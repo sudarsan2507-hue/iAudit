@@ -1,4 +1,4 @@
-# iAudit: Brain-Age Fairness Audit
+# iAudit : Brain-Age Fairness Audit
 
 A fairness audit of brain-age prediction on the [IXI](https://brain-development.org/ixi-dataset/)
 neuroimaging dataset. DeepBrainNet (a CNN trained on raw T1 MRI) is compared
