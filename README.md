@@ -65,6 +65,11 @@ Tabular models are less accurate than the CNN by design (no hyperparameter
 tuning, simple volumetric features) — the point of comparison is bias
 *shape*, not accuracy.
 
+<p align="center">
+  <img src="results/fig_pred_vs_actual.png" width="420" alt="DeepBrainNet predicted vs actual age">
+</p>
+<p align="center"><em>DeepBrainNet predicted vs actual age, full cohort (n=560, r=0.910)</em></p>
+
 ### Cross-model fairness comparison (Stage T4, common cohort n=544)
 
 **MAE by site — IOP is the worst site for all 4 models:**
@@ -80,6 +85,12 @@ regardless of whether the model sees the raw image (DeepBrainNet) or
 simple tissue-volume features (tabular models) — consistent with a
 scanner/acquisition artifact at the data level, not a DeepBrainNet quirk.
 
+<p align="center">
+  <img src="results/fig_crossmodel_site_bias.png" width="420" alt="Corrected gap by site, all 4 models">
+  <img src="results/fig_crossmodel_sex_bias.png" width="420" alt="Corrected gap by sex, all 4 models">
+</p>
+<p align="center"><em>Corrected gap by site (left) and sex (right), all 4 models side by side</em></p>
+
 Stage V confirms this mechanistically for the tabular pathway: 5/6
 tissue-volume fractions remain significantly shifted at IOP after
 age-adjustment (Bonferroni-corrected Mann-Whitney U), i.e. IOP scans are
@@ -90,6 +101,11 @@ The male-older/female-younger directional bias seen in DeepBrainNet does
 **not** cleanly replicate in the tabular models — see
 `results/fairness_checklist.md` and `results/bias_report.csv` for the
 full subgroup breakdown.
+
+<p align="center">
+  <img src="results/fig_bland_altman_DeepBrainNet.png" width="420" alt="Bland-Altman DeepBrainNet">
+</p>
+<p align="center"><em>Bland-Altman: gap vs age, before/after correction (DeepBrainNet; see results/fig_bland_altman_*.png for the other 3 models)</em></p>
 
 ### Unsupervised reliability score
 
@@ -106,13 +122,27 @@ signal:
   the effect size is only practically meaningful for DeepBrainNet
   (0.80y MAE drop at 80% coverage vs ~0.02–0.32y for the tabular models).
 
-### Key figures
+<p align="center">
+  <img src="results/fig_distance_by_site.png" width="320" alt="Reliability score distance by site">
+  <img src="results/fig_error_vs_distance.png" width="420" alt="Error vs reliability score, per model">
+</p>
+<p align="center"><em>Left: distance-from-reference by site (IOP separates cleanly, AUC=0.967). Right: per-subject error vs distance, per model.</em></p>
+
+<p align="center">
+  <img src="results/fig_selective_prediction.png" width="480" alt="Selective prediction: MAE vs coverage">
+</p>
+<p align="center"><em>MAE vs coverage as high-distance scans are dropped — reliability-score-based (solid) vs random abstention (dashed)</em></p>
+
+### All figures
 
 | | |
 |---|---|
 | `fig_pred_vs_actual.png` | DeepBrainNet predicted vs actual age |
+| `fig_boxplot_sex_*.png` | Corrected gap distribution by sex, per model |
+| `fig_mae_by_site_*.png` | MAE by site, per model |
 | `fig_crossmodel_site_bias.png` / `_sex_bias.png` | Corrected gap by site/sex, all 4 models side by side |
 | `fig_bland_altman_*.png` | Gap vs age, before/after correction, per model |
+| `fig_multimodel_subgroup_comparison.png` | Multi-model subgroup comparison scaffold |
 | `fig_distance_by_site.png` | Reliability-score distance by site (IOP separation) |
 | `fig_error_vs_distance.png` | Per-subject error vs reliability score, per model |
 | `fig_selective_prediction.png` | MAE vs coverage, reliability-score-based vs random abstention |
