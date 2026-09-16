@@ -1,4 +1,4 @@
-# iAudit — Brain-Age Fairness Audit
+# iAudit - Brain-Age Fairness Audit
 
 A fairness audit of brain-age prediction on the [IXI](https://brain-development.org/ixi-dataset/)
 neuroimaging dataset. DeepBrainNet (a CNN trained on raw T1 MRI) is compared
@@ -21,11 +21,11 @@ model-specific.
 | T3 | Write tabular predictions in shared schema; re-run the audit unchanged on all 4 models | `scripts/write_tabular_predictions.py` |
 | T4 | Cross-model comparison on the common cohort | `scripts/compare_models.py` |
 | V | IOP feature-distribution check (age-adjusted, is IOP off-distribution at the data level?) | `scripts/check_iop_features.py` |
-| — | Unsupervised Mahalanobis reliability score (feature-space distance from the "seen" Guys+HH distribution) | `scripts/reliability_score.py` |
+| - | Unsupervised Mahalanobis reliability score (feature-space distance from the "seen" Guys+HH distribution) | `scripts/reliability_score.py` |
 
 Every stage is checkpointed/resumable where it runs long, and every number
 in `results/` comes from actually running these scripts on the real IXI
-cohort — nothing is hand-entered.
+cohort - nothing is hand-entered.
 
 ## Data
 
@@ -33,7 +33,7 @@ cohort — nothing is hand-entered.
   XNAT mirror (the official IXI host returns 403 for direct downloads).
 - 560 subjects with a usable T1 scan and known age/sex/site/ethnicity;
   544 of those also have volumetric features (16 dropped to transient
-  `deep_atropos` MemoryErrors during segmentation, caught and logged —
+  `deep_atropos` MemoryErrors during segmentation, caught and logged -
   see `scripts/extract_features.py`).
 - Sites: Guys, HH, IOP (three different scanners/acquisition protocols).
 
@@ -56,13 +56,13 @@ the full pipeline (Stage 0 through the reliability score) below.
 
 | Model | MAE | R² | Pearson r |
 |---|---|---|---|
-| DeepBrainNet (CNN, full n=560) | 5.45y | — | 0.910 |
+| DeepBrainNet (CNN, full n=560) | 5.45y | - | 0.910 |
 | LinearRegression | 7.13y | 0.695 | 0.834 |
 | RandomForest | 6.76y | 0.716 | 0.846 |
 | XGBoost | 7.20y | 0.681 | 0.827 |
 
 Tabular models are less accurate than the CNN by design (no hyperparameter
-tuning, simple volumetric features) — the point of comparison is bias
+tuning, simple volumetric features) - the point of comparison is bias
 *shape*, not accuracy.
 
 <p align="center">
@@ -72,7 +72,7 @@ tuning, simple volumetric features) — the point of comparison is bias
 
 ### Cross-model fairness comparison (Stage T4, common cohort n=544)
 
-**MAE by site — IOP is the worst site for all 4 models:**
+**MAE by site - IOP is the worst site for all 4 models:**
 
 | Site | DeepBrainNet | LinearRegression | RandomForest | XGBoost |
 |---|---|---|---|---|
@@ -82,7 +82,7 @@ tuning, simple volumetric features) — the point of comparison is bias
 
 This is the headline finding: IOP degrades every architecture tested,
 regardless of whether the model sees the raw image (DeepBrainNet) or
-simple tissue-volume features (tabular models) — consistent with a
+simple tissue-volume features (tabular models) - consistent with a
 scanner/acquisition artifact at the data level, not a DeepBrainNet quirk.
 
 <p align="center">
@@ -98,7 +98,7 @@ genuinely off-distribution at the feature level, independent of the
 younger age mix at that site.
 
 The male-older/female-younger directional bias seen in DeepBrainNet does
-**not** cleanly replicate in the tabular models — see
+**not** cleanly replicate in the tabular models - see
 `results/fairness_checklist.md` and `results/bias_report.csv` for the
 full subgroup breakdown.
 
@@ -117,7 +117,7 @@ signal:
   labels used to fit it).
 - **Predicts per-subject error, age-controlled:** real and significant for
   DeepBrainNet (partial Spearman r=0.215, p<0.00001); null for all 3
-  tabular models (p>0.5) — a genuine negative result, not glossed over.
+  tabular models (p>0.5) - a genuine negative result, not glossed over.
 - **Selective prediction beats random abstention** for all 4 models, but
   the effect size is only practically meaningful for DeepBrainNet
   (0.80y MAE drop at 80% coverage vs ~0.02–0.32y for the tabular models).
@@ -131,7 +131,7 @@ signal:
 <p align="center">
   <img src="results/fig_selective_prediction.png" width="480" alt="Selective prediction: MAE vs coverage">
 </p>
-<p align="center"><em>MAE vs coverage as high-distance scans are dropped — reliability-score-based (solid) vs random abstention (dashed)</em></p>
+<p align="center"><em>MAE vs coverage as high-distance scans are dropped - reliability-score-based (solid) vs random abstention (dashed)</em></p>
 
 ### All figures
 
