@@ -1,0 +1,31 @@
+model_name,axis,group,n,MAE,mean_gap,p_value,test,underpowered
+DeepBrainNet,sex,F,311.0,4.913091481528265,-0.7995836994199536,,,False
+DeepBrainNet,sex,M,249.0,4.139252142699079,0.9986768293960063,,,False
+DeepBrainNet,sex,F vs M,,,-1.9696738149601627,0.00015723003826969577,pairwise post-hoc (Mann-Whitney U),False
+DeepBrainNet,site,Guys,312.0,4.140504168779453,-0.29777113927070353,,,False
+DeepBrainNet,site,HH,180.0,4.286943423897738,-1.3303833302800632,,,False
+DeepBrainNet,site,IOP,68.0,7.281737019508512,4.8878469838657495,,,False
+DeepBrainNet,site,Guys vs HH,,,1.3606476789127537,0.0596984910748312,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,site,Guys vs IOP,,,-5.212635319453053,7.027563233550912e-09,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,site,HH vs IOP,,,-6.573282998365807,4.5340923038343556e-10,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,ethnicity,Asian or AsianBrit,49.0,5.968415089029034,2.0353050669699386,,,False
+DeepBrainNet,ethnicity,Black or BlackBrit,15.0,6.957404282139132,3.1735373902852424,,,False
+DeepBrainNet,ethnicity,Chinese,14.0,4.140544831569645,-0.5511397958349958,,,False
+DeepBrainNet,ethnicity,Other,24.0,3.4961860475523636,0.6557346219824803,,,False
+DeepBrainNet,ethnicity,White,450.0,4.41061796652581,-0.28435675517875564,,,False
+DeepBrainNet,ethnicity,White vs Asian or AsianBrit,,,-3.0816730456265056,0.08707482877452467,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,ethnicity,White vs Other,,,0.5173899235205859,1.0,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,ethnicity,White vs Black or BlackBrit,,,-2.7772401691437487,0.8511625020601434,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,ethnicity,White vs Chinese,,,1.7106086633695465,1.0,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,ethnicity,Asian or AsianBrit vs Other,,,3.5990629691470915,1.0,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,ethnicity,Asian or AsianBrit vs Black or BlackBrit,,,0.30443287648275685,1.0,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,ethnicity,Asian or AsianBrit vs Chinese,,,4.792281708996052,1.0,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,ethnicity,Other vs Black or BlackBrit,,,-3.2946300926643346,1.0,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,ethnicity,Other vs Chinese,,,1.1932187398489607,1.0,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,ethnicity,Black or BlackBrit vs Chinese,,,4.487848832513295,1.0,pairwise post-hoc (Kruskal-Wallis),False
+DeepBrainNet,sex_x_site,F/Guys,173.0,4.406208846546574,-1.571011127194318,,,False
+DeepBrainNet,sex_x_site,F/HH,94.0,4.342545716929362,-2.109588351698949,,,False
+DeepBrainNet,sex_x_site,F/IOP,44.0,8.124955066167558,5.032174989652561,,,False
+DeepBrainNet,sex_x_site,M/Guys,139.0,3.8098069799038248,1.2869088456989748,,,False
+DeepBrainNet,sex_x_site,M/HH,86.0,4.22616882453759,-0.4786941208222107,,,False
+DeepBrainNet,sex_x_site,M/IOP,24.0,5.735837267300258,4.623245639923258,,,False
