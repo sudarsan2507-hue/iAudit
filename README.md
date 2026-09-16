@@ -49,6 +49,70 @@ before importing TensorFlow (already done in every script that needs it).
 
 ## Results
 
-See `results/SESSION_REPORT.md` for the full Stage 0–5 writeup, and the
-Results section below for the tabular-model comparison and reliability
-score.
+See `results/SESSION_REPORT.md` for the full Stage 0–5 writeup. Summary of
+the full pipeline (Stage 0 through the reliability score) below.
+
+### Per-model accuracy (CV / out-of-fold, n=544 common cohort)
+
+| Model | MAE | R² | Pearson r |
+|---|---|---|---|
+| DeepBrainNet (CNN, full n=560) | 5.45y | — | 0.910 |
+| LinearRegression | 7.13y | 0.695 | 0.834 |
+| RandomForest | 6.76y | 0.716 | 0.846 |
+| XGBoost | 7.20y | 0.681 | 0.827 |
+
+Tabular models are less accurate than the CNN by design (no hyperparameter
+tuning, simple volumetric features) — the point of comparison is bias
+*shape*, not accuracy.
+
+### Cross-model fairness comparison (Stage T4, common cohort n=544)
+
+**MAE by site — IOP is the worst site for all 4 models:**
+
+| Site | DeepBrainNet | LinearRegression | RandomForest | XGBoost |
+|---|---|---|---|---|
+| Guys | 4.43y | 6.62y | 6.24y | 6.72y |
+| HH | 4.87y | 6.84y | 6.67y | 7.25y |
+| **IOP** | **11.49y** | **10.25y** | **9.33y** | **9.23y** |
+
+This is the headline finding: IOP degrades every architecture tested,
+regardless of whether the model sees the raw image (DeepBrainNet) or
+simple tissue-volume features (tabular models) — consistent with a
+scanner/acquisition artifact at the data level, not a DeepBrainNet quirk.
+
+Stage V confirms this mechanistically for the tabular pathway: 5/6
+tissue-volume fractions remain significantly shifted at IOP after
+age-adjustment (Bonferroni-corrected Mann-Whitney U), i.e. IOP scans are
+genuinely off-distribution at the feature level, independent of the
+younger age mix at that site.
+
+The male-older/female-younger directional bias seen in DeepBrainNet does
+**not** cleanly replicate in the tabular models — see
+`results/fairness_checklist.md` and `results/bias_report.csv` for the
+full subgroup breakdown.
+
+### Unsupervised reliability score
+
+A Mahalanobis distance from the Guys+HH ("seen") feature distribution,
+fit **without ever using IOP**, was tested as a model-agnostic reliability
+signal:
+
+- **Recovers IOP unsupervised:** ROC AUC = 0.967 (distance alone, no site
+  labels used to fit it).
+- **Predicts per-subject error, age-controlled:** real and significant for
+  DeepBrainNet (partial Spearman r=0.215, p<0.00001); null for all 3
+  tabular models (p>0.5) — a genuine negative result, not glossed over.
+- **Selective prediction beats random abstention** for all 4 models, but
+  the effect size is only practically meaningful for DeepBrainNet
+  (0.80y MAE drop at 80% coverage vs ~0.02–0.32y for the tabular models).
+
+### Key figures
+
+| | |
+|---|---|
+| `fig_pred_vs_actual.png` | DeepBrainNet predicted vs actual age |
+| `fig_crossmodel_site_bias.png` / `_sex_bias.png` | Corrected gap by site/sex, all 4 models side by side |
+| `fig_bland_altman_*.png` | Gap vs age, before/after correction, per model |
+| `fig_distance_by_site.png` | Reliability-score distance by site (IOP separation) |
+| `fig_error_vs_distance.png` | Per-subject error vs reliability score, per model |
+| `fig_selective_prediction.png` | MAE vs coverage, reliability-score-based vs random abstention |
