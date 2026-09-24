@@ -3,10 +3,12 @@
 Verifies the 16 deep_atropos MemoryError drops didn't gut any site, and flags
 the max-total_brain subject as a watch-item.
 """
+from pathlib import Path
 import pandas as pd
 
-feat = pd.read_csv(r"D:\Projects\iAuditAge\results\features.csv")
-dbn = pd.read_csv(r"D:\Projects\iAuditAge\results\predictions_deepbrainnet.csv")
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+feat = pd.read_csv(RESULTS / "features.csv")
+dbn = pd.read_csv(RESULTS / "predictions_deepbrainnet.csv")
 
 print("=" * 60)
 print("PRE-CHECK (before Stage T2)")

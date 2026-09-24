@@ -17,7 +17,7 @@ import pandas as pd
 from scipy import stats
 from sklearn.metrics import roc_auc_score, roc_curve
 
-RESULTS = Path(r"D:\Projects\iAuditAge\results")
+RESULTS = Path(__file__).resolve().parent.parent / "results"
 FEATURE_COLS = [
     "frac_CSF", "frac_GM", "frac_WM", "frac_deepGM", "frac_brainstem",
     "frac_cerebellum", "total_brain_volume_ml",

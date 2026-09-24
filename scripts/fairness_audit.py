@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-RESULTS = Path(r"D:\Projects\iAuditAge\results")
+RESULTS = Path(__file__).resolve().parent.parent / "results"
 MIN_GROUP_N = 10  # below this, a subgroup is "underpowered" - flagged, not hidden
 
 

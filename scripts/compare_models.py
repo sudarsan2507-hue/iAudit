@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-RESULTS = Path(r"D:\Projects\iAuditAge\results")
+RESULTS = Path(__file__).resolve().parent.parent / "results"
 MODELS = ["DeepBrainNet", "LinearRegression", "RandomForest", "XGBoost"]
 
 

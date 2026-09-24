@@ -6,6 +6,7 @@ accurate than DeepBrainNet (a CNN trained on raw MRI). The comparison of
 interest is bias SHAPE (does the IOP site effect / sex split replicate),
 not accuracy.
 """
+from pathlib import Path
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
@@ -16,7 +17,8 @@ from sklearn.preprocessing import StandardScaler
 from scipy import stats
 from xgboost import XGBRegressor
 
-FEATURES = pd.read_csv(r"D:\Projects\iAuditAge\results\features.csv")
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+FEATURES = pd.read_csv(RESULTS / "features.csv")
 
 FEATURE_COLS = [
     "volume_CSF_ml", "volume_GM_ml", "volume_WM_ml", "volume_deepGM_ml",
@@ -95,5 +97,5 @@ if len(watch):
 oof_df = FEATURES[["subject_id", "chronological_age", "sex", "site", "ethnicity"]].copy()
 for name in MODELS:
     oof_df[f"pred_{name}"] = oof_preds[name]
-oof_df.to_csv(r"D:\Projects\iAuditAge\results\_oof_predictions.csv", index=False)
+oof_df.to_csv(RESULTS / "_oof_predictions.csv", index=False)
 print(f"\nwrote results\\_oof_predictions.csv ({len(oof_df)} rows)")

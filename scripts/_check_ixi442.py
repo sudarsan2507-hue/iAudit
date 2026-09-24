@@ -3,9 +3,11 @@ or a corrupted deep_atropos segmentation (e.g. skull/dura included)?
 
 Compares IXI442's 6 tissue volumes against the cohort mean/std per tissue.
 """
+from pathlib import Path
 import pandas as pd
 
-feat = pd.read_csv(r"D:\Projects\iAuditAge\results\features.csv")
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+feat = pd.read_csv(RESULTS / "features.csv")
 
 TISSUES = ["CSF", "GM", "WM", "deepGM", "brainstem", "cerebellum"]
 vol_cols = [f"volume_{t}_ml" for t in TISSUES]

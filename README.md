@@ -146,3 +146,29 @@ signal:
 | `fig_distance_by_site.png` | Reliability-score distance by site (IOP separation) |
 | `fig_error_vs_distance.png` | Per-subject error vs reliability score, per model |
 | `fig_selective_prediction.png` | MAE vs coverage, reliability-score-based vs random abstention |
+
+## Interactive 3D WebGL Dashboard & Regulatory Station
+
+Run the interactive audit suite locally:
+
+```bash
+python app.py
+# Open http://127.0.0.1:8505
+```
+
+### Features:
+1. **Custom 3D Anatomical Brain (`brain.glb`)**:
+   - High-fidelity cortical surface, cerebellar folia, and brainstem rendered in Three.js with cyberpunk holographic materials.
+   - Interactive modes: *Hologram*, *Synaptic Particles*, *X-Ray Wireframe*, and *Slice Laser*.
+   - Scanner distortion simulator displaying geometric warping when switching from Philips (Guys/HH) to GE (IOP).
+2. **Orthogonal MRI & DeepAtropos Multi-Planar Reconstruction (MPR) Viewer**:
+   - Tri-planar navigation across **Axial (Z)**, **Coronal (Y)**, and **Sagittal (X)** orthogonal planes with MNI coordinates.
+   - Continuous 100-slice scrubbing with dynamic depth rendering.
+   - **DeepAtropos 6-Tissue Segmentation overlay** (CSF, Cortical Gray, White Matter, Deep Gray/Thalamus, Cerebellum, Brainstem) with live opacity controls and tissue filters.
+   - Real-time **IOP Scanner Artifact Injection switch** simulating RF B1 coil field gradients.
+   - Live crosshair voxel inspector HUD showing MNI $(x, y, z)$ coordinates, T1 signal intensity, and anatomical tissue structure.
+3. **Official Regulatory Conformity Audit Dossier (EU AI Act & FDA SaMD)**:
+   - Interactive compliance center conforming to **EU AI Act Regulation (EU) 2024/1689 Annex III (High-Risk SaMD)** and **FDA Good Machine Learning Practice (GMLP, 21 CFR Part 820)**.
+   - Automated audit tabs: Executive Conformity Certificate, Article 15 Sensor Invariance Audit, Article 10(2)(f) Demographic Fairness, and Article 14 Human-in-the-Loop Selective Prediction Gate ($D > 3.0$ quarantine).
+   - Dedicated print-ready document at [`/dossier`](http://127.0.0.1:8505/dossier) for 1-click **A4/Letter PDF export** with official stamps and digital signatures.
+

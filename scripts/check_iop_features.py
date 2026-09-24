@@ -4,11 +4,13 @@ Tests whether IOP's segmentation-derived tissue-fraction features are
 systematically off-distribution vs Guys/HH, independent of age - the
 data-level mechanism candidate for why IOP is hard for the tabular models.
 """
+from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy import stats
 
-feat = pd.read_csv(r"D:\Projects\iAuditAge\results\features.csv")
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+feat = pd.read_csv(RESULTS / "features.csv")
 
 FRACTIONS = ["frac_CSF", "frac_GM", "frac_WM", "frac_deepGM", "frac_brainstem", "frac_cerebellum"]
 SITE_ORDER = ["Guys", "HH", "IOP"]

@@ -2,10 +2,11 @@
 same schema as predictions_deepbrainnet.csv so fairness_audit.py picks them
 up unchanged.
 """
+from pathlib import Path
 import pandas as pd
 
-RESULTS = r"D:\Projects\iAuditAge\results"
-oof = pd.read_csv(fr"{RESULTS}\_oof_predictions.csv")
+RESULTS = Path(__file__).resolve().parent.parent / "results"
+oof = pd.read_csv(RESULTS / "_oof_predictions.csv")
 
 MODEL_COL_TO_NAME = {
     "pred_LinearRegression": "LinearRegression",
@@ -21,5 +22,5 @@ for col, model_name in MODEL_COL_TO_NAME.items():
     out["model_name"] = model_name
     out = out[SCHEMA]
     fname = f"predictions_{model_name.lower()}.csv"
-    out.to_csv(fr"{RESULTS}\{fname}", index=False)
+    out.to_csv(RESULTS / fname, index=False)
     print(f"wrote {fname}  ({len(out)} rows, model_name={model_name})")
