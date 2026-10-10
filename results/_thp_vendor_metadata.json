@@ -1,0 +1,538 @@
+[
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001CCF1",
+    "json_path": "sub-THP0001/ses-THP0001CCF1/anat/sub-THP0001_ses-THP0001CCF1_run-01_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001CCF1/anat/sub-THP0001_ses-THP0001CCF1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001DART1",
+    "json_path": "sub-THP0001/ses-THP0001DART1/anat/sub-THP0001_ses-THP0001DART1_run-01_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001DART1/anat/sub-THP0001_ses-THP0001DART1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001DART1",
+    "json_path": "sub-THP0001/ses-THP0001DART1/anat/sub-THP0001_ses-THP0001DART1_run-02_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001DART1/anat/sub-THP0001_ses-THP0001DART1_run-02_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001DART1",
+    "json_path": "sub-THP0001/ses-THP0001DART1/anat/sub-THP0001_ses-THP0001DART1_run-03_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001DART1/anat/sub-THP0001_ses-THP0001DART1_run-03_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001IOWA1",
+    "json_path": "sub-THP0001/ses-THP0001IOWA1/anat/sub-THP0001_ses-THP0001IOWA1_run-01_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001IOWA1/anat/sub-THP0001_ses-THP0001IOWA1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001IOWA2",
+    "json_path": "sub-THP0001/ses-THP0001IOWA2/anat/sub-THP0001_ses-THP0001IOWA2_run-01_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001IOWA2/anat/sub-THP0001_ses-THP0001IOWA2_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001IOWA2",
+    "json_path": "sub-THP0001/ses-THP0001IOWA2/anat/sub-THP0001_ses-THP0001IOWA2_run-02_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001IOWA2/anat/sub-THP0001_ses-THP0001IOWA2_run-02_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001JHU1",
+    "json_path": "sub-THP0001/ses-THP0001JHU1/anat/sub-THP0001_ses-THP0001JHU1_run-01_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001JHU1/anat/sub-THP0001_ses-THP0001JHU1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001JHU1",
+    "json_path": "sub-THP0001/ses-THP0001JHU1/anat/sub-THP0001_ses-THP0001JHU1_run-02_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001JHU1/anat/sub-THP0001_ses-THP0001JHU1_run-02_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001MGH1",
+    "json_path": "sub-THP0001/ses-THP0001MGH1/anat/sub-THP0001_ses-THP0001MGH1_run-01_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001MGH1/anat/sub-THP0001_ses-THP0001MGH1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001UCI1",
+    "json_path": "sub-THP0001/ses-THP0001UCI1/anat/sub-THP0001_ses-THP0001UCI1_run-01_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001UCI1/anat/sub-THP0001_ses-THP0001UCI1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001UMN1",
+    "json_path": "sub-THP0001/ses-THP0001UMN1/anat/sub-THP0001_ses-THP0001UMN1_run-01_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001UMN1/anat/sub-THP0001_ses-THP0001UMN1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0001",
+    "session": "ses-THP0001UW1",
+    "json_path": "sub-THP0001/ses-THP0001UW1/anat/sub-THP0001_ses-THP0001UW1_run-01_T1w.json",
+    "nii_path": "sub-THP0001/ses-THP0001UW1/anat/sub-THP0001_ses-THP0001UW1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002CCF1",
+    "json_path": "sub-THP0002/ses-THP0002CCF1/anat/sub-THP0002_ses-THP0002CCF1_run-01_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002CCF1/anat/sub-THP0002_ses-THP0002CCF1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002DART1",
+    "json_path": "sub-THP0002/ses-THP0002DART1/anat/sub-THP0002_ses-THP0002DART1_run-01_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002DART1/anat/sub-THP0002_ses-THP0002DART1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002DART1",
+    "json_path": "sub-THP0002/ses-THP0002DART1/anat/sub-THP0002_ses-THP0002DART1_run-02_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002DART1/anat/sub-THP0002_ses-THP0002DART1_run-02_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002DART1",
+    "json_path": "sub-THP0002/ses-THP0002DART1/anat/sub-THP0002_ses-THP0002DART1_run-03_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002DART1/anat/sub-THP0002_ses-THP0002DART1_run-03_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002DART1",
+    "json_path": "sub-THP0002/ses-THP0002DART1/anat/sub-THP0002_ses-THP0002DART1_run-04_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002DART1/anat/sub-THP0002_ses-THP0002DART1_run-04_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002DART1",
+    "json_path": "sub-THP0002/ses-THP0002DART1/anat/sub-THP0002_ses-THP0002DART1_run-05_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002DART1/anat/sub-THP0002_ses-THP0002DART1_run-05_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002IOWA2",
+    "json_path": "sub-THP0002/ses-THP0002IOWA2/anat/sub-THP0002_ses-THP0002IOWA2_run-01_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002IOWA2/anat/sub-THP0002_ses-THP0002IOWA2_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002JHU1",
+    "json_path": "sub-THP0002/ses-THP0002JHU1/anat/sub-THP0002_ses-THP0002JHU1_run-01_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002JHU1/anat/sub-THP0002_ses-THP0002JHU1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002JHU1",
+    "json_path": "sub-THP0002/ses-THP0002JHU1/anat/sub-THP0002_ses-THP0002JHU1_run-02_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002JHU1/anat/sub-THP0002_ses-THP0002JHU1_run-02_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002MGH1",
+    "json_path": "sub-THP0002/ses-THP0002MGH1/anat/sub-THP0002_ses-THP0002MGH1_run-01_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002MGH1/anat/sub-THP0002_ses-THP0002MGH1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002UCI1",
+    "json_path": "sub-THP0002/ses-THP0002UCI1/anat/sub-THP0002_ses-THP0002UCI1_run-01_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002UCI1/anat/sub-THP0002_ses-THP0002UCI1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002UMN1",
+    "json_path": "sub-THP0002/ses-THP0002UMN1/anat/sub-THP0002_ses-THP0002UMN1_run-01_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002UMN1/anat/sub-THP0002_ses-THP0002UMN1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0002",
+    "session": "ses-THP0002UW1",
+    "json_path": "sub-THP0002/ses-THP0002UW1/anat/sub-THP0002_ses-THP0002UW1_run-01_T1w.json",
+    "nii_path": "sub-THP0002/ses-THP0002UW1/anat/sub-THP0002_ses-THP0002UW1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003CCF1",
+    "json_path": "sub-THP0003/ses-THP0003CCF1/anat/sub-THP0003_ses-THP0003CCF1_run-01_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003CCF1/anat/sub-THP0003_ses-THP0003CCF1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003DART1",
+    "json_path": "sub-THP0003/ses-THP0003DART1/anat/sub-THP0003_ses-THP0003DART1_run-01_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003DART1/anat/sub-THP0003_ses-THP0003DART1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003IOWA2",
+    "json_path": "sub-THP0003/ses-THP0003IOWA2/anat/sub-THP0003_ses-THP0003IOWA2_run-01_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003IOWA2/anat/sub-THP0003_ses-THP0003IOWA2_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003IOWA3",
+    "json_path": "sub-THP0003/ses-THP0003IOWA3/anat/sub-THP0003_ses-THP0003IOWA3_run-01_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003IOWA3/anat/sub-THP0003_ses-THP0003IOWA3_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003IOWA3",
+    "json_path": "sub-THP0003/ses-THP0003IOWA3/anat/sub-THP0003_ses-THP0003IOWA3_run-02_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003IOWA3/anat/sub-THP0003_ses-THP0003IOWA3_run-02_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003JHU1",
+    "json_path": "sub-THP0003/ses-THP0003JHU1/anat/sub-THP0003_ses-THP0003JHU1_run-01_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003JHU1/anat/sub-THP0003_ses-THP0003JHU1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003JHU1",
+    "json_path": "sub-THP0003/ses-THP0003JHU1/anat/sub-THP0003_ses-THP0003JHU1_run-02_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003JHU1/anat/sub-THP0003_ses-THP0003JHU1_run-02_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003MGH1",
+    "json_path": "sub-THP0003/ses-THP0003MGH1/anat/sub-THP0003_ses-THP0003MGH1_run-01_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003MGH1/anat/sub-THP0003_ses-THP0003MGH1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003UCI1",
+    "json_path": "sub-THP0003/ses-THP0003UCI1/anat/sub-THP0003_ses-THP0003UCI1_run-01_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003UCI1/anat/sub-THP0003_ses-THP0003UCI1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003UMN1",
+    "json_path": "sub-THP0003/ses-THP0003UMN1/anat/sub-THP0003_ses-THP0003UMN1_run-01_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003UMN1/anat/sub-THP0003_ses-THP0003UMN1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0003",
+    "session": "ses-THP0003UW1",
+    "json_path": "sub-THP0003/ses-THP0003UW1/anat/sub-THP0003_ses-THP0003UW1_run-01_T1w.json",
+    "nii_path": "sub-THP0003/ses-THP0003UW1/anat/sub-THP0003_ses-THP0003UW1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004CCF1",
+    "json_path": "sub-THP0004/ses-THP0004CCF1/anat/sub-THP0004_ses-THP0004CCF1_run-01_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004CCF1/anat/sub-THP0004_ses-THP0004CCF1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004DART1",
+    "json_path": "sub-THP0004/ses-THP0004DART1/anat/sub-THP0004_ses-THP0004DART1_run-01_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004DART1/anat/sub-THP0004_ses-THP0004DART1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004DART1",
+    "json_path": "sub-THP0004/ses-THP0004DART1/anat/sub-THP0004_ses-THP0004DART1_run-02_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004DART1/anat/sub-THP0004_ses-THP0004DART1_run-02_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004DART1",
+    "json_path": "sub-THP0004/ses-THP0004DART1/anat/sub-THP0004_ses-THP0004DART1_run-03_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004DART1/anat/sub-THP0004_ses-THP0004DART1_run-03_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004IOWA1",
+    "json_path": "sub-THP0004/ses-THP0004IOWA1/anat/sub-THP0004_ses-THP0004IOWA1_run-01_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004IOWA1/anat/sub-THP0004_ses-THP0004IOWA1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004IOWA2",
+    "json_path": "sub-THP0004/ses-THP0004IOWA2/anat/sub-THP0004_ses-THP0004IOWA2_run-01_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004IOWA2/anat/sub-THP0004_ses-THP0004IOWA2_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004IOWA3",
+    "json_path": "sub-THP0004/ses-THP0004IOWA3/anat/sub-THP0004_ses-THP0004IOWA3_run-01_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004IOWA3/anat/sub-THP0004_ses-THP0004IOWA3_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004JHU1",
+    "json_path": "sub-THP0004/ses-THP0004JHU1/anat/sub-THP0004_ses-THP0004JHU1_run-01_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004JHU1/anat/sub-THP0004_ses-THP0004JHU1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004JHU1",
+    "json_path": "sub-THP0004/ses-THP0004JHU1/anat/sub-THP0004_ses-THP0004JHU1_run-02_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004JHU1/anat/sub-THP0004_ses-THP0004JHU1_run-02_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004MGH1",
+    "json_path": "sub-THP0004/ses-THP0004MGH1/anat/sub-THP0004_ses-THP0004MGH1_run-01_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004MGH1/anat/sub-THP0004_ses-THP0004MGH1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004UCI1",
+    "json_path": "sub-THP0004/ses-THP0004UCI1/anat/sub-THP0004_ses-THP0004UCI1_run-01_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004UCI1/anat/sub-THP0004_ses-THP0004UCI1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004UMN1",
+    "json_path": "sub-THP0004/ses-THP0004UMN1/anat/sub-THP0004_ses-THP0004UMN1_run-01_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004UMN1/anat/sub-THP0004_ses-THP0004UMN1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0004",
+    "session": "ses-THP0004UW1",
+    "json_path": "sub-THP0004/ses-THP0004UW1/anat/sub-THP0004_ses-THP0004UW1_run-01_T1w.json",
+    "nii_path": "sub-THP0004/ses-THP0004UW1/anat/sub-THP0004_ses-THP0004UW1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005CCF1",
+    "json_path": "sub-THP0005/ses-THP0005CCF1/anat/sub-THP0005_ses-THP0005CCF1_run-01_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005CCF1/anat/sub-THP0005_ses-THP0005CCF1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005DART1",
+    "json_path": "sub-THP0005/ses-THP0005DART1/anat/sub-THP0005_ses-THP0005DART1_run-01_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005DART1/anat/sub-THP0005_ses-THP0005DART1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005DART1",
+    "json_path": "sub-THP0005/ses-THP0005DART1/anat/sub-THP0005_ses-THP0005DART1_run-02_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005DART1/anat/sub-THP0005_ses-THP0005DART1_run-02_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005DART1",
+    "json_path": "sub-THP0005/ses-THP0005DART1/anat/sub-THP0005_ses-THP0005DART1_run-03_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005DART1/anat/sub-THP0005_ses-THP0005DART1_run-03_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005DART1",
+    "json_path": "sub-THP0005/ses-THP0005DART1/anat/sub-THP0005_ses-THP0005DART1_run-04_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005DART1/anat/sub-THP0005_ses-THP0005DART1_run-04_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005DART1",
+    "json_path": "sub-THP0005/ses-THP0005DART1/anat/sub-THP0005_ses-THP0005DART1_run-05_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005DART1/anat/sub-THP0005_ses-THP0005DART1_run-05_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005IOWA2",
+    "json_path": "sub-THP0005/ses-THP0005IOWA2/anat/sub-THP0005_ses-THP0005IOWA2_run-01_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005IOWA2/anat/sub-THP0005_ses-THP0005IOWA2_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005IOWA3",
+    "json_path": "sub-THP0005/ses-THP0005IOWA3/anat/sub-THP0005_ses-THP0005IOWA3_run-01_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005IOWA3/anat/sub-THP0005_ses-THP0005IOWA3_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005IOWA3",
+    "json_path": "sub-THP0005/ses-THP0005IOWA3/anat/sub-THP0005_ses-THP0005IOWA3_run-02_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005IOWA3/anat/sub-THP0005_ses-THP0005IOWA3_run-02_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005JHU1",
+    "json_path": "sub-THP0005/ses-THP0005JHU1/anat/sub-THP0005_ses-THP0005JHU1_run-01_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005JHU1/anat/sub-THP0005_ses-THP0005JHU1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005JHU1",
+    "json_path": "sub-THP0005/ses-THP0005JHU1/anat/sub-THP0005_ses-THP0005JHU1_run-02_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005JHU1/anat/sub-THP0005_ses-THP0005JHU1_run-02_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005MGH1",
+    "json_path": "sub-THP0005/ses-THP0005MGH1/anat/sub-THP0005_ses-THP0005MGH1_run-01_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005MGH1/anat/sub-THP0005_ses-THP0005MGH1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005UCI1",
+    "json_path": "sub-THP0005/ses-THP0005UCI1/anat/sub-THP0005_ses-THP0005UCI1_run-01_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005UCI1/anat/sub-THP0005_ses-THP0005UCI1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005UMN1",
+    "json_path": "sub-THP0005/ses-THP0005UMN1/anat/sub-THP0005_ses-THP0005UMN1_run-01_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005UMN1/anat/sub-THP0005_ses-THP0005UMN1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THP0005",
+    "session": "ses-THP0005UW1",
+    "json_path": "sub-THP0005/ses-THP0005UW1/anat/sub-THP0005_ses-THP0005UW1_run-01_T1w.json",
+    "nii_path": "sub-THP0005/ses-THP0005UW1/anat/sub-THP0005_ses-THP0005UW1_run-01_T1w.nii.gz",
+    "manufacturer": "Philips",
+    "model": "Achieva"
+  },
+  {
+    "subject": "sub-THPBALL",
+    "session": "ses-THPBALLCCF1",
+    "json_path": "sub-THPBALL/ses-THPBALLCCF1/anat/sub-THPBALL_ses-THPBALLCCF1_run-01_T1w.json",
+    "nii_path": "sub-THPBALL/ses-THPBALLCCF1/anat/sub-THPBALL_ses-THPBALLCCF1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  },
+  {
+    "subject": "sub-THPBALL",
+    "session": "ses-THPBALLIOWA1",
+    "json_path": "sub-THPBALL/ses-THPBALLIOWA1/anat/sub-THPBALL_ses-THPBALLIOWA1_run-01_T1w.json",
+    "nii_path": "sub-THPBALL/ses-THPBALLIOWA1/anat/sub-THPBALL_ses-THPBALLIOWA1_run-01_T1w.nii.gz",
+    "manufacturer": "Siemens",
+    "model": "TrioTim"
+  }
+]
