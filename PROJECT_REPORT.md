@@ -117,7 +117,7 @@ That one commit (`245e64c`, "Add 3D brain.glb viewer, Orthogonal MRI MPR worksta
 **Precise split:**
 - **Sudarsan (sudarsan2507@gmail.com) wrote:** every pipeline script that does actual data work — data fetching, feature extraction, model training, the fairness audit, the reliability score, the theory-test battery, and the three-dataset generalization extension (THP/eNKI/pooled). Every number in §6 traces back to his code. `git log --follow` on `reliability_score.py`, `fairness_audit.py`, `extract_features.py`, `compare_models.py` shows only "Sudarsan" as author (the one non-Sudarsan touch to some of these was the 1-line path fix above).
 - **fawaz (fawaz0212kb@gmail.com) wrote:** the interactive 3D dashboard (`app.py`), the `brain.glb` asset, and the pipeline orchestration wrapper. See §9 for what this dashboard does and doesn't actually do.
-- On the currently checked-out branch (`reliability-experiments`), `app.py`/`brain.glb`/`run_pipeline.py` are **not present** — they exist only on `main`. The working tree also has 10 untracked files (Stage R1/R2/R3, Task 0 — the THP/eNKI generalization work) that are on disk but not committed to either branch; `git log` shows no author for these because they were never committed. Written-by attribution for those is UNVERIFIED from git alone; ask the author to confirm.
+- On the currently checked-out branch (`reliability-experiments`), `app.py`/`brain.glb`/`run_pipeline.py` are **not present** — they exist only on `main`. The Stage R1/R2/R3 and Task 0 files (the THP/eNKI generalization work) were committed to `reliability-experiments` on 2026-10-11 by Sudarsan.
 
 ## 6. Results — every number, checked against the code
 
@@ -137,9 +137,10 @@ I independently re-ran the scripts that produce these numbers rather than trusti
 | Selective prediction gain | 0.80y MAE drop at 80% coverage (DeepBrainNet) | same script's coverage sweep | 544 | Real | Present in script output; not independently re-verified against the 0.80y figure specifically |
 | Stage V: IOP tissue volumes shifted | 5/6 fractions significant, Bonferroni-corrected Mann-Whitney U | `scripts/check_iop_features.py` | 544 | Real | Not re-run in this audit; script exists and is non-trivial (age-adjusted residual test), UNVERIFIED number |
 | Theory battery, Experiment C | sex coefficient before=1.724 (p=0.0005), after=2.867 (p=0.0000) | `scripts/theory_test_battery.py`, `results/theory_test_battery_summary.csv` | 544 | Real | Present in committed CSV; not re-run |
-| Stage R1 (THP): vendor effect on distance score | Philips mean D=5.01, Siemens mean D=3.81, Wilcoxon p=0.0625 (n=5 paired subjects) | `scripts/thp_reliability_score.py` output (not committed to results/ as a report, only as raw CSVs) | 65 scans / 5 unique people | Real (OpenNeuro public phantom dataset) | UNVERIFIED in this audit pass — script exists, CSVs (`thp_features_with_D.csv`) exist and are non-empty, but I did not re-run the script |
-| Stage R2 (eNKI): detector AUC | 0.774 | `scripts/stage_r2_verify.py` | 39 scans | Real (public, no DUA) | UNVERIFIED in this audit pass |
-| Stage R3 pooled synthesis | partial Spearman r=0.220, p=7.99e-08 | `scripts/stage_r3_pooled.py`, `results/pooled_error_vs_D.csv` | 583 pooled | Real | UNVERIFIED in this audit pass — file exists with plausible-looking rows |
+| Stage R1 (THP): vendor effect on distance score | Philips mean D=5.01, Siemens mean D=3.81, Wilcoxon p=0.0625 (n=5 paired subjects) | `scripts/thp_reliability_score.py`, `results/thp_features_with_D.csv` | 65 scans / 5 unique people | Real (OpenNeuro public phantom dataset) | **Confirmed** — re-ran 2026-10-21, printed identical values; output files unchanged |
+| Stage R2 (eNKI): detector AUC | AUC 0.774; DeepBrainNet MAE 4.59y (IXI reference) vs 6.28y (eNKI); partial r=0.217, p=0.184 | `scripts/stage_r2_verify.py` | 39 scans | Real (public, no DUA) | **Confirmed** — re-ran 2026-10-21 |
+| Stage R3 pooled synthesis | partial Spearman r=0.220, p=7.99e-08 | `scripts/stage_r3_pooled.py`, `results/pooled_error_vs_D.csv` | 583 pooled | Real | **Confirmed** — re-ran 2026-10-21; CSV and figure byte-identical |
+| Transfer learning (Stage F1) | Best: BrainAgeNeXt 512 + ridge, MAE 3.24y (IXI Guys+HH, 5-fold OOF) / 3.51y (eNKI); DeepBrainNet best 4.52y / 5.86y | `colab/iaudit_colab_auto.ipynb` stage-3 output, copied to `results/transfer_head_mae.csv` | 492 + 39 | Real | Ran once on Colab T4 (531 scans, no failures); per-scan outputs stay on Google Drive. **Not a held-out result for BrainAgeNeXt** — its pretraining data includes openBHB (contains IXI) and NKI-RS (see §10) |
 | "IOP is a GE scanner, Guys/HH are Philips" | Asserted in README/app.py as fact | README §"Interactive 3D WebGL Dashboard", `app.py` | — | Not verified from any file in this repo | **This specific claim is NOT backed by any data file in the repository** — no DICOM header, no `Manufacturer` field, no scanner-vendor column exists for IXI anywhere in `results/` or `data/`. It matches IXI's *externally* published documentation (common knowledge in the neuroimaging community) but nothing in this codebase confirms it. Sudarsan's own script (`check_iop_features.py` line 157) states this only as a *hypothesis* ("consistent with, not proof of a common upstream cause — the GE scanner..."); the README/dashboard text drops that hedge and states it as settled fact. |
 | Regulatory dossier "headline findings" (`app.py`) | in_distribution_mae=4.43, ood_scanner_mae=11.49, sex_bias_delta_years=2.66, mahalanobis_roc_auc=0.967 | Hardcoded Python dict in `app.py`, `get_regulatory_report_data()` | — | These 4 numbers match real results above (4.43, 11.49, 0.967 all verified independently in this table) | The numbers appear to be **manually copied from real results**, not computed live by `app.py` — but the "cryptographic_hash" and "audit_timestamp" fields in the same dict are hardcoded fake-looking strings, not actually computed (see §9, §12). |
 
@@ -157,12 +158,16 @@ These are real correctness checks embedded in the pipeline, not a substitute for
 
 ## 8. How to run
 
-**No `requirements.txt` exists.** The exact install line, taken verbatim from the README:
+Pinned dependencies are in `requirements.txt` (TensorFlow/ANTsPyNet environment) and
+`requirements-torch.txt` (separate PyTorch environment for BrainAgeNeXt):
 
 ```bash
 python -m venv venv
-venv\Scripts\pip install antspyx antspynet tf-keras scikit-learn xgboost scipy pandas matplotlib
+venv\Scripts\pip install -r requirements.txt
 ```
+
+The transfer-learning stage runs on Colab via `colab/iaudit_colab_auto.ipynb` (T4, *Run all*;
+resumable, MD5-checked inputs, self-stopping safety checks).
 
 Then, per the README's stage table, in order:
 ```bash
@@ -190,20 +195,21 @@ Or, on `main` only: `python scripts/run_pipeline.py` runs stages T2 through the 
 ## 9. README vs code
 
 **Where the README is behind or wrong:**
-- The checked-out `reliability-experiments` branch's README (and the working tree's `understand.md`) describe only the IXI-only pipeline (Stages 0–5, T1–T4, V, reliability score). The README does **not** mention the Stage R1 (THP)/R2 (eNKI)/R3 (pooled) generalization work at all, even though the scripts for it exist in the working tree (`thp_*.py`, `enki_*.py`, `stage_r2_verify.py`, `stage_r3_pooled.py`) — likely because that work isn't committed yet.
+- ~~README omits Stages R1–R3~~ — resolved 2026-10-21: the `reliability-experiments` README now covers R1–R3, the THP/eNKI cohorts, and the transfer-learning stage (F1) with its pretraining-overlap caveat.
 - The README's "Interactive 3D WebGL Dashboard" section (added on `main` only, not on the current branch) describes an "Orthogonal MRI & DeepAtropos Multi-Planar Reconstruction (MPR) Viewer" with a "DeepAtropos 6-Tissue Segmentation overlay." **This is not real per-subject scan data.** I read the actual rendering code (`renderMpr()` in `app.py`): it draws a **procedurally generated illustration** — ellipses shaped with `Math.sin`/`Math.cos` noise to look like a brain slice — for every subject, every slice, every plane. It never reads a real NIfTI file, a real DeepAtropos segmentation array, or any per-subject voxel data. The "IOP Scanner Artifact Injection" and "scanner distortion simulator" likewise just apply a CSS/canvas rotate+scale transform, not a measured distortion. This is a real gap between what the README promises ("MRI viewer", "segmentation overlay") and what the code does (a stylized animation).
 - The README (and `app.py`) state that switching from "Philips (Guys/HH)" to "GE (IOP)" causes the distortion — asserted as fact. As detailed in §6, no file in this repository verifies IXI's actual scanner vendors; Sudarsan's own script only frames this as an unconfirmed hypothesis.
 - The "Official Regulatory Conformity Audit Dossier" section claims conformance with "EU AI Act... Annex III (High-Risk SaMD)" and "FDA GMLP (21 CFR Part 820)" with "Digital Attestation Hash" and "SHA-256 Digest" fields. These look like real cryptographic/regulatory artifacts but are **hardcoded strings** (`"sha256:7f9a2b8e4d3c60195a8b7c2e4f0d192837465abcde98124056789abcdef12345"`, a fixed ISO timestamp `"2026-09-24T08:15:00Z"`) — there is no `hashlib` import or any computation producing them anywhere in `app.py`. This is presented to look like a genuine regulatory attestation but is not one.
 
 **What the code does that the README doesn't mention:**
 - `scripts/run_pipeline.py` (main branch) — a one-command orchestrator for stages T2 through the reliability score. Not mentioned in the README at all.
-- The full THP/eNKI/pooled-synthesis extension (10 untracked files in the working tree) — substantial additional work, not mentioned anywhere in the currently checked-out README.
+- The THP/eNKI/pooled-synthesis extension is now committed and documented in the README (2026-10-21).
 - `app.py` actually launches a **real subprocess pipeline runner** (`run_pipeline_thread()`, which really does call `subprocess.Popen` on `run_pipeline.py` and streams live logs) — this part is genuinely functional, not a mockup, even though the MPR/segmentation visuals next to it are illustrative.
 
 ## 10. Limitations (honest)
 
 - **No automated test suite** (§7) — correctness relies on inline asserts on real data, not a fixture-based CI test.
-- **No dependency lockfile** (`requirements.txt`/`pyproject.toml`) anywhere — reproducing the environment relies on a single README pip-install line with no pinned versions.
+- **Dependencies are pinned but not locked** — `requirements.txt` / `requirements-torch.txt` pin the direct packages (added 2026-10-21); transitive versions are not locked.
+- **The sub-4y MAE is not a clean held-out result.** BrainAgeNeXt (the only model under 4y) was pretrained on openBHB, which includes IXI, and on NKI-RS, the source of eNKI ([paper, Table 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC12319810/)). A cohort it only used for testing (e.g. SALD, DLBS) is needed before claiming MAE < 4y. DeepBrainNet's pretraining sets were not checked the same way.
 - **16 of 560 subjects dropped** from feature extraction to transient `deep_atropos` `MemoryError`s (disclosed in the README itself — not hidden, but a real gap: 544 vs 560 cohort size mismatch between DeepBrainNet and the tabular models).
 - **29 of 619 IXI subjects excluded** for missing date-of-birth (age unrecoverable) — disclosed, but reduces effective cohort further.
 - **IOP subgroup is small** (n=68 in the common cohort) relative to Guys (n=312) and HH (n=180) — the headline "IOP is worst for every model" finding rests on the smallest of the three groups.
@@ -212,7 +218,7 @@ Or, on `main` only: `python scripts/run_pipeline.py` runs stages T2 through the 
 - **The "GE vs Philips" scanner-vendor claim is unverified from any file in this repo** (§6, §9) — it should not be presented as something this codebase established.
 - **The 3D dashboard's MRI/segmentation viewer is illustrative, not real scan data** (§9) — if used in a demo video, this should be labeled as a stylized visualization, not an actual clinical viewer, or it will misrepresent what the project actually built.
 - **The "regulatory dossier" is a styled document template with a fabricated-looking hash/timestamp**, not a real compliance certification (§9, §12) — should not be described as an actual EU AI Act/FDA conformity assessment.
-- **Nine of the ten Stage-R1/R2/R3 scripts are currently uncommitted** (untracked working-tree files) — this work does not exist in the git history at all yet, so it can't currently be pointed to via a commit link.
+- ~~Stage-R1/R2/R3 scripts uncommitted~~ — resolved: committed to `reliability-experiments` on 2026-10-11.
 
 ## 11. Highlights — most technically interesting things
 
