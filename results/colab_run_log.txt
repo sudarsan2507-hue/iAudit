@@ -1,0 +1,249 @@
+10-10 19:21:23  session start  runtime=T4 GPU  drive_free=70.9 GB  scans=531
+10-10 19:21:24  DeepBrainNet 0/531 done   BrainAgeNeXt 0/531 done
+10-10 19:21:46  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-10 19:24:47    reproduce IXI002: colab=36.13 laptop=36.27 (diff 0.15 y)  feature r=1.0000
+10-10 19:24:48  DeepBrainNet pre-flight passed
+10-10 19:25:03  pre-flight: BrainAgeNeXt on IXI002, all 4 orientations, vs the laptop ...
+10-10 19:25:05    reproduce BrainAgeNeXt IXI002 as_is: colab=36.9 laptop=37.2
+10-10 19:25:07    reproduce BrainAgeNeXt IXI002 flip_LR: colab=35.1 laptop=35.5
+10-10 19:25:08    reproduce BrainAgeNeXt IXI002 flip_AP: colab=40.1 laptop=40.1
+10-10 19:25:10    reproduce BrainAgeNeXt IXI002 flip_SI: colab=42.6 laptop=42.7
+10-10 19:25:10  BrainAgeNeXt pre-flight passed
+10-10 19:25:10  531 scans to process this session
+10-10 19:27:39    reproduce IXI012: colab=46.05 laptop=46.23 (diff 0.18 y)  feature r=1.0000
+10-10 19:30:02    reproduce IXI013: colab=48.94 laptop=49.29 (diff 0.35 y)  feature r=1.0000
+10-10 19:35:30  working: DeepBrainNet 5/531  BrainAgeNeXt 0/531  (last IXI015: age 24.3, DBN 43.8)  124 s/scan, ~18.1 h left
+10-10 19:48:20  working: DeepBrainNet 10/531  BrainAgeNeXt 0/531  (last IXI021: age 21.6, DBN 28.5)  139 s/scan, ~20.1 h left
+10-10 19:59:50  working: DeepBrainNet 15/531  BrainAgeNeXt 0/531  (last IXI026: age 34.5, DBN 34.9)  139 s/scan, ~19.9 h left
+10-10 20:15:14  orientation check (MAE, 20 Guys/HH scans): as_is=4.52  flip_LR=4.70  flip_AP=9.12  flip_SI=11.35
+10-10 20:15:14  orientation locked: as_is
+10-10 20:15:17  working: DeepBrainNet 20/531  BrainAgeNeXt 1/531  (last IXI031: age 31.1, DBN 40.3, BANG 36.4)  150 s/scan, ~21.3 h left
+10-10 20:27:43  working: DeepBrainNet 25/531  BrainAgeNeXt 6/531  (last IXI038: age 21.4, DBN 26.8, BANG 24.3)  150 s/scan, ~21.1 h left
+10-10 20:40:02  working: DeepBrainNet 30/531  BrainAgeNeXt 11/531  (last IXI043: age 22.6, DBN 18.7, BANG 20.7)  150 s/scan, ~20.8 h left
+10-10 20:52:30  working: DeepBrainNet 35/531  BrainAgeNeXt 16/531  (last IXI049: age 31.9, DBN 44.6, BANG 32.8)  150 s/scan, ~20.6 h left
+10-10 21:06:22  working: DeepBrainNet 40/531  BrainAgeNeXt 21/531  (last IXI054: age 41.8, DBN 39.0, BANG 43.3)  152 s/scan, ~20.7 h left
+10-10 21:19:40  working: DeepBrainNet 45/531  BrainAgeNeXt 26/531  (last IXI059: age 34.1, DBN 32.2, BANG 31.0)  153 s/scan, ~20.6 h left
+10-10 21:31:36  working: DeepBrainNet 50/531  BrainAgeNeXt 31/531  (last IXI064: age 20.1, DBN 33.3, BANG 23.0)  152 s/scan, ~20.3 h left
+10-10 21:47:09  working: DeepBrainNet 55/531  BrainAgeNeXt 36/531  (last IXI069: age 26.3, DBN 30.8, BANG 33.3)  155 s/scan, ~20.5 h left
+10-10 21:59:48  working: DeepBrainNet 60/531  BrainAgeNeXt 41/531  (last IXI075: age 36.0, DBN 38.0, BANG 42.1)  155 s/scan, ~20.2 h left
+10-10 22:12:28  working: DeepBrainNet 65/531  BrainAgeNeXt 46/531  (last IXI080: age 21.2, DBN 21.8, BANG 18.9)  154 s/scan, ~20.0 h left
+10-10 22:24:46  working: DeepBrainNet 70/531  BrainAgeNeXt 51/531  (last IXI087: age 25.7, DBN 17.5, BANG 24.5)  154 s/scan, ~19.7 h left
+10-10 22:37:05  working: DeepBrainNet 75/531  BrainAgeNeXt 56/531  (last IXI093: age 26.9, DBN 46.4, BANG 28.9)  154 s/scan, ~19.4 h left
+10-10 22:49:20  working: DeepBrainNet 80/531  BrainAgeNeXt 61/531  (last IXI098: age 29.7, DBN 31.6, BANG 26.0)  153 s/scan, ~19.2 h left
+10-10 23:02:21  working: DeepBrainNet 85/531  BrainAgeNeXt 66/531  (last IXI103: age 31.8, DBN 39.2, BANG 35.5)  153 s/scan, ~19.0 h left
+10-10 23:14:49  working: DeepBrainNet 90/531  BrainAgeNeXt 71/531  (last IXI108: age 43.2, DBN 47.2, BANG 42.3)  153 s/scan, ~18.8 h left
+10-10 23:28:52  working: DeepBrainNet 95/531  BrainAgeNeXt 76/531  (last IXI113: age 32.4, DBN 30.2, BANG 33.0)  154 s/scan, ~18.6 h left
+10-10 23:41:41  working: DeepBrainNet 100/531  BrainAgeNeXt 81/531  (last IXI119: age 32.2, DBN 31.7, BANG 33.0)  154 s/scan, ~18.4 h left
+10-10 23:55:21  working: DeepBrainNet 105/531  BrainAgeNeXt 86/531  (last IXI126: age 57.2, DBN 57.2, BANG 54.8)  154 s/scan, ~18.3 h left
+10-11 00:07:43  working: DeepBrainNet 110/531  BrainAgeNeXt 91/531  (last IXI131: age 45.2, DBN 45.1, BANG 47.1)  154 s/scan, ~18.0 h left
+10-11 00:20:46  working: DeepBrainNet 115/531  BrainAgeNeXt 96/531  (last IXI137: age 41.2, DBN 37.7, BANG 37.2)  154 s/scan, ~17.8 h left
+10-11 00:32:34  working: DeepBrainNet 120/531  BrainAgeNeXt 101/531  (last IXI142: age 48.3, DBN 50.8, BANG 46.1)  154 s/scan, ~17.5 h left
+10-11 00:44:46  working: DeepBrainNet 125/531  BrainAgeNeXt 106/531  (last IXI148: age 40.6, DBN 50.7, BANG 39.1)  153 s/scan, ~17.3 h left
+10-11 00:59:42  working: DeepBrainNet 130/531  BrainAgeNeXt 111/531  (last IXI156: age 59.4, DBN 59.2, BANG 59.5)  154 s/scan, ~17.2 h left
+10-11 01:11:25  working: DeepBrainNet 135/531  BrainAgeNeXt 116/531  (last IXI161: age 65.1, DBN 65.0, BANG 68.6)  154 s/scan, ~16.9 h left
+10-11 01:24:39  working: DeepBrainNet 140/531  BrainAgeNeXt 121/531  (last IXI166: age 41.2, DBN 38.8, BANG 40.9)  154 s/scan, ~16.7 h left
+10-11 01:36:50  working: DeepBrainNet 145/531  BrainAgeNeXt 126/531  (last IXI172: age 75.0, DBN 71.1, BANG 72.8)  154 s/scan, ~16.5 h left
+10-11 01:48:41  working: DeepBrainNet 150/531  BrainAgeNeXt 131/531  (last IXI177: age 34.3, DBN 42.3, BANG 42.1)  153 s/scan, ~16.2 h left
+10-11 02:01:26  working: DeepBrainNet 155/531  BrainAgeNeXt 136/531  (last IXI182: age 61.0, DBN 56.4, BANG 57.5)  153 s/scan, ~16.0 h left
+10-11 02:14:03  working: DeepBrainNet 160/531  BrainAgeNeXt 141/531  (last IXI188: age 44.0, DBN 48.3, BANG 51.7)  153 s/scan, ~15.8 h left
+10-11 02:27:30  working: DeepBrainNet 165/531  BrainAgeNeXt 146/531  (last IXI194: age 48.3, DBN 48.6, BANG 52.3)  154 s/scan, ~15.6 h left
+10-11 02:40:13  working: DeepBrainNet 170/531  BrainAgeNeXt 151/531  (last IXI199: age 63.7, DBN 65.0, BANG 65.0)  154 s/scan, ~15.4 h left
+10-11 02:53:55  working: DeepBrainNet 175/531  BrainAgeNeXt 156/531  (last IXI205: age 45.4, DBN 48.2, BANG 44.2)  154 s/scan, ~15.2 h left
+10-11 03:06:43  working: DeepBrainNet 180/531  BrainAgeNeXt 161/531  (last IXI210: age 69.3, DBN 65.2, BANG 66.4)  154 s/scan, ~15.0 h left
+10-11 03:19:27  working: DeepBrainNet 185/531  BrainAgeNeXt 166/531  (last IXI216: age 73.0, DBN 69.0, BANG 73.8)  154 s/scan, ~14.8 h left
+10-11 05:42:31  session start  runtime=T4 GPU  drive_free=70.9 GB  scans=531
+10-11 05:42:32  DeepBrainNet 185/531 done   BrainAgeNeXt 166/531 done
+10-11 05:42:46  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-11 05:46:07    reproduce IXI002: colab=35.52 laptop=36.27 (diff 0.76 y)  feature r=1.0000
+10-11 05:46:08  DeepBrainNet pre-flight passed
+10-11 05:46:45  pre-flight: BrainAgeNeXt on IXI002, all 4 orientations, vs the laptop ...
+10-11 05:46:51    reproduce BrainAgeNeXt IXI002 as_is: colab=36.9 laptop=37.2
+10-11 05:46:53    reproduce BrainAgeNeXt IXI002 flip_LR: colab=35.1 laptop=35.5
+10-11 05:46:55    reproduce BrainAgeNeXt IXI002 flip_AP: colab=40.1 laptop=40.1
+10-11 05:46:57    reproduce BrainAgeNeXt IXI002 flip_SI: colab=42.6 laptop=42.7
+10-11 05:46:57  BrainAgeNeXt pre-flight passed; orientation locked earlier: as_is
+10-11 05:46:57  365 scans to process this session
+10-11 05:47:20  working: DeepBrainNet 185/531  BrainAgeNeXt 171/531  (last IXI015: age 24.3, BANG 30.2)  5 s/scan, ~0.5 h left
+10-11 05:47:43  working: DeepBrainNet 185/531  BrainAgeNeXt 176/531  (last IXI021: age 21.6, BANG 29.5)  5 s/scan, ~0.5 h left
+10-11 05:48:07  working: DeepBrainNet 185/531  BrainAgeNeXt 181/531  (last IXI026: age 34.5, BANG 36.3)  5 s/scan, ~0.5 h left
+10-11 05:51:19  working: DeepBrainNet 186/531  BrainAgeNeXt 186/531  (last IXI217: age 57.2, DBN 47.8, BANG 52.9)  13 s/scan, ~1.3 h left
+10-11 06:04:26  working: DeepBrainNet 191/531  BrainAgeNeXt 191/531  (last IXI223: age 63.2, DBN 62.7, BANG 64.4)  42 s/scan, ~4.0 h left
+10-11 06:17:43  working: DeepBrainNet 196/531  BrainAgeNeXt 196/531  (last IXI229: age 72.4, DBN 72.8, BANG 76.4)  62 s/scan, ~5.7 h left
+10-11 06:30:36  working: DeepBrainNet 201/531  BrainAgeNeXt 201/531  (last IXI241: age 30.0, DBN 34.1, BANG 33.3)  75 s/scan, ~6.9 h left
+10-11 06:42:55  working: DeepBrainNet 206/531  BrainAgeNeXt 206/531  (last IXI248: age 44.9, DBN 42.7, BANG 41.3)  84 s/scan, ~7.6 h left
+10-11 06:55:12  working: DeepBrainNet 211/531  BrainAgeNeXt 211/531  (last IXI253: age 24.0, DBN 21.9, BANG 22.9)  91 s/scan, ~8.1 h left
+10-11 07:07:55  working: DeepBrainNet 216/531  BrainAgeNeXt 216/531  (last IXI258: age 22.6, DBN 27.9, BANG 21.7)  97 s/scan, ~8.5 h left
+10-11 07:20:12  working: DeepBrainNet 221/531  BrainAgeNeXt 221/531  (last IXI263: age 25.2, DBN 40.7, BANG 24.0)  102 s/scan, ~8.8 h left
+10-11 07:32:57  working: DeepBrainNet 226/531  BrainAgeNeXt 226/531  (last IXI269: age 26.6, DBN 25.5, BANG 29.9)  106 s/scan, ~9.0 h left
+10-11 07:45:34  working: DeepBrainNet 231/531  BrainAgeNeXt 231/531  (last IXI277: age 61.3, DBN 63.1, BANG 58.0)  109 s/scan, ~9.1 h left
+10-11 07:58:50  working: DeepBrainNet 236/531  BrainAgeNeXt 236/531  (last IXI284: age 63.0, DBN 59.3, BANG 62.5)  113 s/scan, ~9.3 h left
+10-11 08:11:39  working: DeepBrainNet 241/531  BrainAgeNeXt 241/531  (last IXI289: age 60.8, DBN 63.5, BANG 62.4)  116 s/scan, ~9.3 h left
+10-11 08:23:32  working: DeepBrainNet 246/531  BrainAgeNeXt 246/531  (last IXI299: age 53.4, DBN 58.5, BANG 57.5)  117 s/scan, ~9.3 h left
+10-11 08:36:10  working: DeepBrainNet 251/531  BrainAgeNeXt 251/531  (last IXI311: age 61.6, DBN 66.6, BANG 65.8)  119 s/scan, ~9.3 h left
+10-11 08:48:25  working: DeepBrainNet 256/531  BrainAgeNeXt 256/531  (last IXI318: age 54.5, DBN 48.5, BANG 56.8)  121 s/scan, ~9.2 h left
+10-11 09:02:01  working: DeepBrainNet 261/531  BrainAgeNeXt 261/531  (last IXI325: age 52.7, DBN 49.4, BANG 55.6)  123 s/scan, ~9.2 h left
+10-11 09:14:55  working: DeepBrainNet 266/531  BrainAgeNeXt 266/531  (last IXI330: age 44.5, DBN 47.2, BANG 45.1)  125 s/scan, ~9.2 h left
+10-11 09:27:04  working: DeepBrainNet 271/531  BrainAgeNeXt 271/531  (last IXI342: age 48.7, DBN 45.8, BANG 44.1)  126 s/scan, ~9.1 h left
+10-11 09:40:33  working: DeepBrainNet 276/531  BrainAgeNeXt 276/531  (last IXI353: age 52.7, DBN 50.8, BANG 48.0)  127 s/scan, ~9.0 h left
+10-11 09:53:26  working: DeepBrainNet 281/531  BrainAgeNeXt 281/531  (last IXI359: age 62.1, DBN 54.8, BANG 57.6)  129 s/scan, ~8.9 h left
+10-11 10:07:03  working: DeepBrainNet 286/531  BrainAgeNeXt 286/531  (last IXI364: age 67.2, DBN 58.4, BANG 61.2)  130 s/scan, ~8.9 h left
+10-11 10:19:59  working: DeepBrainNet 291/531  BrainAgeNeXt 291/531  (last IXI370: age 60.6, DBN 62.5, BANG 56.8)  131 s/scan, ~8.7 h left
+10-11 10:33:22  working: DeepBrainNet 296/531  BrainAgeNeXt 296/531  (last IXI380: age 66.9, DBN 61.1, BANG 63.1)  132 s/scan, ~8.6 h left
+10-11 10:46:23  working: DeepBrainNet 301/531  BrainAgeNeXt 301/531  (last IXI386: age 52.3, DBN 38.0, BANG 45.3)  133 s/scan, ~8.5 h left
+10-11 11:00:11  working: DeepBrainNet 306/531  BrainAgeNeXt 306/531  (last IXI392: age 62.5, DBN 65.1, BANG 64.3)  134 s/scan, ~8.4 h left
+10-11 11:12:55  working: DeepBrainNet 311/531  BrainAgeNeXt 311/531  (last IXI398: age 51.7, DBN 44.7, BANG 53.4)  135 s/scan, ~8.2 h left
+10-11 11:26:03  working: DeepBrainNet 316/531  BrainAgeNeXt 316/531  (last IXI403: age 53.5, DBN 40.0, BANG 51.7)  136 s/scan, ~8.1 h left
+10-11 11:39:55  working: DeepBrainNet 321/531  BrainAgeNeXt 321/531  (last IXI408: age 52.1, DBN 48.9, BANG 57.5)  137 s/scan, ~8.0 h left
+10-11 11:52:35  working: DeepBrainNet 326/531  BrainAgeNeXt 326/531  (last IXI413: age 59.8, DBN 60.4, BANG 61.1)  137 s/scan, ~7.8 h left
+10-11 12:07:05  working: DeepBrainNet 331/531  BrainAgeNeXt 331/531  (last IXI418: age 59.7, DBN 62.6, BANG 58.1)  138 s/scan, ~7.7 h left
+10-11 12:20:21  working: DeepBrainNet 336/531  BrainAgeNeXt 336/531  (last IXI429: age 55.5, DBN 54.7, BANG 57.7)  139 s/scan, ~7.5 h left
+10-11 12:34:07  working: DeepBrainNet 341/531  BrainAgeNeXt 341/531  (last IXI438: age 63.7, DBN 55.3, BANG 55.6)  140 s/scan, ~7.4 h left
+10-11 12:47:31  working: DeepBrainNet 346/531  BrainAgeNeXt 346/531  (last IXI444: age 58.4, DBN 51.3, BANG 56.3)  140 s/scan, ~7.2 h left
+10-11 13:01:07  working: DeepBrainNet 351/531  BrainAgeNeXt 351/531  (last IXI449: age 46.9, DBN 55.0, BANG 51.5)  141 s/scan, ~7.0 h left
+10-11 13:14:48  working: DeepBrainNet 356/531  BrainAgeNeXt 356/531  (last IXI454: age 32.6, DBN 40.0, BANG 33.4)  141 s/scan, ~6.9 h left
+10-11 13:27:25  working: DeepBrainNet 361/531  BrainAgeNeXt 361/531  (last IXI460: age 60.9, DBN 59.0, BANG 59.1)  142 s/scan, ~6.7 h left
+10-11 13:44:38  session start  runtime=T4 GPU  drive_free=70.9 GB  scans=531
+10-11 13:44:39  DeepBrainNet 362/531 done   BrainAgeNeXt 362/531 done
+10-11 13:45:01  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-11 13:48:04    reproduce IXI002: colab=36.38 laptop=36.27 (diff 0.11 y)  feature r=1.0000
+10-11 13:48:04  DeepBrainNet pre-flight passed
+10-11 13:48:28  pre-flight: BrainAgeNeXt on IXI002, all 4 orientations, vs the laptop ...
+10-11 13:48:32    reproduce BrainAgeNeXt IXI002 as_is: colab=36.9 laptop=37.2
+10-11 13:48:34    reproduce BrainAgeNeXt IXI002 flip_LR: colab=35.1 laptop=35.5
+10-11 13:48:35    reproduce BrainAgeNeXt IXI002 flip_AP: colab=40.1 laptop=40.1
+10-11 13:48:37    reproduce BrainAgeNeXt IXI002 flip_SI: colab=42.6 laptop=42.7
+10-11 13:48:37  BrainAgeNeXt pre-flight passed; orientation locked earlier: as_is
+10-11 13:48:37  169 scans to process this session
+10-11 14:03:03  working: DeepBrainNet 367/531  BrainAgeNeXt 367/531  (last IXI480: age 60.0, DBN 55.1, BANG 55.5)  173 s/scan, ~7.9 h left
+10-11 14:16:30  working: DeepBrainNet 372/531  BrainAgeNeXt 372/531  (last IXI485: age 68.9, DBN 63.5, BANG 62.2)  167 s/scan, ~7.4 h left
+10-11 14:29:54  working: DeepBrainNet 377/531  BrainAgeNeXt 377/531  (last IXI490: age 70.1, DBN 65.8, BANG 70.8)  165 s/scan, ~7.1 h left
+10-11 14:42:17  working: DeepBrainNet 382/531  BrainAgeNeXt 382/531  (last IXI495: age 60.9, DBN 62.9, BANG 67.0)  161 s/scan, ~6.7 h left
+10-11 15:46:27  session start  runtime=CPU  drive_free=88.2 GB  scans=531
+10-11 15:46:30  DeepBrainNet 385/531 done   BrainAgeNeXt 385/531 done
+10-11 15:46:50  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-11 15:52:14    reproduce IXI002: colab=36.41 laptop=36.27 (diff 0.14 y)  feature r=1.0000
+10-11 15:52:15  DeepBrainNet pre-flight passed
+10-11 15:52:16  146 scans to process this session
+10-11 16:21:35  working: DeepBrainNet 390/531  BrainAgeNeXt 385/531  (last IXI503: age 65.1, DBN 73.1)  352 s/scan, ~13.8 h left
+10-11 16:33:36  session start  runtime=CPU  drive_free=87.9 GB  scans=531
+10-11 16:33:37  DeepBrainNet 391/531 done   BrainAgeNeXt 385/531 done
+10-11 16:33:53  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-11 16:40:28    reproduce IXI002: colab=36.05 laptop=36.27 (diff 0.23 y)  feature r=1.0000
+10-11 16:40:29  DeepBrainNet pre-flight passed
+10-11 16:40:29  140 scans to process this session
+10-11 17:07:50  working: DeepBrainNet 396/531  BrainAgeNeXt 385/531  (last IXI511: age 64.6, DBN 66.8)  328 s/scan, ~12.3 h left
+10-11 17:36:48  working: DeepBrainNet 401/531  BrainAgeNeXt 385/531  (last IXI519: age 57.5, DBN 53.9)  338 s/scan, ~12.2 h left
+10-11 18:03:31  working: DeepBrainNet 406/531  BrainAgeNeXt 385/531  (last IXI525: age 41.5, DBN 45.3)  332 s/scan, ~11.5 h left
+10-11 18:31:29  working: DeepBrainNet 411/531  BrainAgeNeXt 385/531  (last IXI534: age 69.6, DBN 65.9)  333 s/scan, ~11.1 h left
+10-11 18:59:02  working: DeepBrainNet 416/531  BrainAgeNeXt 385/531  (last IXI539: age 78.1, DBN 74.3)  333 s/scan, ~10.6 h left
+10-11 19:26:52  working: DeepBrainNet 421/531  BrainAgeNeXt 385/531  (last IXI551: age 70.5, DBN 69.8)  333 s/scan, ~10.2 h left
+10-11 19:55:22  working: DeepBrainNet 426/531  BrainAgeNeXt 385/531  (last IXI558: age 66.9, DBN 65.4)  334 s/scan, ~9.7 h left
+10-11 20:24:14  working: DeepBrainNet 431/531  BrainAgeNeXt 385/531  (last IXI566: age 43.0, DBN 44.6)  336 s/scan, ~9.3 h left
+10-11 20:52:53  working: DeepBrainNet 436/531  BrainAgeNeXt 385/531  (last IXI575: age 57.8, DBN 52.4)  337 s/scan, ~8.9 h left
+10-11 21:22:07  working: DeepBrainNet 441/531  BrainAgeNeXt 385/531  (last IXI582: age 29.8, DBN 40.5)  338 s/scan, ~8.4 h left
+10-11 21:51:23  working: DeepBrainNet 446/531  BrainAgeNeXt 385/531  (last IXI591: age 59.9, DBN 63.4)  339 s/scan, ~8.0 h left
+10-11 22:17:45  working: DeepBrainNet 451/531  BrainAgeNeXt 385/531  (last IXI599: age 39.4, DBN 42.9)  337 s/scan, ~7.5 h left
+10-11 22:47:17  working: DeepBrainNet 456/531  BrainAgeNeXt 385/531  (last IXI606: age 60.5, DBN 63.4)  339 s/scan, ~7.1 h left
+10-11 23:16:01  working: DeepBrainNet 461/531  BrainAgeNeXt 385/531  (last IXI611: age 28.9, DBN 34.1)  339 s/scan, ~6.6 h left
+10-11 23:43:07  working: DeepBrainNet 466/531  BrainAgeNeXt 385/531  (last IXI617: age 39.2, DBN 48.9)  338 s/scan, ~6.1 h left
+10-12 00:11:18  working: DeepBrainNet 471/531  BrainAgeNeXt 385/531  (last IXI625: age 47.1, DBN 46.0)  338 s/scan, ~5.6 h left
+10-12 00:41:36  working: DeepBrainNet 476/531  BrainAgeNeXt 385/531  (last IXI631: age 41.3, DBN 43.5)  340 s/scan, ~5.2 h left
+10-12 01:09:33  working: DeepBrainNet 481/531  BrainAgeNeXt 385/531  (last IXI636: age 43.2, DBN 51.4)  339 s/scan, ~4.7 h left
+10-12 01:36:37  working: DeepBrainNet 486/531  BrainAgeNeXt 385/531  (last IXI644: age 56.9, DBN 47.3)  339 s/scan, ~4.2 h left
+10-12 02:05:35  working: DeepBrainNet 491/531  BrainAgeNeXt 385/531  (last IXI653: age 46.2, DBN 46.4)  339 s/scan, ~3.8 h left
+10-12 02:32:19  working: DeepBrainNet 496/531  BrainAgeNeXt 385/531  (last eNKI_A00034854: age 21.0, DBN 29.5)  338 s/scan, ~3.3 h left
+10-12 03:00:21  working: DeepBrainNet 501/531  BrainAgeNeXt 385/531  (last eNKI_A00038806: age 62.0, DBN 65.2)  338 s/scan, ~2.8 h left
+10-12 03:27:28  working: DeepBrainNet 506/531  BrainAgeNeXt 385/531  (last eNKI_A00040324: age 70.0, DBN 68.7)  338 s/scan, ~2.3 h left
+10-12 07:53:26  session start  runtime=CPU  drive_free=88.2 GB  scans=531
+10-12 07:53:28  DeepBrainNet 507/531 done   BrainAgeNeXt 385/531 done
+10-12 07:53:58  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-12 07:58:41    reproduce IXI002: colab=35.56 laptop=36.27 (diff 0.71 y)  feature r=1.0000
+10-12 07:58:42  DeepBrainNet pre-flight passed
+10-12 07:58:42  24 scans to process this session
+10-12 08:21:13  working: DeepBrainNet 512/531  BrainAgeNeXt 385/531  (last eNKI_A00043635: age 50.0, DBN 54.9)  270 s/scan, ~1.4 h left
+10-12 08:42:18  working: DeepBrainNet 517/531  BrainAgeNeXt 385/531  (last eNKI_A00051678: age 66.0, DBN 62.7)  262 s/scan, ~1.0 h left
+10-12 09:04:20  working: DeepBrainNet 522/531  BrainAgeNeXt 385/531  (last eNKI_A00060925: age 24.0, DBN 31.0)  263 s/scan, ~0.7 h left
+10-12 09:27:10  working: DeepBrainNet 527/531  BrainAgeNeXt 385/531  (last eNKI_A00065995: age 45.0, DBN 52.2)  265 s/scan, ~0.3 h left
+10-12 09:45:10  finished this pass: DeepBrainNet 531/531  BrainAgeNeXt 385/531
+10-12 09:45:10  PAUSED: DeepBrainNet is complete. Switch to Runtime > Change runtime type > T4 GPU, then Run all.
+10-12 09:45:10  releasing the Colab runtime (no more compute is used)
+10-12 11:04:48  session start  runtime=T4 GPU  drive_free=70.9 GB  scans=531
+10-12 11:05:07  session start  runtime=T4 GPU  drive_free=70.9 GB  scans=531
+10-12 11:05:07  DeepBrainNet 531/531 done   BrainAgeNeXt 385/531 done
+10-12 11:05:29  pre-flight: BrainAgeNeXt on IXI002, all 4 orientations, vs the laptop ...
+10-12 11:05:36    reproduce BrainAgeNeXt IXI002 as_is: colab=36.9 laptop=37.2
+10-12 11:05:38    reproduce BrainAgeNeXt IXI002 flip_LR: colab=35.1 laptop=35.5
+10-12 11:05:40    reproduce BrainAgeNeXt IXI002 flip_AP: colab=40.1 laptop=40.1
+10-12 11:05:41    reproduce BrainAgeNeXt IXI002 flip_SI: colab=42.6 laptop=42.7
+10-12 11:05:41  BrainAgeNeXt pre-flight passed; orientation locked earlier: as_is
+10-12 11:05:41  146 scans to process this session
+10-12 11:06:05  working: DeepBrainNet 531/531  BrainAgeNeXt 390/531  (last IXI503: age 65.1, BANG 74.2)  5 s/scan, ~0.2 h left
+10-12 11:06:28  working: DeepBrainNet 531/531  BrainAgeNeXt 395/531  (last IXI508: age 60.9, BANG 63.3)  5 s/scan, ~0.2 h left
+10-12 11:06:53  working: DeepBrainNet 531/531  BrainAgeNeXt 400/531  (last IXI518: age 75.8, BANG 75.7)  5 s/scan, ~0.2 h left
+10-12 11:07:18  working: DeepBrainNet 531/531  BrainAgeNeXt 405/531  (last IXI524: age 33.5, BANG 39.2)  5 s/scan, ~0.2 h left
+10-12 11:07:44  working: DeepBrainNet 531/531  BrainAgeNeXt 410/531  (last IXI533: age 73.6, BANG 71.3)  5 s/scan, ~0.2 h left
+10-12 11:08:10  working: DeepBrainNet 531/531  BrainAgeNeXt 415/531  (last IXI538: age 81.9, BANG 83.5)  5 s/scan, ~0.2 h left
+10-12 11:08:34  working: DeepBrainNet 531/531  BrainAgeNeXt 420/531  (last IXI550: age 59.9, BANG 54.5)  5 s/scan, ~0.2 h left
+10-12 11:08:57  working: DeepBrainNet 531/531  BrainAgeNeXt 425/531  (last IXI556: age 55.6, BANG 54.4)  5 s/scan, ~0.1 h left
+10-12 11:09:21  working: DeepBrainNet 531/531  BrainAgeNeXt 430/531  (last IXI565: age 63.8, BANG 66.8)  5 s/scan, ~0.1 h left
+10-12 11:09:45  working: DeepBrainNet 531/531  BrainAgeNeXt 435/531  (last IXI572: age 41.9, BANG 31.6)  5 s/scan, ~0.1 h left
+10-12 11:10:08  working: DeepBrainNet 531/531  BrainAgeNeXt 440/531  (last IXI579: age 41.2, BANG 41.6)  5 s/scan, ~0.1 h left
+10-12 11:10:34  working: DeepBrainNet 531/531  BrainAgeNeXt 445/531  (last IXI587: age 33.6, BANG 39.8)  5 s/scan, ~0.1 h left
+10-12 11:11:00  working: DeepBrainNet 531/531  BrainAgeNeXt 450/531  (last IXI598: age 52.9, BANG 53.3)  5 s/scan, ~0.1 h left
+10-12 11:11:24  working: DeepBrainNet 531/531  BrainAgeNeXt 455/531  (last IXI605: age 70.3, BANG 70.2)  5 s/scan, ~0.1 h left
+10-12 11:11:46  working: DeepBrainNet 531/531  BrainAgeNeXt 460/531  (last IXI610: age 56.7, BANG 52.5)  5 s/scan, ~0.1 h left
+10-12 11:12:10  working: DeepBrainNet 531/531  BrainAgeNeXt 465/531  (last IXI616: age 55.1, BANG 56.3)  5 s/scan, ~0.1 h left
+10-12 11:12:33  working: DeepBrainNet 531/531  BrainAgeNeXt 470/531  (last IXI622: age 59.7, BANG 64.7)  5 s/scan, ~0.1 h left
+10-12 11:12:58  working: DeepBrainNet 531/531  BrainAgeNeXt 475/531  (last IXI630: age 54.7, BANG 52.6)  5 s/scan, ~0.1 h left
+10-12 11:13:25  working: DeepBrainNet 531/531  BrainAgeNeXt 480/531  (last IXI635: age 25.5, BANG 26.6)  5 s/scan, ~0.1 h left
+10-12 11:13:50  working: DeepBrainNet 531/531  BrainAgeNeXt 485/531  (last IXI642: age 57.1, BANG 58.1)  5 s/scan, ~0.1 h left
+10-12 11:14:15  working: DeepBrainNet 531/531  BrainAgeNeXt 490/531  (last IXI652: age 43.0, BANG 46.2)  5 s/scan, ~0.1 h left
+10-12 11:14:42  working: DeepBrainNet 531/531  BrainAgeNeXt 495/531  (last eNKI_A00033247: age 22.0, BANG 25.6)  5 s/scan, ~0.0 h left
+10-12 11:15:06  working: DeepBrainNet 531/531  BrainAgeNeXt 500/531  (last eNKI_A00038411: age 44.0, BANG 47.3)  5 s/scan, ~0.0 h left
+10-12 11:15:30  working: DeepBrainNet 531/531  BrainAgeNeXt 505/531  (last eNKI_A00040181: age 85.0, BANG 76.5)  5 s/scan, ~0.0 h left
+10-12 11:15:56  working: DeepBrainNet 531/531  BrainAgeNeXt 510/531  (last eNKI_A00043417: age 53.0, BANG 58.4)  5 s/scan, ~0.0 h left
+10-12 11:16:22  working: DeepBrainNet 531/531  BrainAgeNeXt 515/531  (last eNKI_A00051514: age 21.0, BANG 24.3)  5 s/scan, ~0.0 h left
+10-12 11:16:47  working: DeepBrainNet 531/531  BrainAgeNeXt 520/531  (last eNKI_A00054895: age 59.0, BANG 61.9)  5 s/scan, ~0.0 h left
+10-12 11:17:11  working: DeepBrainNet 531/531  BrainAgeNeXt 525/531  (last eNKI_A00062285: age 51.0, BANG 49.7)  5 s/scan, ~0.0 h left
+10-12 11:17:38  working: DeepBrainNet 531/531  BrainAgeNeXt 530/531  (last eNKI_A00073330: age 35.0, BANG 35.6)  5 s/scan, ~0.0 h left
+10-12 11:17:44  finished this pass: DeepBrainNet 531/531  BrainAgeNeXt 531/531
+10-12 11:29:24  stage 3: 531 scans with both feature sets  {'Guys': 312, 'HH': 180, 'eNKI': 39}
+10-12 11:29:27  MAE in years (Guys+HH = 5-fold out-of-fold; eNKI never used for training):
+                        Guys+HH  eNKI
+model                                
+dbn_raw (no head)          4.57  6.30
+bang_raw (no head)         3.38  3.69
+DBN gap512 + ridge         4.57  6.29
+DBN dense1024 + ridge      4.52  5.86
+BANG 512 + ridge           3.24  3.51
+DBN gap + BANG + ridge     3.26  3.54
+10-12 11:29:27  ALL DONE. Results: outputs/transfer_head_mae.csv and outputs/transfer_head_predictions.csv
+10-12 11:29:27  releasing the Colab runtime (no more compute is used)
+10-12 12:15:36  session start  runtime=CPU  drive_free=88.2 GB  scans=531
+10-12 12:15:38  DeepBrainNet 531/531 done   BrainAgeNeXt 531/531 done
+10-12 12:15:38  0 scans to process this session
+10-12 12:15:38  finished this pass: DeepBrainNet 531/531  BrainAgeNeXt 531/531
+10-12 12:15:38  PAUSED: DeepBrainNet is complete. Switch to Runtime > Change runtime type > T4 GPU, then Run all.
+10-12 12:15:38  releasing the Colab runtime (no more compute is used)
+10-12 12:19:29  session start  runtime=CPU  drive_free=88.2 GB  scans=531
+10-12 12:19:37  DeepBrainNet 531/531 done   BrainAgeNeXt 531/531 done
+10-12 12:19:37  0 scans to process this session
+10-12 12:19:37  finished this pass: DeepBrainNet 531/531  BrainAgeNeXt 531/531
+10-12 12:19:37  PAUSED: DeepBrainNet is complete. Switch to Runtime > Change runtime type > T4 GPU, then Run all.
+10-12 12:19:37  releasing the Colab runtime (no more compute is used)
+10-12 12:43:08  session start  runtime=T4 GPU  drive_free=70.9 GB  scans=531
+10-12 12:43:09  DeepBrainNet 531/531 done   BrainAgeNeXt 531/531 done
+10-12 12:43:10  0 scans to process this session
+10-12 12:43:10  finished this pass: DeepBrainNet 531/531  BrainAgeNeXt 531/531
+10-12 12:50:45  stage 3: 531 scans with both feature sets  {'Guys': 312, 'HH': 180, 'eNKI': 39}
+10-12 12:50:53  MAE in years (Guys+HH = 5-fold out-of-fold; eNKI never used for training):
+                        Guys+HH  eNKI
+model                                
+dbn_raw (no head)          4.57  6.30
+bang_raw (no head)         3.38  3.69
+DBN gap512 + ridge         4.57  6.29
+DBN dense1024 + ridge      4.52  5.86
+BANG 512 + ridge           3.24  3.51
+DBN gap + BANG + ridge     3.26  3.54
+10-12 12:50:54  ALL DONE. Results: outputs/transfer_head_mae.csv and outputs/transfer_head_predictions.csv
+10-12 12:50:54  releasing the Colab runtime (no more compute is used)
