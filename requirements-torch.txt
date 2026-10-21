@@ -1,0 +1,14 @@
+# Separate environment (PyTorch) for BrainAgeNeXt - kept apart from requirements.txt to avoid
+# TensorFlow/PyTorch dependency conflicts. CPU wheels:
+#   pip install -r requirements-torch.txt --extra-index-url https://download.pytorch.org/whl/cpu
+# BrainAgeNeXt code + weights: https://github.com/FrancescoLR/BrainAgeNeXt and
+# https://huggingface.co/FrancescoLR/BrainAgeNeXt (the Colab notebook fetches and MD5-checks both).
+torch==2.14.1
+monai==1.6.1
+torchio==1.2.1
+nibabel==5.4.2
+simpleitk==2.5.6
+numpy==2.4.6
+scipy==1.17.1
+pandas==3.0.6
+mednextv1 @ git+https://github.com/FrancescoLR/MedNeXt.git@463813b1c7352edb487f43b1eecebe507429a195
