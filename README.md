@@ -149,6 +149,23 @@ signal:
 </p>
 <p align="center"><em>MAE vs coverage as high-distance scans are dropped - reliability-score-based (solid) vs random abstention (dashed)</em></p>
 
+### External validation of the reliability score (Stages R1-R3)
+
+| Stage | Question | Result | Verdict |
+|---|---|---|---|
+| R1 - THP | Does scanner vendor shift the distance D within the same person? | Philips mean D 5.01 vs Siemens 3.81; paired Wilcoxon p=0.0625 (the smallest p a 5-pair test can reach) | Not significant - underpowered, not disproven. The "IOP is GE" idea stays untested (no GE scans exist in THP) |
+| R2 - eNKI | Does D flag a new, unseen cohort? | eNKI mean D 3.37 vs IXI reference 2.33; AUC 0.774 | Yes |
+| R2 - eNKI | Does D predict DeepBrainNet error on eNKI alone? | Age-controlled partial Spearman r=0.217, p=0.184 (n=39) | Not significant on its own |
+| R3 - pooled | Does D predict error across IXI + eNKI? | Partial Spearman r=0.220, p=7.99e-08 (n=583) | **Supported** |
+
+DeepBrainNet MAE rises from 4.59y on the IXI reference sites to 6.28y on
+eNKI, in line with eNKI sitting further from the reference distribution.
+
+<p align="center">
+  <img src="results/fig_pooled_error_vs_D.png" width="480" alt="Pooled DeepBrainNet error vs reliability distance">
+</p>
+<p align="center"><em>Pooled IXI + eNKI (n=583): DeepBrainNet absolute error vs distance from the Guys+HH reference</em></p>
+
 ### All figures
 
 | | |
