@@ -28,6 +28,7 @@ model-specific.
 | R3 | Pooled IXI + eNKI test of error vs reliability distance | `scripts/stage_r3_pooled.py` |
 | F1 | Frozen-CNN feature extraction (DeepBrainNet 512/1024-d, BrainAgeNeXt 512-d) + ridge transfer heads, run on Colab T4 | `colab/iaudit_colab_auto.ipynb` (built by `colab/build_auto.py`); local: `scripts/dbn_embed.py`, `scripts/bang_orientation_check.py` |
 | F2 | Transfer-learning MAE figure | `scripts/plot_transfer_head_mae.py` |
+| F3 | BrainAgeNeXt fairness audit (Stage 5 method, same 492 subjects as DeepBrainNet) | `scripts/bang_fairness_audit.py` |
 
 Every stage is checkpointed/resumable where it runs long, and every number
 in `results/` comes from actually running these scripts on the real IXI
@@ -188,6 +189,57 @@ eNKI, in line with eNKI sitting further from the reference distribution.
   <img src="results/fig_pooled_error_vs_D.png" width="480" alt="Pooled DeepBrainNet error vs reliability distance">
 </p>
 <p align="center"><em>Pooled IXI + eNKI (n=583): DeepBrainNet absolute error vs distance from the Guys+HH reference</em></p>
+
+### Second CNN: BrainAgeNeXt
+
+[BrainAgeNeXt](https://github.com/FrancescoLR/BrainAgeNeXt)
+([La Rosa et al., Imaging Neuroscience 2025](https://doi.org/10.1162/imag_a_00487))
+was added as a second, newer brain-age CNN to compare against DeepBrainNet.
+
+| | DeepBrainNet | BrainAgeNeXt |
+|---|---|---|
+| Architecture | VGG16-style 2D CNN, 80 axial slices, median of slice predictions | MedNeXt (ConvNeXt-style) 3D CNN on the whole 160×192×160 volume |
+| Ensemble | single model | 5 models, median prediction |
+| Training data (per its paper) | not checked here | 11,574 healthy scans, 33 datasets, ages 5–95, 3T and 7T - **including openBHB (contains IXI) and NKI-RS** |
+| Framework / environment | TensorFlow (`requirements.txt`) | PyTorch (`requirements-torch.txt`) |
+| Speed in this project | ~165 s/scan on laptop CPU (mostly ANTs registration) | ~190 s/scan laptop CPU, **~5 s/scan on a Colab T4** |
+
+How it was run (`colab/iaudit_colab_auto.ipynb`):
+
+- **Same preprocessing as DeepBrainNet.** BrainAgeNeXt reads the skull-stripped,
+  bias-corrected, MNI-registered volume that the DeepBrainNet step saves,
+  so both models see the identical brain for every scan.
+- **Orientation check.** ANTs and BrainAgeNeXt's expected MNI space can differ
+  by an axis flip, so all 4 orientations (as-is, flip L-R / A-P / S-I) were
+  scored on 20 Guys+HH scans and the best one was locked for the whole run
+  (recorded in the notebook's `outputs/bang_orientation.json`). The run would
+  have stopped if even the best orientation had MAE > 10y.
+- **Reproduction check.** Each Colab session first re-ran IXI002 in all 4
+  orientations and had to match the laptop CPU result within 1.5y.
+- **Features.** For every scan the 512-d encoder output of each of the 5
+  models was saved alongside the prediction, for the transfer heads below.
+
+Results on the 531 scans (IXI Guys+HH n=492, eNKI n=39):
+
+- Raw MAE **3.38y on IXI** and **3.69y on eNKI**, against DeepBrainNet's 4.57y
+  and 6.30y - about 1.2y and 2.6y better.
+- It barely degrades from IXI to eNKI (+0.31y) where DeepBrainNet degrades by
+  +1.73y.
+- **Caveat:** both cohorts very likely overlap its training data (IXI via
+  openBHB; NKI-RS is the Rockland sample eNKI comes from). The small IXI-to-eNKI
+  drop is more likely memory than robustness, and none of these numbers is a
+  held-out result.
+
+Not done yet for BrainAgeNeXt:
+
+- **Fairness audit** (sex / site / ethnicity, the Stage 5 method) -
+  `scripts/bang_fairness_audit.py` is ready; it needs the per-scan
+  `transfer_head_predictions.csv` from the Colab run's Google Drive outputs.
+- **IOP** - not included in the Colab run, so it is unknown whether
+  BrainAgeNeXt also fails on the IOP scanner (DeepBrainNet: 11.49y).
+- **Reliability score** - not yet tested against BrainAgeNeXt's errors.
+- **Clean held-out test** - a cohort the paper used only for testing (e.g.
+  SALD, DLBS).
 
 ### Transfer learning toward MAE < 4 years (Stage F1)
 
