@@ -29,6 +29,7 @@ model-specific.
 | F1 | Frozen-CNN feature extraction (DeepBrainNet 512/1024-d, BrainAgeNeXt 512-d) + ridge transfer heads, run on Colab T4 | `colab/iaudit_colab_auto.ipynb` (built by `colab/build_auto.py`); local: `scripts/dbn_embed.py`, `scripts/bang_orientation_check.py` |
 | F2 | Transfer-learning MAE figure | `scripts/plot_transfer_head_mae.py` |
 | F3 | BrainAgeNeXt fairness audit (Stage 5 method, same 492 subjects as DeepBrainNet) | `scripts/bang_fairness_audit.py` |
+| F4 | BrainAgeNeXt figures: IXI-to-eNKI error growth, run pipeline diagram | `scripts/plot_bang_vs_dbn.py`, `scripts/plot_bang_pipeline.py` |
 
 Every stage is checkpointed/resumable where it runs long, and every number
 in `results/` comes from actually running these scripts on the real IXI
@@ -206,6 +207,10 @@ was added as a second, newer brain-age CNN to compare against DeepBrainNet.
 
 How it was run (`colab/iaudit_colab_auto.ipynb`):
 
+<p align="center">
+  <img src="results/fig_bang_pipeline.png" width="760" alt="How BrainAgeNeXt and DeepBrainNet were run">
+</p>
+
 - **Same preprocessing as DeepBrainNet.** BrainAgeNeXt reads the skull-stripped,
   bias-corrected, MNI-registered volume that the DeepBrainNet step saves,
   so both models see the identical brain for every scan.
@@ -225,6 +230,12 @@ Results on the 531 scans (IXI Guys+HH n=492, eNKI n=39):
   and 6.30y - about 1.2y and 2.6y better.
 - It barely degrades from IXI to eNKI (+0.31y) where DeepBrainNet degrades by
   +1.73y.
+
+<p align="center">
+  <img src="results/fig_bang_vs_dbn.png" width="460" alt="MAE growth from IXI to eNKI, BrainAgeNeXt vs DeepBrainNet">
+</p>
+<p align="center"><em>Error growth from IXI to eNKI. † = training data overlaps both cohorts.</em></p>
+
 - **Caveat:** both cohorts very likely overlap its training data (IXI via
   openBHB; NKI-RS is the Rockland sample eNKI comes from). The small IXI-to-eNKI
   drop is more likely memory than robustness, and none of these numbers is a
@@ -235,6 +246,9 @@ Not done yet for BrainAgeNeXt:
 - **Fairness audit** (sex / site / ethnicity, the Stage 5 method) -
   `scripts/bang_fairness_audit.py` is ready; it needs the per-scan
   `transfer_head_predictions.csv` from the Colab run's Google Drive outputs.
+  To get it, run only the notebook's last cell ("Export for the GitHub repo",
+  CPU runtime is enough): it downloads `iaudit_colab_outputs.zip`; unzip it
+  into `E:\iAuditData\colab_outputs\` and run the script.
 - **IOP** - not included in the Colab run, so it is unknown whether
   BrainAgeNeXt also fails on the IOP scanner (DeepBrainNet: 11.49y).
 - **Reliability score** - not yet tested against BrainAgeNeXt's errors.
@@ -295,3 +309,5 @@ holds the summary table.
 | `fig_selective_prediction.png` | MAE vs coverage, reliability-score-based vs random abstention |
 | `fig_pooled_error_vs_D.png` | Pooled IXI + eNKI DeepBrainNet error vs reliability distance (R3) |
 | `fig_transfer_head_mae.png` | Transfer-learning MAE per model on IXI and eNKI (F1) |
+| `fig_bang_vs_dbn.png` | BrainAgeNeXt vs DeepBrainNet: error growth from IXI to eNKI |
+| `fig_bang_pipeline.png` | How BrainAgeNeXt and DeepBrainNet were run on Colab |
