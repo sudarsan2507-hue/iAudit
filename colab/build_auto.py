@@ -122,6 +122,9 @@ Each scan goes through DeepBrainNet and then straight into BrainAgeNeXt, so both
 - every saved file is re-loaded and shape/NaN-checked before it counts as done
 
 Log: `MyDrive/iAuditAge/outputs/run_log.txt`. If it stopped, the reason is in `outputs/STOPPED.txt`.
+
+Reference run (T4, Oct 2026): all 531 scans, no safety stops, ~150 s/scan for DeepBrainNet (CPU-bound
+ANTs registration) and ~5 s/scan for BrainAgeNeXt. Results: `results/transfer_head_mae.csv` in the repo.
 """)
 
     code(r"""
@@ -169,7 +172,7 @@ if changed:
 # ===== 3. Drive, logging, safety helpers =====
 os.environ['TF_USE_LEGACY_KERAS'] = '1'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-import io, json, time, shutil, hashlib, pathlib, datetime, traceback
+import io, json, time, shutil, hashlib, pathlib, datetime
 import numpy as np, pandas as pd, requests
 from google.colab import drive, runtime
 drive.mount('/content/drive')
@@ -511,6 +514,15 @@ if N - len(D2) > 0.05 * N:
     stop(f'{N - len(D2)} scans still missing BrainAgeNeXt features; Run all again to retry them.')
 """)
 
+    md(r"""
+## Stage 3 - transfer-learning heads
+Ridge heads are trained only on IXI Guys+HH (5-fold out-of-fold MAE reported); eNKI is never used to fit them.
+
+**Caveat - pretraining overlap.** BrainAgeNeXt's own training set includes openBHB (which contains IXI)
+and NKI-RS (the same Rockland sample as eNKI). Its sub-4 y errors on these cohorts are therefore not a
+held-out result. A clean test needs a cohort BrainAgeNeXt only used for testing (e.g. SALD, DLBS).
+""")
+
     code(r"""
 # ===== 6. Stage 3 - transfer-learning heads (train on IXI Guys+HH only) =====
 from sklearn.linear_model import RidgeCV
@@ -557,7 +569,8 @@ for name, cols in {'DBN gap512': ['gap'], 'DBN dense1024': ['dense'], 'BANG 512'
 res = pd.DataFrame(table).set_index('model').round(2)
 res.to_csv(OUT / 'transfer_head_mae.csv')
 df.drop(columns=['gap', 'dense', 'bangf']).to_csv(OUT / 'transfer_head_predictions.csv', index=False)
-log('MAE in years (Guys+HH = 5-fold out-of-fold; eNKI never used for training):\n' + res.to_string())
+log('MAE in years (Guys+HH = 5-fold out-of-fold; eNKI never used to train the heads):\n' + res.to_string())
+log('caveat: BrainAgeNeXt was pretrained on openBHB (includes IXI) and NKI-RS - its rows are not held-out results')
 (OUT / 'DONE.txt').write_text(f'{datetime.datetime.now()}\n' + res.to_string() + '\n')
 log('ALL DONE. Results: outputs/transfer_head_mae.csv and outputs/transfer_head_predictions.csv')
 release()
