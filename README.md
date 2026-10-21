@@ -166,6 +166,45 @@ eNKI, in line with eNKI sitting further from the reference distribution.
 </p>
 <p align="center"><em>Pooled IXI + eNKI (n=583): DeepBrainNet absolute error vs distance from the Guys+HH reference</em></p>
 
+### Transfer learning toward MAE < 4 years (Stage F1)
+
+Goal: reach MAE < 4y without GPU fine-tuning. Both CNNs were frozen; their
+internal features were extracted for every scan, and a small ridge head was
+trained on IXI Guys+HH only. IOP was left out of this experiment entirely.
+Run on a Colab T4 (531 scans, no failed scans, no safety stops).
+
+| Model | IXI Guys+HH (5-fold out-of-fold, n=492) | eNKI (n=39) |
+|---|---|---|
+| DeepBrainNet, raw | 4.57y | 6.30y |
+| DeepBrainNet GAP-512 + ridge | 4.57y | 6.29y |
+| DeepBrainNet dense-1024 + ridge | 4.52y | 5.86y |
+| BrainAgeNeXt, raw † | 3.38y | 3.69y |
+| BrainAgeNeXt 512 + ridge † | **3.24y** | **3.51y** |
+| DeepBrainNet GAP + BrainAgeNeXt + ridge † | 3.26y | 3.54y |
+
+- A ridge head on DeepBrainNet's frozen features barely helps (-0.05y on
+  IXI, -0.4y on eNKI); DeepBrainNet stays above 4y.
+- BrainAgeNeXt is already under 4y with no head; the head adds ~0.15y.
+  Combining both CNNs adds nothing over BrainAgeNeXt alone.
+- **† Not a held-out result.** BrainAgeNeXt's training set
+  ([La Rosa et al., Imaging Neuroscience](https://pmc.ncbi.nlm.nih.gov/articles/PMC12319810/), Table 1)
+  includes **openBHB**, which pools IXI among ten public datasets, and
+  **NKI-RS**, the same Rockland sample eNKI comes from. Its sub-4y errors
+  here are on data it was very likely trained on; our 5-fold CV cannot
+  remove leakage that happened during pretraining. DeepBrainNet's training
+  sets have not been checked the same way.
+- A clean test needs a cohort BrainAgeNeXt only used for *testing* (e.g.
+  SALD or DLBS) - not yet run.
+
+<p align="center">
+  <img src="results/fig_transfer_head_mae.png" width="620" alt="Transfer-learning MAE per model on IXI and eNKI">
+</p>
+<p align="center"><em>MAE per model and cohort; dashed line = 4y target. † = pretraining overlaps the test cohorts.</em></p>
+
+Per-scan features and predictions from this run are kept on Google Drive
+(`outputs/` of the notebook), not in the repo; `results/transfer_head_mae.csv`
+holds the summary table.
+
 ### All figures
 
 | | |
