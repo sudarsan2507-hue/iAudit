@@ -31,6 +31,7 @@ model-specific.
 | F3 | BrainAgeNeXt fairness audit (Stage 5 method, same 492 subjects as DeepBrainNet) | `scripts/bang_fairness_audit.py` |
 | F4 | BrainAgeNeXt figures: IXI-to-eNKI error growth, run pipeline diagram, predicted vs actual | `scripts/plot_bang_vs_dbn.py`, `scripts/plot_bang_pipeline.py`, `scripts/plot_bang_pred_vs_actual.py` |
 | F5 | Reliability score vs BrainAgeNeXt error | `scripts/bang_reliability_check.py` |
+| F6 | BrainAgeNeXt per-scan data (5-model predictions, features) + ensemble-disagreement test | `scripts/export_brainagenext_data.py` |
 
 Every stage is checkpointed/resumable where it runs long, and every number
 in `results/` comes from actually running these scripts on the real IXI
@@ -307,6 +308,31 @@ three models. Full table: `results/bias_report_brainagenext.csv`.
 predict BrainAgeNeXt's per-scan error (partial r +0.010, p=0.82, n=517) -
 but without IOP it does not predict DeepBrainNet's either (see the R3
 correction above).
+
+**Ensemble disagreement as an uncertainty signal**
+(`scripts/export_brainagenext_data.py`): BrainAgeNeXt's 5 models disagree
+by a median SD of 1.7y per scan (max 4.8y). Age-controlled, larger
+disagreement goes with larger error on IXI (partial r +0.115, p=0.011,
+n=492) - a weak but real signal - but not on eNKI (r -0.267, p=0.10, n=39)
+or pooled (r +0.084, p=0.054). `results/brainagenext_uncertainty.csv`.
+
+**BrainAgeNeXt data in this repo** (all 531 scans, built by
+`scripts/export_brainagenext_data.py` from the notebook's export):
+
+| File | Contents |
+|---|---|
+| `results/brainagenext_predictions.csv` | One row per scan: dataset, site, age, sex, ethnicity, ensemble-median prediction, each of the 5 models' predictions, ensemble SD, ridge-head prediction, orientation |
+| `results/brainagenext_features.npz` | `scan_id` + `features` array (531, 5, 512), float16 - the encoder output of each model, as used by the transfer heads |
+| `results/brainagenext_uncertainty.csv` | Ensemble-disagreement vs error test above |
+| `results/bias_report_brainagenext.csv` | Fairness audit, per model / axis / group |
+| `results/bang_reliability_check.csv` | Reliability score vs error, both CNNs |
+| `results/bang_orientation.json` | Locked orientation and the MAE of all 4 candidates |
+| `results/transfer_head_predictions.csv` | Raw notebook export: both CNNs and every head, per scan |
+| `results/colab_run_log.txt` | Full Colab run log, including every pre-flight reproduction check |
+
+The files are named `brainagenext_*`, not `predictions_*`, on purpose:
+`scripts/fairness_audit.py` picks up every `predictions_*.csv`, and adding
+a subset without IOP there would silently change the original 4-model audit.
 
 Still open for BrainAgeNeXt:
 
