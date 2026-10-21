@@ -22,6 +22,12 @@ model-specific.
 | T4 | Cross-model comparison on the common cohort | `scripts/compare_models.py` |
 | V | IOP feature-distribution check (age-adjusted, is IOP off-distribution at the data level?) | `scripts/check_iop_features.py` |
 | - | Unsupervised Mahalanobis reliability score (feature-space distance from the "seen" Guys+HH distribution) | `scripts/reliability_score.py` |
+| - | Theory-test battery: LSO penalty, harmonization, sex-bias confound, within-distribution OOD, site-aware correction | `scripts/theory_test_battery.py`, `scripts/task0_suppressor_check.py` |
+| R1 | Traveling Human Phantom (ds000206): fetch, extract features, score vendor effect on the reliability distance | `scripts/thp_fetch_metadata.py`, `scripts/thp_fetch_t1.py`, `scripts/thp_extract_features.py`, `scripts/thp_reliability_score.py` |
+| R2 | eNKI Rockland external cohort: fetch, features + DeepBrainNet, verify the reliability score off-IXI | `scripts/enki_fetch_t1.py`, `scripts/enki_extract_and_predict.py`, `scripts/stage_r2_verify.py` |
+| R3 | Pooled IXI + eNKI test of error vs reliability distance | `scripts/stage_r3_pooled.py` |
+| F1 | Frozen-CNN feature extraction (DeepBrainNet 512/1024-d, BrainAgeNeXt 512-d) + ridge transfer heads, run on Colab T4 | `colab/iaudit_colab_auto.ipynb` (built by `colab/build_auto.py`); local: `scripts/dbn_embed.py`, `scripts/bang_orientation_check.py` |
+| F2 | Transfer-learning MAE figure | `scripts/plot_transfer_head_mae.py` |
 
 Every stage is checkpointed/resumable where it runs long, and every number
 in `results/` comes from actually running these scripts on the real IXI
