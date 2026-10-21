@@ -43,6 +43,16 @@ cohort - nothing is hand-entered.
   see `scripts/extract_features.py`).
 - Sites: Guys, HH, IOP (three different scanners/acquisition protocols).
 
+External cohorts used to test whether the findings travel beyond IXI:
+
+| Cohort | Source | Scans | Used for | Notes |
+|---|---|---|---|---|
+| Traveling Human Phantom (ds000206) | OpenNeuro | 65 (5 people, 8 sites) | R1: vendor effect on the reliability distance | Siemens + Philips only (0 GE scans), no age ground truth |
+| eNKI Rockland | FCP-INDI public S3 (no DUA) | 39 | R2/R3 and the transfer-learning test set | All Siemens TrioTim; community-volunteer sample, not clinically screened; capped at 39 by ~30 KB/s S3 throughput |
+
+Large inputs (T1 scans, model caches, extracted features) live outside the
+repo; only scripts, tables and figures are committed.
+
 ## Setup
 
 ```
