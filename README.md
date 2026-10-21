@@ -29,7 +29,8 @@ model-specific.
 | F1 | Frozen-CNN feature extraction (DeepBrainNet 512/1024-d, BrainAgeNeXt 512-d) + ridge transfer heads, run on Colab T4 | `colab/iaudit_colab_auto.ipynb` (built by `colab/build_auto.py`); local: `scripts/dbn_embed.py`, `scripts/bang_orientation_check.py` |
 | F2 | Transfer-learning MAE figure | `scripts/plot_transfer_head_mae.py` |
 | F3 | BrainAgeNeXt fairness audit (Stage 5 method, same 492 subjects as DeepBrainNet) | `scripts/bang_fairness_audit.py` |
-| F4 | BrainAgeNeXt figures: IXI-to-eNKI error growth, run pipeline diagram | `scripts/plot_bang_vs_dbn.py`, `scripts/plot_bang_pipeline.py` |
+| F4 | BrainAgeNeXt figures: IXI-to-eNKI error growth, run pipeline diagram, predicted vs actual | `scripts/plot_bang_vs_dbn.py`, `scripts/plot_bang_pipeline.py`, `scripts/plot_bang_pred_vs_actual.py` |
+| F5 | Reliability score vs BrainAgeNeXt error | `scripts/bang_reliability_check.py` |
 
 Every stage is checkpointed/resumable where it runs long, and every number
 in `results/` comes from actually running these scripts on the real IXI
@@ -181,10 +182,28 @@ signal:
 | R1 - THP | Does scanner vendor shift the distance D within the same person? | Philips mean D 5.01 vs Siemens 3.81; paired Wilcoxon p=0.0625 (the smallest p a 5-pair test can reach) | Not significant - underpowered, not disproven. The "IOP is GE" idea stays untested (no GE scans exist in THP) |
 | R2 - eNKI | Does D flag a new, unseen cohort? | eNKI mean D 3.37 vs IXI reference 2.33; AUC 0.774 | Yes |
 | R2 - eNKI | Does D predict DeepBrainNet error on eNKI alone? | Age-controlled partial Spearman r=0.217, p=0.184 (n=39) | Not significant on its own |
-| R3 - pooled | Does D predict error across IXI + eNKI? | Partial Spearman r=0.220, p=7.99e-08 (n=583) | **Supported** |
+| R3 - pooled | Does D predict error across IXI + eNKI? | Partial Spearman r=0.220, p=7.99e-08 (n=583) | Supported **only because of IOP** - see below |
 
 DeepBrainNet MAE rises from 4.59y on the IXI reference sites to 6.28y on
 eNKI, in line with eNKI sitting further from the reference distribution.
+
+**Correction (2026-10-21): the pooled R3 effect is driven entirely by the
+66 IOP scans.** Re-testing R3's own saved data (`results/pooled_error_vs_D.csv`)
+with subsets removed:
+
+| Subset | n | Partial Spearman r | p |
+|---|---|---|---|
+| All (R3 as published) | 583 | +0.220 | 8.0e-08 |
+| IXI reference + IOP | 544 | +0.215 | 4.1e-07 |
+| **Without IOP** (IXI reference + eNKI) | 517 | **-0.004** | 0.93 |
+| IXI reference only | 478 | -0.046 | 0.32 |
+
+D separates out-of-distribution sites well (IOP AUC 0.967, eNKI AUC 0.774),
+and IOP scans are both far away and badly predicted. But beyond that site
+effect, D carries no information about an individual scan's error - not for
+DeepBrainNet and, per `scripts/bang_reliability_check.py`, not for
+BrainAgeNeXt either (partial r +0.010, p=0.82, n=517). The earlier wording
+"across 3 independently-collected datasets" overstated this.
 
 <p align="center">
   <img src="results/fig_pooled_error_vs_D.png" width="480" alt="Pooled DeepBrainNet error vs reliability distance">
@@ -216,11 +235,15 @@ How it was run (`colab/iaudit_colab_auto.ipynb`):
   so both models see the identical brain for every scan.
 - **Orientation check.** ANTs and BrainAgeNeXt's expected MNI space can differ
   by an axis flip, so all 4 orientations (as-is, flip L-R / A-P / S-I) were
-  scored on 20 Guys+HH scans and the best one was locked for the whole run
-  (recorded in the notebook's `outputs/bang_orientation.json`). The run would
-  have stopped if even the best orientation had MAE > 10y.
+  scored on 20 Guys+HH scans and the best one was locked for the whole run.
+  Result (`results/bang_orientation.json`): **as-is** won with MAE 4.52y;
+  flip L-R 4.70y, flip A-P 9.12y, flip S-I 11.35y. So no flip was needed;
+  L-R being close is expected, since brains are roughly left-right symmetric.
+  The run would have stopped if even the best orientation had MAE > 10y.
 - **Reproduction check.** Each Colab session first re-ran IXI002 in all 4
-  orientations and had to match the laptop CPU result within 1.5y.
+  orientations and had to match the laptop CPU result within 1.5y. Every
+  session passed (e.g. as-is 36.9 on Colab vs 37.2 on the laptop). Full log:
+  `results/colab_run_log.txt`.
 - **Features.** For every scan the 512-d encoder output of each of the 5
   models was saved alongside the prediction, for the transfer heads below.
 
@@ -241,17 +264,54 @@ Results on the 531 scans (IXI Guys+HH n=492, eNKI n=39):
   drop is more likely memory than robustness, and none of these numbers is a
   held-out result.
 
-Not done yet for BrainAgeNeXt:
+<p align="center">
+  <img src="results/fig_bang_pred_vs_actual.png" width="720" alt="Predicted vs actual age, DeepBrainNet and BrainAgeNeXt">
+</p>
+<p align="center"><em>Predicted vs actual age. BrainAgeNeXt: r = 0.966 (IXI) / 0.970 (eNKI); DeepBrainNet: 0.937 / 0.897.</em></p>
 
-- **Fairness audit** (sex / site / ethnicity, the Stage 5 method) -
-  `scripts/bang_fairness_audit.py` is ready; it needs the per-scan
-  `transfer_head_predictions.csv` from the Colab run's Google Drive outputs.
-  To get it, run only the notebook's last cell ("Export for the GitHub repo",
-  CPU runtime is enough): it downloads `iaudit_colab_outputs.zip`; unzip it
-  into `E:\iAuditData\colab_outputs\` and run the script.
+**Fairness audit** (`scripts/bang_fairness_audit.py`): the Stage 5 method -
+one pooled age-bias correction per model, then Mann-Whitney / Kruskal-Wallis
+with Bonferroni post-hoc - run on the same 492 IXI Guys+HH subjects for all
+three models. Full table: `results/bias_report_brainagenext.csv`.
+
+| Mean age-corrected gap | DeepBrainNet | BrainAgeNeXt | BrainAgeNeXt + ridge |
+|---|---|---|---|
+| Female (n=267) | -1.20y | -0.37y | -0.23y |
+| Male (n=225) | +1.43y | +0.43y | +0.28y |
+| **Sex difference, p** | **7.5e-08** | 0.056 | 0.30 |
+| Guys (n=312) | +0.27y | +0.77y | +0.37y |
+| HH (n=180) | -0.48y | -1.33y | -0.64y |
+| **Site difference, p** | 0.064 | **8.7e-08** | **0.0095** |
+| Ethnicity (Kruskal-Wallis), p | 0.048 | 0.0069 | 0.067 |
+
+<p align="center">
+  <img src="results/fig_bang_fairness.png" width="720" alt="Subgroup bias by sex and site for DeepBrainNet and BrainAgeNeXt">
+</p>
+
+- **The bias moves rather than disappears.** DeepBrainNet's large sex bias
+  (men predicted ~2.6y older than women after correction) largely goes away
+  with BrainAgeNeXt (0.8y, p=0.056). But BrainAgeNeXt shows a strong
+  **site** bias between the two IXI reference sites that DeepBrainNet does
+  not: HH scans are predicted ~2.1y younger than Guys scans (p=8.7e-08).
+- The ridge head (trained on Guys+HH) shrinks both gaps (sex 0.8 -> 0.5y,
+  site 2.1 -> 1.0y), but the site difference is still significant (p=0.0095).
+- Ethnicity: the only Bonferroni-significant pair for BrainAgeNeXt is White
+  vs Chinese (n=13, mean gap -3.9y, p=0.009); for DeepBrainNet it is White vs
+  Asian/Asian British (n=43, p=0.034). Both rest on small groups.
+- Why Guys and HH differ for BrainAgeNeXt is not established here. The two
+  sites used different scanners (per IXI's documentation, not verified from
+  files in this repo), and how much of each site BrainAgeNeXt saw in training
+  is unknown.
+
+**Reliability score** (`scripts/bang_reliability_check.py`): D does not
+predict BrainAgeNeXt's per-scan error (partial r +0.010, p=0.82, n=517) -
+but without IOP it does not predict DeepBrainNet's either (see the R3
+correction above).
+
+Still open for BrainAgeNeXt:
+
 - **IOP** - not included in the Colab run, so it is unknown whether
   BrainAgeNeXt also fails on the IOP scanner (DeepBrainNet: 11.49y).
-- **Reliability score** - not yet tested against BrainAgeNeXt's errors.
 - **Clean held-out test** - a cohort the paper used only for testing (e.g.
   SALD, DLBS).
 
@@ -290,9 +350,9 @@ Run on a Colab T4 (531 scans, no failed scans, no safety stops).
 </p>
 <p align="center"><em>MAE per model and cohort; dashed line = 4y target. † = pretraining overlaps the test cohorts.</em></p>
 
-Per-scan features and predictions from this run are kept on Google Drive
-(`outputs/` of the notebook), not in the repo; `results/transfer_head_mae.csv`
-holds the summary table.
+Per-scan predictions are in `results/transfer_head_predictions.csv` and the
+summary in `results/transfer_head_mae.csv`, both exported from the notebook's
+last cell. The 512-d per-scan features stay on Google Drive.
 
 ### All figures
 
@@ -311,3 +371,5 @@ holds the summary table.
 | `fig_transfer_head_mae.png` | Transfer-learning MAE per model on IXI and eNKI (F1) |
 | `fig_bang_vs_dbn.png` | BrainAgeNeXt vs DeepBrainNet: error growth from IXI to eNKI |
 | `fig_bang_pipeline.png` | How BrainAgeNeXt and DeepBrainNet were run on Colab |
+| `fig_bang_pred_vs_actual.png` | Predicted vs actual age, DeepBrainNet and BrainAgeNeXt |
+| `fig_bang_fairness.png` | Age-corrected bias by sex and site, three models on the same subjects |
