@@ -9,8 +9,10 @@ verified against the MD5 of the file this laptop actually used:
 Output: E:\\iAuditData\\colab_bundle\\iaudit_colab_auto.ipynb
 """
 import hashlib
+import io
 import json
 import re
+import sys
 import urllib.request
 from pathlib import Path, PureWindowsPath
 
@@ -576,11 +578,66 @@ log('ALL DONE. Results: outputs/transfer_head_mae.csv and outputs/transfer_head_
 release()
 """)
 
+    md(r"""
+## Export for the GitHub repo (optional)
+Run **only this cell** (not *Run all*) after the run has finished; a CPU runtime is enough.
+It downloads `iaudit_colab_outputs.zip`. Unzip it into `E:\iAuditData\colab_outputs\`, then run
+`scripts/bang_fairness_audit.py` and the plotting scripts locally.
+""")
+
+    code(r"""
+# ===== 7. Export results for the repo (run ONLY this cell; CPU runtime is enough) =====
+import json, pathlib, zipfile
+import pandas as pd
+from google.colab import drive, files
+drive.mount('/content/drive')
+OUT = pathlib.Path('/content/drive/MyDrive/iAuditAge/outputs')
+NEED = ['transfer_head_predictions.csv', 'transfer_head_mae.csv', 'bang_orientation.json', 'run_log.txt']
+missing = [f for f in NEED if not (OUT / f).exists()]
+if missing:
+    raise SystemExit(f'not found in {OUT}: {missing} - has the run finished?')
+
+pred = pd.read_csv(OUT / 'transfer_head_predictions.csv')
+print('predictions:', pred.shape, '| sites:', pred.groupby('site').size().to_dict())
+print('columns:', pred.columns.tolist())
+print('orientation:', json.loads((OUT / 'bang_orientation.json').read_text()))
+print(pd.read_csv(OUT / 'transfer_head_mae.csv').to_string(index=False))
+
+bang = sorted((OUT / 'bang_embed').glob('*.npz'))
+zpath = pathlib.Path('/content/iaudit_colab_outputs.zip')
+with zipfile.ZipFile(zpath, 'w', zipfile.ZIP_DEFLATED) as zf:
+    for name in NEED + ['DONE.txt']:
+        if (OUT / name).exists():
+            zf.write(OUT / name, name)
+    for i, f in enumerate(bang, 1):
+        zf.write(f, f'bang_embed/{f.name}')
+        if i % 100 == 0:
+            print(f'  packed {i}/{len(bang)} BrainAgeNeXt feature files', flush=True)
+print(f'{zpath.name}: {zpath.stat().st_size / 1e6:.1f} MB ({len(bang)} BrainAgeNeXt feature files)')
+files.download(str(zpath))
+""")
+
+
+def embedded_data(nb_path):
+    """MANIFEST_CSV / REF_JSON from an already-built notebook (no network, no re-hashing)."""
+    nb = json.loads(nb_path.read_text(encoding="utf-8"))
+    ns = {}
+    for c in nb["cells"]:
+        src = "".join(c["source"])
+        if c["cell_type"] == "code" and "MANIFEST_CSV = " in src:
+            exec(src, ns)
+            return ns["MANIFEST_CSV"], ns["REF_JSON"]
+    raise SystemExit(f"no embedded data cell in {nb_path}")
+
 
 def main():
-    man, ref = build_ref()
-    man_csv = man.to_csv(index=False)
-    ref_json = json.dumps(ref, separators=(",", ":"))
+    if "--reuse" in sys.argv:   # only text/cells changed: keep the verified scan list, URLs and MD5s
+        man_csv, ref_json = embedded_data(OUT / "iaudit_colab_auto.ipynb")
+        man = pd.read_csv(io.StringIO(man_csv))
+    else:
+        man, ref = build_ref()
+        man_csv = man.to_csv(index=False)
+        ref_json = json.dumps(ref, separators=(",", ":"))
     build_cells(man_csv, ref_json)
     nb = {"nbformat": 4, "nbformat_minor": 0,
           "metadata": {"colab": {"provenance": []}, "kernelspec": {"name": "python3", "display_name": "Python 3"}},
