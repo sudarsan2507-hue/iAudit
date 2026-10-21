@@ -30,7 +30,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from fairness_audit import (MIN_GROUP_N, RESULTS, add_gap_and_correction, axis_stats,
                             intersectional_summary, subgroup_summary)
 
-DEFAULT_IN = Path(r"E:\iAuditData\colab_outputs\transfer_head_predictions.csv")
+DEFAULT_IN = RESULTS / "transfer_head_predictions.csv"   # copied from the Colab export
 MODELS = {"dbn_raw": "DeepBrainNet", "bang_raw": "BrainAgeNeXt", "pred BANG 512": "BrainAgeNeXt+ridge"}
 COLORS = {"DeepBrainNet": "#2a78d6", "BrainAgeNeXt": "#eb6834", "BrainAgeNeXt+ridge": "#1baf7a"}
 SURFACE, INK, INK2, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#e4e3df"
@@ -117,7 +117,7 @@ def plot(rep):
 def main():
     path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_IN
     if not path.exists():
-        raise SystemExit(f"{path} not found - download outputs/transfer_head_predictions.csv from Google Drive")
+        raise SystemExit(f"{path} not found - run the notebook's export cell and copy the file into results/")
     df = add_gap_and_correction(load(path))
     rep = audit(df)
     out = RESULTS / "bias_report_brainagenext.csv"
