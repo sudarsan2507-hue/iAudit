@@ -2,6 +2,7 @@
 
 Writes results/fig_bang_pipeline.png. Every box describes code that exists in the notebook.
 """
+import json
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -38,8 +39,10 @@ def main():
         "affine registration to MNI152\nsaved once as *_prep.nii.gz", NEUTRAL)
     box(ax, 58, 39, 101, 53, "DeepBrainNet  (TensorFlow)", "80 axial slices → VGG16 2D CNN\n"
         "age = median of slice predictions\nfeatures: GAP-512, dense-1024", DBN)
-    box(ax, 58, 2, 81, 18, "BrainAgeNeXt input", "1 mm, crop/pad 160×192×160,\nz-normalise, orientation flip\n"
-        "(best of 4, locked on\n20 Guys+HH scans)", BANG)
+    orient = json.loads((RESULTS / "bang_orientation.json").read_text())
+    chosen = orient["orientation"].replace("_", " ")
+    box(ax, 58, 2, 81, 18, "BrainAgeNeXt input", "1 mm, crop/pad 160×192×160,\nz-normalise; orientation:\n"
+        f"best of 4 on 20 Guys+HH\n= {chosen} (MAE {orient['mae'][orient['orientation']]:.2f} y), locked", BANG)
     box(ax, 85, 2, 107, 18, "5-model ensemble", "5 × MedNeXt 3D encoder\n512-d pooled features each\n"
         "age = median of 5\n(PyTorch, ~5 s/scan on T4)", BANG)
     box(ax, 111, 20, 128, 38, "Ridge head", "trained on IXI\nGuys+HH only\n5-fold out-of-fold\n→ MAE on IXI\nand eNKI", NEUTRAL)
