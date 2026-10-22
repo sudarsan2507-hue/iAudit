@@ -31,7 +31,8 @@ model-specific.
 | F3 | BrainAgeNeXt fairness audit (Stage 5 method, same 492 subjects as DeepBrainNet) | `scripts/bang_fairness_audit.py` |
 | F4 | BrainAgeNeXt figures: IXI-to-eNKI error growth, run pipeline diagram, predicted vs actual | `scripts/plot_bang_vs_dbn.py`, `scripts/plot_bang_pipeline.py`, `scripts/plot_bang_pred_vs_actual.py` |
 | F5 | Reliability score vs BrainAgeNeXt error | `scripts/bang_reliability_check.py` |
-| F6 | BrainAgeNeXt per-scan data (5-model predictions, features) + ensemble-disagreement test | `scripts/export_brainagenext_data.py` |
+| F6 | BrainAgeNeXt per-scan data (5-model predictions, features) + ensemble-disagreement test | `scripts/export_brainagenext_data.py`, `scripts/plot_bang_uncertainty.py` |
+| R3b | R3 re-check: pooled effect with and without IOP | `scripts/plot_r3_iop_dependence.py` |
 
 Every stage is checkpointed/resumable where it runs long, and every number
 in `results/` comes from actually running these scripts on the real IXI
@@ -207,9 +208,14 @@ BrainAgeNeXt either (partial r +0.010, p=0.82, n=517). The earlier wording
 "across 3 independently-collected datasets" overstated this.
 
 <p align="center">
+  <img src="results/fig_r3_iop_dependence.png" width="720" alt="Pooled error vs distance, with and without IOP">
+</p>
+<p align="center"><em>Same data, two views: with IOP (left) the age-controlled correlation is +0.220; without the 66 IOP scans (right) it is -0.004.</em></p>
+
+<p align="center">
   <img src="results/fig_pooled_error_vs_D.png" width="480" alt="Pooled DeepBrainNet error vs reliability distance">
 </p>
-<p align="center"><em>Pooled IXI + eNKI (n=583): DeepBrainNet absolute error vs distance from the Guys+HH reference</em></p>
+<p align="center"><em>Pooled IXI + eNKI (n=583): DeepBrainNet absolute error vs distance from the Guys+HH reference. The single pooled trend line is driven by IOP - see the correction below.</em></p>
 
 ### Second CNN: BrainAgeNeXt
 
@@ -316,6 +322,10 @@ disagreement goes with larger error on IXI (partial r +0.115, p=0.011,
 n=492) - a weak but real signal - but not on eNKI (r -0.267, p=0.10, n=39)
 or pooled (r +0.084, p=0.054). `results/brainagenext_uncertainty.csv`.
 
+<p align="center">
+  <img src="results/fig_bang_uncertainty.png" width="680" alt="BrainAgeNeXt ensemble disagreement vs error">
+</p>
+
 **BrainAgeNeXt data in this repo** (all 531 scans, built by
 `scripts/export_brainagenext_data.py` from the notebook's export):
 
@@ -399,3 +409,5 @@ last cell. The 512-d per-scan features stay on Google Drive.
 | `fig_bang_pipeline.png` | How BrainAgeNeXt and DeepBrainNet were run on Colab |
 | `fig_bang_pred_vs_actual.png` | Predicted vs actual age, DeepBrainNet and BrainAgeNeXt |
 | `fig_bang_fairness.png` | Age-corrected bias by sex and site, three models on the same subjects |
+| `fig_bang_uncertainty.png` | BrainAgeNeXt 5-model disagreement vs error, IXI and eNKI |
+| `fig_r3_iop_dependence.png` | Pooled error vs distance with and without IOP (R3 correction) |
