@@ -1,0 +1,17 @@
+# Main environment (TensorFlow / ANTsPyNet): DeepBrainNet, feature extraction, audits.
+# Versions as used for every result in results/. Set TF_USE_LEGACY_KERAS=1 (done in the scripts).
+antspyx==0.6.3
+antspynet==0.3.2
+tensorflow==2.21.0
+tf_keras==2.21.0
+numpy==2.3.5
+scipy==1.15.3
+pandas==3.0.5
+scikit-learn==1.9.1
+xgboost==3.2.0
+statsmodels==0.15.0
+matplotlib==3.11.1
+nibabel==5.4.2
+requests==2.34.2
+xlrd==2.0.2
+openpyxl==3.1.5

@@ -1,0 +1,6 @@
+experiment,key_number,verdict,meaning
+A: True unseen-scanner (LSO) penalty,"IOP LSO MAE LinearRegression=10.46y, RandomForest=11.75y, XGBoost=11.99y",PARTIALLY SUPPORTED,Unseen-scanner penalty is worse for some but not all tabular models.
+B: Harmonization mitigation,"LinearRegression: 10.46->11.66y, RandomForest: 11.75->12.21y, XGBoost: 11.99->12.90y",NOT SUPPORTED,MAE barely moves after harmonization - IOP difficulty is not just location/scale shift.
+"C: DeepBrainNet sex bias, confound-checked","sex coef before=1.724 (p=0.0005), after=2.867 (p=0.0000)",SUPPORTED,DeepBrainNet's sex coefficient stays significant after site + total_brain controls: real effect.
+D: Within-distribution (Guys+HH) reliability gradient,0/12 scorer x model pairs positive+significant,NULL,"All scorer/model pairs are null or negative within Guys+HH - the reliability signal found earlier is purely between-scanner (IOP vs reference), not a fine-grained within-distribution gradient. This is a robust, informative null, not an inconclusive result."
+E: Site-aware age-correction (calibration vs accuracy),gap-spread 6.22y -> 0.00y; IOP MAE unchanged at 11.56y,SUPPORTED (as calibration fix ONLY),"Site-aware correction shrinks gap-spread (6.218y -> 0.000y/0.000y) but IOP MAE is UNCHANGED (11.56y, still 6.91y worse than Guys/HH) - this fixes directional calibration, NOT accuracy."
