@@ -1,0 +1,136 @@
+10-25 17:58:00  SALD session start  runtime=T4 GPU  drive_free=70.8 GB  scans=200
+10-25 17:58:00  DeepBrainNet 0/200 done   BrainAgeNeXt 0/200 done
+10-25 17:58:19  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-25 18:01:19    reproduce IXI002: colab=36.26 laptop=36.27 (diff 0.01 y)  feature r=1.0000
+10-25 18:01:20  DeepBrainNet pre-flight passed
+10-25 18:01:35  pre-flight: BrainAgeNeXt on IXI002, all 4 orientations, vs the laptop ...
+10-25 18:01:37    reproduce BrainAgeNeXt IXI002 as_is: colab=37.1 laptop=37.2
+10-25 18:01:39    reproduce BrainAgeNeXt IXI002 flip_LR: colab=35.2 laptop=35.5
+10-25 18:01:41    reproduce BrainAgeNeXt IXI002 flip_AP: colab=40.1 laptop=40.1
+10-25 18:01:42    reproduce BrainAgeNeXt IXI002 flip_SI: colab=42.7 laptop=42.7
+10-25 18:01:43  BrainAgeNeXt pre-flight passed; orientation locked from the IXI run: as_is
+10-25 18:01:43  200 scans to process this session
+10-25 18:14:33  working: DeepBrainNet 5/200  BrainAgeNeXt 5/200  (last SALD_031278: age 55, DBN 58.3, BANG 62.9)  154 s/scan, ~8.3 h left  running MAE DBN 5.00 / BANG 4.17
+10-25 18:27:03  working: DeepBrainNet 10/200  BrainAgeNeXt 10/200  (last SALD_031286: age 76, DBN 74.6, BANG 79.1)  152 s/scan, ~8.0 h left  running MAE DBN 4.09 / BANG 3.24
+10-25 18:39:07  working: DeepBrainNet 15/200  BrainAgeNeXt 15/200  (last SALD_031298: age 59, DBN 64.3, BANG 66.1)  150 s/scan, ~7.7 h left  running MAE DBN 3.97 / BANG 3.13
+10-25 18:51:42  working: DeepBrainNet 20/200  BrainAgeNeXt 20/200  (last SALD_031310: age 60, DBN 62.7, BANG 63.7)  150 s/scan, ~7.5 h left  running MAE DBN 4.04 / BANG 3.09
+10-25 19:04:15  working: DeepBrainNet 25/200  BrainAgeNeXt 25/200  (last SALD_031319: age 77, DBN 74.1, BANG 71.1)  150 s/scan, ~7.3 h left  running MAE DBN 4.15 / BANG 3.38
+10-25 19:16:58  working: DeepBrainNet 30/200  BrainAgeNeXt 30/200  (last SALD_031332: age 73, DBN 63.4, BANG 68.3)  151 s/scan, ~7.1 h left  running MAE DBN 4.36 / BANG 3.20
+10-25 19:29:42  working: DeepBrainNet 35/200  BrainAgeNeXt 35/200  (last SALD_031346: age 58, DBN 62.5, BANG 54.7)  151 s/scan, ~6.9 h left  running MAE DBN 4.44 / BANG 3.24
+10-25 19:42:22  working: DeepBrainNet 40/200  BrainAgeNeXt 40/200  (last SALD_031361: age 61, DBN 58.2, BANG 59.9)  151 s/scan, ~6.7 h left  running MAE DBN 4.43 / BANG 3.24
+10-25 19:54:48  working: DeepBrainNet 45/200  BrainAgeNeXt 45/200  (last SALD_031374: age 63, DBN 70.8, BANG 71.7)  151 s/scan, ~6.5 h left  running MAE DBN 4.58 / BANG 3.48
+10-25 20:07:52  working: DeepBrainNet 50/200  BrainAgeNeXt 50/200  (last SALD_031380: age 73, DBN 67.1, BANG 68.1)  151 s/scan, ~6.3 h left  running MAE DBN 4.44 / BANG 3.46
+10-25 20:20:40  working: DeepBrainNet 55/200  BrainAgeNeXt 55/200  (last SALD_031390: age 64, DBN 68.8, BANG 68.0)  152 s/scan, ~6.1 h left  running MAE DBN 4.45 / BANG 3.43
+10-25 20:32:25  working: DeepBrainNet 60/200  BrainAgeNeXt 60/200  (last SALD_031404: age 75, DBN 71.4, BANG 69.2)  151 s/scan, ~5.9 h left  running MAE DBN 4.53 / BANG 3.42
+10-25 20:45:08  working: DeepBrainNet 65/200  BrainAgeNeXt 65/200  (last SALD_031412: age 63, DBN 61.7, BANG 63.3)  151 s/scan, ~5.7 h left  running MAE DBN 4.64 / BANG 3.33
+10-25 20:57:36  working: DeepBrainNet 70/200  BrainAgeNeXt 70/200  (last SALD_031420: age 55, DBN 65.2, BANG 64.6)  151 s/scan, ~5.4 h left  running MAE DBN 4.58 / BANG 3.42
+10-25 21:10:54  working: DeepBrainNet 75/200  BrainAgeNeXt 75/200  (last SALD_031429: age 78, DBN 74.6, BANG 77.6)  151 s/scan, ~5.3 h left  running MAE DBN 4.55 / BANG 3.31
+10-25 21:23:16  working: DeepBrainNet 80/200  BrainAgeNeXt 80/200  (last SALD_031435: age 66, DBN 67.4, BANG 62.3)  151 s/scan, ~5.0 h left  running MAE DBN 4.53 / BANG 3.32
+10-25 21:36:15  working: DeepBrainNet 85/200  BrainAgeNeXt 85/200  (last SALD_031445: age 68, DBN 65.3, BANG 71.3)  151 s/scan, ~4.8 h left  running MAE DBN 4.39 / BANG 3.29
+10-25 21:49:32  working: DeepBrainNet 90/200  BrainAgeNeXt 90/200  (last SALD_031455: age 59, DBN 48.9, BANG 57.0)  152 s/scan, ~4.6 h left  running MAE DBN 4.31 / BANG 3.44
+10-25 22:02:00  working: DeepBrainNet 95/200  BrainAgeNeXt 95/200  (last SALD_031462: age 69, DBN 67.7, BANG 66.4)  152 s/scan, ~4.4 h left  running MAE DBN 4.25 / BANG 3.45
+10-25 22:14:08  working: DeepBrainNet 100/200  BrainAgeNeXt 100/200  (last SALD_031472: age 23, DBN 33.2, BANG 22.4)  151 s/scan, ~4.2 h left  running MAE DBN 4.48 / BANG 3.40
+10-25 22:25:41  working: DeepBrainNet 105/200  BrainAgeNeXt 105/200  (last SALD_031495: age 45, DBN 50.2, BANG 52.5)  151 s/scan, ~4.0 h left  running MAE DBN 4.58 / BANG 3.41
+10-25 22:37:22  working: DeepBrainNet 110/200  BrainAgeNeXt 110/200  (last SALD_031508: age 33, DBN 41.5, BANG 32.3)  150 s/scan, ~3.8 h left  running MAE DBN 4.64 / BANG 3.35
+10-25 22:49:09  working: DeepBrainNet 115/200  BrainAgeNeXt 115/200  (last SALD_031520: age 30, DBN 36.3, BANG 27.1)  150 s/scan, ~3.5 h left  running MAE DBN 4.69 / BANG 3.28
+10-25 23:01:00  working: DeepBrainNet 120/200  BrainAgeNeXt 120/200  (last SALD_031535: age 42, DBN 34.1, BANG 33.1)  150 s/scan, ~3.3 h left  running MAE DBN 4.77 / BANG 3.38
+10-25 23:13:06  working: DeepBrainNet 125/200  BrainAgeNeXt 125/200  (last SALD_031547: age 38, DBN 32.4, BANG 30.4)  149 s/scan, ~3.1 h left  running MAE DBN 4.89 / BANG 3.46
+10-25 23:24:45  working: DeepBrainNet 130/200  BrainAgeNeXt 130/200  (last SALD_031558: age 46, DBN 48.7, BANG 45.4)  149 s/scan, ~2.9 h left  running MAE DBN 4.91 / BANG 3.40
+10-25 23:36:29  working: DeepBrainNet 135/200  BrainAgeNeXt 135/200  (last SALD_031578: age 37, DBN 47.0, BANG 40.9)  149 s/scan, ~2.7 h left  running MAE DBN 5.00 / BANG 3.38
+10-26 02:36:34  SALD session start  runtime=CPU  drive_free=88.2 GB  scans=200
+10-26 02:36:35  DeepBrainNet 136/200 done   BrainAgeNeXt 136/200 done
+10-26 02:37:10  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-26 02:44:12    reproduce IXI002: colab=36.27 laptop=36.27 (diff 0.00 y)  feature r=1.0000
+10-26 02:44:13  DeepBrainNet pre-flight passed
+10-26 02:44:13  64 scans to process this session
+10-26 03:15:27  working: DeepBrainNet 141/200  BrainAgeNeXt 136/200  (last SALD_031621: age 24, DBN 39.4)  375 s/scan, ~6.1 h left
+10-26 03:44:50  working: DeepBrainNet 146/200  BrainAgeNeXt 136/200  (last SALD_031636: age 53, DBN 52.8)  364 s/scan, ~5.5 h left
+10-26 04:14:03  working: DeepBrainNet 151/200  BrainAgeNeXt 136/200  (last SALD_031645: age 64, DBN 74.0)  359 s/scan, ~4.9 h left
+10-26 04:41:44  working: DeepBrainNet 156/200  BrainAgeNeXt 136/200  (last SALD_031654: age 34, DBN 44.6)  353 s/scan, ~4.3 h left
+10-26 05:11:28  working: DeepBrainNet 161/200  BrainAgeNeXt 136/200  (last SALD_031660: age 42, DBN 48.2)  353 s/scan, ~3.8 h left
+10-26 07:29:23  SALD session start  runtime=CPU  drive_free=88.2 GB  scans=200
+10-26 07:29:24  DeepBrainNet 161/200 done   BrainAgeNeXt 136/200 done
+10-26 07:29:46  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-26 07:35:44    reproduce IXI002: colab=36.73 laptop=36.27 (diff 0.45 y)  feature r=1.0000
+10-26 07:35:45  DeepBrainNet pre-flight passed
+10-26 07:35:45  39 scans to process this session
+10-26 08:05:53  working: DeepBrainNet 166/200  BrainAgeNeXt 136/200  (last SALD_031666: age 52, DBN 56.8)  362 s/scan, ~3.4 h left
+10-26 08:32:44  working: DeepBrainNet 171/200  BrainAgeNeXt 136/200  (last SALD_031680: age 33, DBN 38.4)  342 s/scan, ~2.8 h left
+10-26 08:59:31  working: DeepBrainNet 176/200  BrainAgeNeXt 136/200  (last SALD_031690: age 33, DBN 45.6)  335 s/scan, ~2.2 h left
+10-26 09:28:13  working: DeepBrainNet 181/200  BrainAgeNeXt 136/200  (last SALD_031711: age 56, DBN 58.9)  337 s/scan, ~1.8 h left
+10-26 09:57:02  working: DeepBrainNet 186/200  BrainAgeNeXt 136/200  (last SALD_031722: age 24, DBN 29.6)  339 s/scan, ~1.3 h left
+10-26 10:25:33  working: DeepBrainNet 191/200  BrainAgeNeXt 136/200  (last SALD_031734: age 25, DBN 32.9)  340 s/scan, ~0.8 h left
+10-26 13:43:49  SALD session start  runtime=CPU  drive_free=87.7 GB  scans=200
+10-26 13:43:50  DeepBrainNet 194/200 done   BrainAgeNeXt 136/200 done
+10-26 13:44:03  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-26 13:49:22    reproduce IXI002: colab=36.31 laptop=36.27 (diff 0.04 y)  feature r=1.0000
+10-26 13:49:23  DeepBrainNet pre-flight passed
+10-26 13:49:23  6 scans to process this session
+10-26 14:18:09  working: DeepBrainNet 199/200  BrainAgeNeXt 136/200  (last SALD_031759: age 25, DBN 45.6)  345 s/scan, ~0.1 h left
+10-26 14:24:22  finished this pass: DeepBrainNet 200/200  BrainAgeNeXt 136/200
+10-26 14:24:22  PAUSED: DeepBrainNet is complete. Switch to Runtime > Change runtime type > T4 GPU, then Run all.
+10-26 14:24:22  releasing the Colab runtime (no more compute is used)
+10-26 14:39:00  SALD session start  runtime=CPU  drive_free=88.2 GB  scans=200
+10-26 14:39:01  DeepBrainNet 200/200 done   BrainAgeNeXt 136/200 done
+10-26 14:39:17  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-26 14:44:41    reproduce IXI002: colab=36.76 laptop=36.27 (diff 0.49 y)  feature r=1.0000
+10-26 14:44:43  DeepBrainNet pre-flight passed
+10-26 14:44:43  0 scans to process this session
+10-26 14:44:43  finished this pass: DeepBrainNet 200/200  BrainAgeNeXt 136/200
+10-26 14:44:43  PAUSED: DeepBrainNet is complete. Switch to Runtime > Change runtime type > T4 GPU, then Run all.
+10-26 14:44:43  releasing the Colab runtime (no more compute is used)
+10-26 15:44:59  SALD session start  runtime=CPU  drive_free=88.2 GB  scans=200
+10-26 15:45:00  DeepBrainNet 200/200 done   BrainAgeNeXt 136/200 done
+10-26 15:45:27  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-26 15:50:50    reproduce IXI002: colab=35.81 laptop=36.27 (diff 0.46 y)  feature r=1.0000
+10-26 15:50:51  DeepBrainNet pre-flight passed
+10-26 15:50:51  0 scans to process this session
+10-26 15:50:51  finished this pass: DeepBrainNet 200/200  BrainAgeNeXt 136/200
+10-26 15:50:51  PAUSED: DeepBrainNet is complete. Switch to Runtime > Change runtime type > T4 GPU, then Run all.
+10-26 15:50:51  releasing the Colab runtime (no more compute is used)
+10-26 19:29:43  SALD session start  runtime=T4 GPU  drive_free=12.8 GB  scans=200
+10-26 19:29:44  DeepBrainNet 200/200 done   BrainAgeNeXt 136/200 done
+10-26 19:29:59  pre-flight: re-running IXI002 through DeepBrainNet and comparing with the laptop ...
+10-26 19:32:48    reproduce IXI002: colab=35.41 laptop=36.27 (diff 0.86 y)  feature r=1.0000
+10-26 19:32:48  DeepBrainNet pre-flight passed
+10-26 19:33:02  pre-flight: BrainAgeNeXt on IXI002 (4 orientation(s), cuda) vs the laptop ...
+10-26 19:33:04    reproduce BrainAgeNeXt IXI002 as_is: colab=37.1 laptop=37.2
+10-26 19:33:06    reproduce BrainAgeNeXt IXI002 flip_LR: colab=35.2 laptop=35.5
+10-26 19:33:08    reproduce BrainAgeNeXt IXI002 flip_AP: colab=40.2 laptop=40.1
+10-26 19:33:09    reproduce BrainAgeNeXt IXI002 flip_SI: colab=42.7 laptop=42.7
+10-26 19:33:09  BrainAgeNeXt pre-flight passed; orientation locked from the IXI run: as_is
+10-26 19:33:09  64 scans to process this session
+10-26 19:33:34  working: DeepBrainNet 200/200  BrainAgeNeXt 141/200  (last SALD_031621: age 24, BANG 28.2)  5 s/scan, ~0.1 h left
+10-26 19:34:00  working: DeepBrainNet 200/200  BrainAgeNeXt 146/200  (last SALD_031636: age 53, BANG 53.8)  5 s/scan, ~0.1 h left
+10-26 19:34:26  working: DeepBrainNet 200/200  BrainAgeNeXt 151/200  (last SALD_031645: age 64, BANG 72.4)  5 s/scan, ~0.1 h left
+10-26 19:34:52  working: DeepBrainNet 200/200  BrainAgeNeXt 156/200  (last SALD_031654: age 34, BANG 36.7)  5 s/scan, ~0.1 h left
+10-26 19:35:15  working: DeepBrainNet 200/200  BrainAgeNeXt 161/200  (last SALD_031660: age 42, BANG 42.2)  5 s/scan, ~0.1 h left
+10-26 19:35:39  working: DeepBrainNet 200/200  BrainAgeNeXt 166/200  (last SALD_031666: age 52, BANG 53.5)  5 s/scan, ~0.0 h left
+10-26 19:36:02  working: DeepBrainNet 200/200  BrainAgeNeXt 171/200  (last SALD_031680: age 33, BANG 29.4)  5 s/scan, ~0.0 h left
+10-26 19:36:26  working: DeepBrainNet 200/200  BrainAgeNeXt 176/200  (last SALD_031690: age 33, BANG 35.6)  5 s/scan, ~0.0 h left
+10-26 19:36:49  working: DeepBrainNet 200/200  BrainAgeNeXt 181/200  (last SALD_031711: age 56, BANG 60.7)  5 s/scan, ~0.0 h left
+10-26 19:37:17  working: DeepBrainNet 200/200  BrainAgeNeXt 186/200  (last SALD_031722: age 24, BANG 24.9)  5 s/scan, ~0.0 h left
+10-26 19:37:40  working: DeepBrainNet 200/200  BrainAgeNeXt 191/200  (last SALD_031734: age 25, BANG 26.4)  5 s/scan, ~0.0 h left
+10-26 19:38:06  working: DeepBrainNet 200/200  BrainAgeNeXt 196/200  (last SALD_031747: age 25, BANG 23.9)  5 s/scan, ~0.0 h left
+10-26 19:38:26  finished this pass: DeepBrainNet 200/200  BrainAgeNeXt 200/200
+10-26 19:41:37  stage 3: 200 SALD scans with both feature sets
+10-26 19:51:36  IXI training features found on Drive: 492/492
+10-26 19:51:36  SALD MAE (held out for BrainAgeNeXt; heads never saw SALD):
+                                           MAE  mean_error      r    n
+model                                                                 
+DeepBrainNet raw                         5.775       2.213  0.923  200
+BrainAgeNeXt raw                         3.391       0.065  0.968  200
+DBN dense1024 + ridge (trained on IXI)   5.681       1.148  0.899  200
+BANG 512 + ridge (trained on IXI)        3.488      -0.851  0.969  200
+DBN gap + BANG + ridge (trained on IXI)  3.367      -0.530  0.971  200
+10-26 19:51:36  MAE by age bin:
+             n   DBN  BANG
+age_bin                   
+[19, 30)  34.0  8.63  2.09
+[30, 40)  34.0  7.71  3.45
+[40, 50)  33.0  4.78  4.14
+[50, 60)  33.0  4.37  3.69
+[60, 70)  33.0  4.59  3.66
+[70, 81)  33.0  4.42  3.35
+10-26 19:51:37  ALL DONE. Results zip saved to Drive: /content/drive/MyDrive/iAuditAge/sald_outputs/iaudit_sald_outputs.zip  (1.1 MB)
+10-26 19:51:57  releasing the Colab runtime (no more compute is used)
