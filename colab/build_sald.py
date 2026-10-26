@@ -106,9 +106,16 @@ def build(sald, ixi_csv, ref_json):
 not in BrainAgeNeXt's training data. This notebook measures both CNNs on {len(sald)} SALD scans
 (age-balanced, ages {int(sald.chronological_age.min())}-{int(sald.chronological_age.max())}).
 
-**How to run:** *Runtime > Change runtime type >* **T4 GPU**, then *Runtime > Run all*, allow Drive.
-If Colab disconnects, *Run all* again - every finished scan is saved to
-`MyDrive/iAuditAge/sald_outputs/` and never redone. Expected: ~150 s/scan, about 8 h.
+**How to run:** *Runtime > Change runtime type >* **T4 GPU** (CPU also works, slower), then
+*Runtime > Run all* and click *Allow* on the two Google sign-in prompts.
+- **From a second Google account:** first share the `iAuditAge` folder from the account that owns it
+  (Drive > right-click > Share > Editor). This notebook then adds the My Drive shortcut itself, and
+  stops without processing anything if the folder it finds is not the project folder.
+- If Colab disconnects, *Run all* again - every finished scan is saved to
+  `MyDrive/iAuditAge/sald_outputs/` and never redone.
+- No GPU available? BrainAgeNeXt runs on CPU instead (~3-4 min/scan) - same results, slower.
+- At the end the results zip is saved to `sald_outputs/iaudit_sald_outputs.zip` and downloaded
+  automatically, then the runtime is released.
 
 **Nothing is tuned on SALD:**
 - BrainAgeNeXt orientation stays locked to the IXI run's choice (**{ORIENT_LOCKED['orientation']}**).
@@ -123,10 +130,39 @@ If Colab disconnects, *Run all* again - every finished scan is saved to
   implausible running error (DeepBrainNet > 20 y, BrainAgeNeXt > 15 y over 20 scans)
 - every saved file is re-loaded and shape/NaN-checked before it counts as done
 
-When it finishes, run only the last cell (export) and send the zip.
+The last cell (export) is only needed if the automatic download did not start.
 """)
     code(settings["source"])
     code(install["source"])
+    code(r"""
+# ===== 1b. Find the iAuditAge folder in this account's My Drive; if it was only shared with this
+#            account, add a My Drive shortcut to it (Drive API), so the paths below work unchanged =====
+from google.colab import auth
+from googleapiclient.discovery import build as gbuild
+auth.authenticate_user()
+svc = gbuild('drive', 'v3')
+
+def drive_find(query):
+    return svc.files().list(q=query, fields='files(id,name,mimeType,owners(emailAddress))', pageSize=50,
+                            supportsAllDrives=True, includeItemsFromAllDrives=True).execute().get('files', [])
+
+in_root = drive_find(f"name = '{DRIVE_FOLDER}' and 'root' in parents and trashed = false")
+if in_root:
+    kinds = ['shortcut' if f['mimeType'].endswith('shortcut') else 'folder' for f in in_root]
+    print(f"'{DRIVE_FOLDER}' already in My Drive ({', '.join(kinds)}) - using it")
+else:
+    shared = drive_find(f"name = '{DRIVE_FOLDER}' and sharedWithMe = true and trashed = false "
+                        "and mimeType = 'application/vnd.google-apps.folder'")
+    if len(shared) != 1:
+        raise Stop(f"found {len(shared)} folders named '{DRIVE_FOLDER}' shared with this account (need exactly 1). "
+                   "In the account that owns the data: Drive > right-click iAuditAge > Share > add this "
+                   "account as Editor, then Run all again.")
+    svc.files().create(body={'name': DRIVE_FOLDER, 'mimeType': 'application/vnd.google-apps.shortcut',
+                             'shortcutDetails': {'targetId': shared[0]['id']}, 'parents': ['root']},
+                       fields='id').execute()
+    owner = shared[0].get('owners', [{}])[0].get('emailAddress', '?')
+    print(f"added a My Drive shortcut to the '{DRIVE_FOLDER}' folder shared by {owner}")
+""")
     code("# ===== 2. Embedded data (do not edit) =====\n"
          f"SALD_CSV = {json.dumps(sald.to_csv(index=False))}\n"
          f"IXI_TRAIN_CSV = {json.dumps(ixi_train.to_csv(index=False))}\n"
@@ -239,6 +275,11 @@ def bang_ok(p):
 
 import torch
 GPU = torch.cuda.is_available()
+DEV = 'cuda' if GPU else 'cpu'
+if not (PREV / 'bang_embed').exists() and not any(DBN_OUT.glob('*.npz')):
+    raise Stop(f"{DRIVE} does not look like the project folder (no outputs/ from the IXI run, no SALD progress). "
+               "If this account has its own empty 'iAuditAge' folder, rename or remove it so the shared one "
+               "is used, then Run all again. Nothing was processed.")
 if (OUT / 'STOPPED.txt').exists():
     log('note: the previous session stopped with: ' + (OUT / 'STOPPED.txt').read_text().strip().replace('\n', ' | '))
     (OUT / 'STOPPED.txt').unlink()
@@ -255,7 +296,9 @@ D1 = {s for s in manifest.scan_id if (DBN_OUT / f'{s}.npz').exists()}
 D2 = {s for s in manifest.scan_id if (BANG_OUT / f'{s}.npz').exists()}
 log(f'DeepBrainNet {len(D1)}/{N} done   BrainAgeNeXt {len(D2)}/{N} done')
 NEED1, NEED2 = len(D1) < N, len(D2) < N
-BANG_READY = GPU and NEED2
+BANG_READY = NEED2                          # runs on the T4 if available, otherwise on CPU (slower, same result)
+if NEED2 and not GPU:
+    log(f'no GPU in this session: BrainAgeNeXt will run on CPU (~3-4 min/scan for {N - len(D2)} scans)')
 
 def t1_of(r):
     return fetch(r.url, WORK / 't1' / r.fname, lambda p: s3_etag(p) == r.etag)
@@ -326,13 +369,13 @@ if BANG_READY:
     from BrainAge_estimation import MedNeXtEncReg, prepare_transforms   # official file, MD5-verified
     bang = []
     for i in range(1, 6):
-        m = MedNeXtEncReg().cuda()
-        m.load_state_dict(torch.load(B / f'BrainAge_{i}.pth', map_location='cuda'))
+        m = MedNeXtEncReg().to(DEV)
+        m.load_state_dict(torch.load(B / f'BrainAge_{i}.pth', map_location=DEV))
         bang.append(m.eval())
     tfm = prepare_transforms()
 
     def bang_run(prep_path, flip_dim):
-        x = torch.as_tensor(np.asarray(tfm({'image': str(prep_path)})['image']))[None].cuda()
+        x = torch.as_tensor(np.asarray(tfm({'image': str(prep_path)})['image']))[None].to(DEV)
         if flip_dim is not None:
             x = torch.flip(x, dims=[flip_dim])
         feats, preds = [], []
@@ -343,8 +386,9 @@ if BANG_READY:
                 preds.append(float(m.regression_fc(f).squeeze()))
         return np.stack(feats), np.array(preds, dtype=np.float32)
 
-    log('pre-flight: BrainAgeNeXt on IXI002, all 4 orientations, vs the laptop ...')
-    for k, refv in REF['bang_ref']['IXI002'].items():
+    checks = REF['bang_ref']['IXI002'] if GPU else {ORIENT: REF['bang_ref']['IXI002'][ORIENT]}  # CPU: skip 3 extra runs
+    log(f'pre-flight: BrainAgeNeXt on IXI002 ({len(checks)} orientation(s), {DEV}) vs the laptop ...')
+    for k, refv in checks.items():
         got = float(np.median(bang_run(prep0, VARIANTS[k])[1]))
         log(f'  reproduce BrainAgeNeXt IXI002 {k}: colab={got:.1f} laptop={refv:.1f}')
         if abs(got - refv) > 1.5:
@@ -439,8 +483,6 @@ pool.shutdown(wait=False)
 log(f'finished this pass: DeepBrainNet {len(D1)}/{N}  BrainAgeNeXt {len(D2)}/{N}')
 if N - len(D1) > 0.05 * N:
     stop(f'{N - len(D1)} scans still missing DeepBrainNet features; Run all again to retry them.')
-if not GPU:
-    stop('DeepBrainNet is complete. Switch to Runtime > Change runtime type > T4 GPU, then Run all.', ok=True)
 if N - len(D2) > 0.05 * N:
     stop(f'{N - len(D2)} scans still missing BrainAgeNeXt features; Run all again to retry them.')
 """)
@@ -507,7 +549,24 @@ sald.drop(columns=['gap', 'dense', 'bangf']).to_csv(OUT / 'sald_predictions.csv'
 log('SALD MAE (held out for BrainAgeNeXt; heads never saw SALD):\n' + res.to_string())
 log('MAE by age bin:\n' + by_bin.to_string())
 (OUT / 'DONE.txt').write_text(f'{datetime.datetime.now()}\n' + res.to_string() + '\n')
-log('ALL DONE. Run the export cell below, then send the zip.')
+
+# export: zip saved to Drive (sald_outputs/iaudit_sald_outputs.zip) and downloaded to this browser
+import zipfile
+from google.colab import files
+zpath = WORK / 'iaudit_sald_outputs.zip'
+with zipfile.ZipFile(zpath, 'w', zipfile.ZIP_DEFLATED) as zf:
+    for name in ['sald_predictions.csv', 'sald_mae.csv', 'run_log.txt', 'DONE.txt']:
+        if (OUT / name).exists():
+            zf.write(OUT / name, name)
+    for f in sorted(BANG_OUT.glob('*.npz')):
+        zf.write(f, f'bang_embed/{f.name}')
+put(zpath, OUT / zpath.name)
+log(f'ALL DONE. Results zip saved to Drive: {OUT / zpath.name}  ({zpath.stat().st_size / 1e6:.1f} MB)')
+try:
+    files.download(str(zpath))
+    time.sleep(20)                          # let the browser download start before the runtime is released
+except Exception as e:
+    log(f'browser download did not start ({e!r}) - take the zip from Drive instead')
 release()
 """)
 
