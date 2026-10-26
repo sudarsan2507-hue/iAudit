@@ -460,3 +460,5 @@ last cell. The 512-d per-scan features stay on Google Drive.
 | `fig_bang_fairness.png` | Age-corrected bias by sex and site, three models on the same subjects |
 | `fig_bang_uncertainty.png` | BrainAgeNeXt 5-model disagreement vs error, IXI and eNKI |
 | `fig_r3_iop_dependence.png` | Pooled error vs distance with and without IOP (R3 correction) |
+| `fig_mae_by_cohort.png` | MAE with 95% CI for both CNNs on IXI, eNKI and SALD |
+| `fig_sald_age_bins.png` | SALD MAE by age decade, both CNNs |
