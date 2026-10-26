@@ -1,0 +1,5 @@
+model,sex,n,MAE_corrected,mean_corrected_gap,mann_whitney_p
+DeepBrainNet,F,118,4.3341,-0.6688,0.0832
+DeepBrainNet,M,82,4.2035,0.9625,0.0832
+BrainAgeNeXt,F,118,3.1432,-0.5914,0.0277
+BrainAgeNeXt,M,82,3.6421,0.8511,0.0277
