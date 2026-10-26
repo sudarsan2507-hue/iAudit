@@ -1,0 +1,6 @@
+model,MAE,mean_error,r,n
+DeepBrainNet raw,5.775,2.213,0.923,200
+BrainAgeNeXt raw,3.391,0.065,0.968,200
+DBN dense1024 + ridge (trained on IXI),5.681,1.148,0.899,200
+BANG 512 + ridge (trained on IXI),3.488,-0.851,0.969,200
+DBN gap + BANG + ridge (trained on IXI),3.367,-0.53,0.971,200
