@@ -33,6 +33,7 @@ model-specific.
 | F5 | Reliability score vs BrainAgeNeXt error | `scripts/bang_reliability_check.py` |
 | F6 | BrainAgeNeXt per-scan data (5-model predictions, features) + ensemble-disagreement test | `scripts/export_brainagenext_data.py`, `scripts/plot_bang_uncertainty.py` |
 | R3b | R3 re-check: pooled effect with and without IOP | `scripts/plot_r3_iop_dependence.py` |
+| S1 | SALD held-out test: 200 age-balanced scans, both CNNs + IXI-trained heads (Colab), then CIs, sex audit, age bins | `colab/iaudit_colab_sald.ipynb` (built by `colab/build_sald.py`, `colab/sald_listing.py`), `scripts/sald_analysis.py` |
 
 Every stage is checkpointed/resumable where it runs long, and every number
 in `results/` comes from actually running these scripts on the real IXI
