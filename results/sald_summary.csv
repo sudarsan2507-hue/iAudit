@@ -1,0 +1,7 @@
+cohort,model,n,MAE,ci_low,ci_high,mean_error,r,in_bang_training_data
+IXI Guys+HH,DeepBrainNet,492,4.567,4.25,4.888,0.918,0.937,True
+IXI Guys+HH,BrainAgeNeXt,492,3.384,3.166,3.612,0.653,0.966,True
+eNKI,DeepBrainNet,39,6.299,4.787,7.931,1.689,0.897,True
+eNKI,BrainAgeNeXt,39,3.685,2.915,4.554,0.161,0.97,True
+SALD,DeepBrainNet,200,5.775,5.167,6.392,2.213,0.923,False
+SALD,BrainAgeNeXt,200,3.391,3.026,3.764,0.065,0.968,False
