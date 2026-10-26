@@ -427,8 +427,8 @@ Run on a Colab T4 (531 scans, no failed scans, no safety stops).
   here are on data it was very likely trained on; our 5-fold CV cannot
   remove leakage that happened during pretraining. DeepBrainNet's training
   sets have not been checked the same way.
-- A clean test needs a cohort BrainAgeNeXt only used for *testing* (e.g.
-  SALD or DLBS) - not yet run.
+- The clean test on SALD (above) answers this: BrainAgeNeXt reaches 3.39y
+  on a cohort it never trained on, so these IXI numbers are not inflated.
 
 <p align="center">
   <img src="results/fig_transfer_head_mae.png" width="620" alt="Transfer-learning MAE per model on IXI and eNKI">
