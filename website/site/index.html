@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Real MRI cases from the iAudit project with every brain-age model's prediction shown against the true age.">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px) }
+body { margin: 0 } img { max-width: 100% } [hidden] { display: none !important }
+</style>
+<title>iAudit Case Viewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: case strip on top, then scan viewer (left, always black like a reading-room monitor) beside a
+   shared-age-axis prediction chart (right); cohort results table below. Colour is reserved for model families. */
+:root {
+  --bg: #f3f5f8; --surface: #ffffff; --ink: #121a24; --ink2: #4b5768; --muted: #7a8596; --line: #dde2e9;
+  --chip: #e8ecf1; --focus: #121a24;
+  --dbn: #2a78d6; --bang: #eb6834; --combo: #1baf7a; --tab: #6250d6; --you: #121a24;
+  --flag-bg: #fdeee7; --flag-ink: #8a3412;
+  --scan-bg: #05070a; --scan-ink: #c9d2dc; --scan-line: #1d242d;
+  --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0d1117; --surface: #151b23; --ink: #e6ebf1; --ink2: #a3aebd; --muted: #758092; --line: #27303b;
+  --chip: #1e2631; --focus: #e6ebf1;
+  --dbn: #3987e5; --bang: #d95926; --combo: #199e70; --tab: #9085e9; --you: #e6ebf1;
+  --flag-bg: #3a2016; --flag-ink: #f3b496; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0d1117; --surface: #151b23; --ink: #e6ebf1; --ink2: #a3aebd; --muted: #758092; --line: #27303b;
+  --chip: #1e2631; --focus: #e6ebf1;
+  --dbn: #3987e5; --bang: #d95926; --combo: #199e70; --tab: #9085e9; --you: #e6ebf1;
+  --flag-bg: #3a2016; --flag-ink: #f3b496; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--body) }
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 28px }
+h1, h2, h3 { font-family: var(--display); font-stretch: 85%; letter-spacing: -0.01em; text-wrap: balance; margin: 0 }
+h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.05 }
+h2 { font-size: 22px; font-weight: 700 }
+h3 { font-size: 13px; font-weight: 700; font-stretch: 100%; text-transform: uppercase; letter-spacing: .08em; color: var(--ink2) }
+p { margin: 0; max-width: 68ch }
+.lede { color: var(--ink2) }
+.num, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums }
+button { font: inherit; color: inherit }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px }
+
+header { display: grid; gap: 10px }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted) }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px }
+.fact { background: var(--chip); border-radius: 999px; padding: 4px 10px; font-size: 13px; color: var(--ink2) }
+.fact b { color: var(--ink); font-weight: 600 }
+
+/* toolbar + case strip */
+.toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between }
+.seg { display: inline-flex; background: var(--chip); border-radius: 8px; padding: 3px; gap: 2px }
+.seg button { border: 0; background: transparent; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 14px; color: var(--ink2) }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgb(0 0 0 / .12) }
+.quiz { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink2); cursor: pointer }
+.quiz input { width: 16px; height: 16px; accent-color: var(--ink) }
+.strip { display: grid; grid-auto-flow: column; grid-auto-columns: 132px; gap: 10px; overflow-x: auto;
+  padding-bottom: 8px; scroll-snap-type: x proximity }
+.card { scroll-snap-align: start; border: 1px solid var(--line); background: var(--surface); border-radius: 10px;
+  padding: 0; cursor: pointer; text-align: left; display: grid; overflow: hidden }
+.card img { display: block; width: 100%; aspect-ratio: 182 / 218; object-fit: cover; background: var(--scan-bg) }
+.card .meta { padding: 8px 10px 10px; display: grid; gap: 2px }
+.card .cid { font: 500 12px/1.2 var(--mono); color: var(--muted) }
+.card .cage { font-weight: 600; font-size: 14px }
+.card .cwhy { font-size: 12px; color: var(--ink2); line-height: 1.3 }
+.card[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink) }
+
+/* main */
+.main { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); gap: 24px; align-items: start }
+@media (max-width: 880px) { .main { grid-template-columns: minmax(0, 1fr) } }
+.viewer { background: var(--scan-bg); color: var(--scan-ink); border-radius: 12px; padding: 14px; display: grid; gap: 12px }
+.vtabs { display: flex; gap: 4px }
+.vtabs button { background: transparent; border: 1px solid var(--scan-line); color: var(--scan-ink); border-radius: 6px;
+  padding: 4px 10px; font-size: 13px; cursor: pointer }
+.vtabs button[aria-pressed="true"] { background: #e8edf2; color: #05070a; border-color: #e8edf2 }
+.frame { position: relative; display: grid; place-items: center; aspect-ratio: 1 / 1; max-width: 100% }
+.frame img { max-width: 100%; max-height: 100%; image-rendering: auto }
+.ori { position: absolute; font: 500 12px/1 var(--mono); color: #8f9bab }
+.ori.t { top: 2px; left: 50%; transform: translateX(-50%) } .ori.b { bottom: 2px; left: 50%; transform: translateX(-50%) }
+.ori.l { left: 2px; top: 50% } .ori.r { right: 2px; top: 50% }
+.slice { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; font: 12px var(--mono); color: #8f9bab }
+.slice input { width: 100%; accent-color: #e8edf2 }
+.vmeta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; border-top: 1px solid var(--scan-line); padding-top: 12px }
+.vmeta div { display: grid; gap: 2px; min-width: 0 }
+.vmeta span { font: 11px/1.2 var(--mono); text-transform: uppercase; letter-spacing: .06em; color: #7f8a99 }
+.vmeta b { font-weight: 600; font-size: 15px; overflow-wrap: anywhere }
+.vnote { font-size: 12.5px; color: #9aa5b3; line-height: 1.45 }
+
+/* prediction chart */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 16px; min-width: 0 }
+.phead { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--ink2) }
+.legend span { display: inline-flex; align-items: center; gap: 6px }
+.grp { display: grid; gap: 0 }
+.grp h3 { margin: 6px 0 6px }
+.grp .sub { text-transform: none; letter-spacing: 0; font-weight: 400; font-family: var(--body); color: var(--muted) }
+.row { display: grid; grid-template-columns: minmax(118px, 30%) minmax(0, 1fr) 92px; align-items: center; min-height: 34px; gap: 10px }
+.rlabel { display: flex; gap: 8px; align-items: center; font-size: 13.5px; min-width: 0; line-height: 1.25 }
+.track { position: relative; height: 34px }
+.track .truth { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--ink); opacity: .85 }
+.track .gridl { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line) }
+.track .range { position: absolute; top: 50%; height: 6px; margin-top: -3px; border-radius: 3px; background: var(--bang); opacity: .28 }
+.track .tick { position: absolute; top: 50%; width: 2px; height: 12px; margin: -6px 0 0 -1px; background: var(--bang); opacity: .75; border-radius: 1px }
+.mk { position: absolute; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; box-shadow: 0 0 0 2px var(--surface); cursor: default }
+.mk.circle { border-radius: 50% } .mk.diamond { transform: rotate(45deg) scale(.86) } .mk.square { border-radius: 2px; transform: scale(.9) }
+.key { width: 10px; height: 10px; flex: none }
+.key.circle { border-radius: 50% } .key.diamond { transform: rotate(45deg) scale(.85) } .key.square { border-radius: 2px }
+.f-dbn { background: var(--dbn) } .f-bang { background: var(--bang) } .f-combo { background: var(--combo) }
+.f-tab { background: var(--tab) } .f-you { background: var(--you) }
+.rval { text-align: right; display: grid; justify-items: end; line-height: 1.15 }
+.rval b { font: 500 14px var(--mono) }
+.rval small { font: 12px var(--mono); color: var(--muted) }
+.rval small.big { color: var(--flag-ink); background: var(--flag-bg); padding: 0 5px; border-radius: 4px }
+.axis { display: grid; grid-template-columns: minmax(118px, 30%) minmax(0, 1fr) 92px; gap: 10px }
+.axis .scale { position: relative; height: 20px; border-top: 1px solid var(--line) }
+.axis .scale span { position: absolute; top: 4px; transform: translateX(-50%); font: 11px var(--mono); color: var(--muted) }
+.axis .cap { grid-column: 2; font-size: 12px; color: var(--muted); text-align: center }
+.truthkey { display: inline-block; width: 2px; height: 12px; background: var(--ink) }
+.tip { position: fixed; z-index: 20; pointer-events: none; background: var(--ink); color: var(--bg); font: 12px/1.35 var(--mono);
+  padding: 6px 8px; border-radius: 6px; max-width: 260px }
+.guess { display: grid; gap: 12px; justify-items: start; padding: 8px 0 }
+.guess label { font-weight: 600 }
+.guess .ctl { display: flex; gap: 8px; flex-wrap: wrap }
+.guess input { font: 500 16px var(--mono); width: 110px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink) }
+.btn { border: 1px solid var(--ink); background: var(--ink); color: var(--bg); border-radius: 8px; padding: 7px 14px; cursor: pointer; font-weight: 600 }
+.btn.ghost { background: transparent; color: var(--ink) }
+.empty-note { font-size: 13px; color: var(--muted) }
+
+/* results */
+.results { display: grid; gap: 14px }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface) }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14px }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line) }
+th { font: 600 12px/1.2 var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--ink2) }
+td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap }
+td .ci { color: var(--muted) }
+tr:last-child td { border-bottom: 0 }
+.pass { font-weight: 600 }
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px }
+.note { border-top: 2px solid var(--ink); padding-top: 10px; display: grid; gap: 6px; font-size: 14px; color: var(--ink2) }
+.note b { color: var(--ink) }
+@media (prefers-reduced-motion: no-preference) { .mk, .truth { transition: left .35s ease } .card { transition: border-color .15s } }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">iAudit &middot; brain-age model audit</div>
+    <h1>One brain scan, every model's answer</h1>
+    <p class="lede">Pick a real MRI case from the project. The scan is the preprocessed volume the models actually received;
+      the chart shows what each model predicted for it against the person's true age. All numbers are replayed from the
+      project's recorded runs, not computed live in this page.</p>
+    <div class="facts" id="facts"></div>
+  </header>
+
+  <section class="toolbar" aria-label="Case filters">
+    <div class="seg" role="group" aria-label="Cohort">
+      <button id="f-all" data-f="all" aria-pressed="true">All cases</button>
+      <button id="f-ixi" data-f="IXI" aria-pressed="false">IXI (London)</button>
+      <button id="f-enki" data-f="eNKI" aria-pressed="false">eNKI (New York)</button>
+      <button id="f-sald" data-f="SALD" aria-pressed="false">SALD (held out)</button>
+    </div>
+    <label class="quiz" for="quiz"><input type="checkbox" id="quiz"> Guess the age before revealing</label>
+  </section>
+
+  <nav class="strip" id="strip" aria-label="Cases"></nav>
+
+  <section class="main">
+    <div class="viewer" aria-label="MRI viewer">
+      <div class="vtabs" role="group" aria-label="View">
+        <button id="v-axial" data-v="axial" aria-pressed="true">Axial</button>
+        <button id="v-coronal" data-v="coronal" aria-pressed="false">Coronal</button>
+        <button id="v-sagittal" data-v="sagittal" aria-pressed="false">Sagittal</button>
+      </div>
+      <div class="frame"><img id="scan" alt="Preprocessed T1-weighted MRI slice">
+        <span class="ori t" id="o-t"></span><span class="ori b" id="o-b"></span><span class="ori l" id="o-l"></span><span class="ori r" id="o-r"></span></div>
+      <div class="slice" id="slicebox"><span>inferior</span><input type="range" id="slice" min="0" max="6" value="3" aria-label="Axial slice"><span>superior</span></div>
+      <div class="vmeta" id="vmeta"></div>
+      <p class="vnote" id="vnote"></p>
+    </div>
+
+    <div class="panel" aria-live="polite">
+      <div class="phead">
+        <h2 id="ptitle">Predicted age</h2>
+        <div class="legend">
+          <span><i class="truthkey"></i> true age</span>
+          <span><i class="key circle f-dbn"></i> CNN</span>
+          <span><i class="key diamond f-dbn"></i> ridge head</span>
+          <span><i class="key square f-tab"></i> tabular</span>
+          <span><i class="key circle f-bang" style="opacity:.4"></i> BrainAgeNeXt's 5 internal models</span>
+        </div>
+      </div>
+      <div id="chart"></div>
+    </div>
+  </section>
+
+  <section class="results">
+    <h2>How the models did across whole cohorts</h2>
+    <p class="lede">Mean absolute error (MAE) in years with 95% bootstrap intervals. SALD is the only cohort that was not part of
+      BrainAgeNeXt's training data, so it is the fair test of the under-4-years target.</p>
+    <div class="tablewrap"><table id="summary"></table></div>
+    <div class="tablewrap"><table id="heads"></table></div>
+    <div class="notes">
+      <div class="note"><b>What "ridge head" means</b>The CNN is frozen. Features from inside it (512 or 1024 numbers per scan) feed a
+        small linear model trained on IXI Guys+HH only. On IXI cases the head prediction is out-of-fold; on SALD the head never saw SALD.</div>
+      <div class="note"><b>Why IXI numbers carry a dagger</b>BrainAgeNeXt was trained on openBHB, which includes IXI. Its IXI accuracy
+        (3.38 y) matched its held-out SALD accuracy (3.39 y), so the overlap did not inflate it, but SALD is the clean number.</div>
+      <div class="note"><b>Limits of this demo</b>Cases are one per age decade plus each model's worst miss, per cohort. IOP scans are
+        not shown. The tabular models only exist for IXI. One eNKI image was re-processed on the laptop with the same pipeline
+        for display; every prediction is from the recorded runs.</div>
+    </div>
+  </section>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script type="application/json" id="demo-data">{"cases": [{"id": "IXI122", "cohort": "IXI", "site": "Guys", "age": 23.0, "sex": "F", "ethnicity": "White", "why": "Typical 20s", "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.", "preds": {"DeepBrainNet": 24.76, "BrainAgeNeXt": 25.88, "BrainAgeNeXt models": [25.88, 27.2, 25.72, 24.24, 27.76], "DBN GAP-512 + ridge": 24.52, "DBN dense-1024 + ridge": 23.18, "BrainAgeNeXt + ridge": 25.36, "DBN GAP + BrainAgeNeXt + ridge": 24.12, "Linear regression": 22.74, "Random forest": 23.23, "XGBoost": 21.49}, "views": {"axial": ["img/IXI122_axial0.png", "img/IXI122_axial1.png", "img/IXI122_axial2.png", "img/IXI122_axial3.png", "img/IXI122_axial4.png", "img/IXI122_axial5.png", "img/IXI122_axial6.png"], "coronal": "img/IXI122_coronal.png", "sagittal": "img/IXI122_sagittal.png"}}, {"id": "IXI046", "cohort": "IXI", "site": "Guys", "age": 37.7, "sex": "F", "ethnicity": "White", "why": "Typical 30s", "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.", "preds": {"DeepBrainNet": 38.0, "BrainAgeNeXt": 34.76, "BrainAgeNeXt models": [36.92, 34.22, 31.66, 34.76, 36.93], "DBN GAP-512 + ridge": 38.87, "DBN dense-1024 + ridge": 36.85, "BrainAgeNeXt + ridge": 34.73, "DBN GAP + BrainAgeNeXt + ridge": 35.03, "Linear regression": 39.47, "Random forest": 39.3, "XGBoost": 41.0}, "views": {"axial": ["img/IXI046_axial0.png", "img/IXI046_axial1.png", "img/IXI046_axial2.png", "img/IXI046_axial3.png", "img/IXI046_axial4.png", "img/IXI046_axial5.png", "img/IXI046_axial6.png"], "coronal": "img/IXI046_coronal.png", "sagittal": "img/IXI046_sagittal.png"}}, {"id": "IXI248", "cohort": "IXI", "site": "HH", "age": 44.9, "sex": "F", "ethnicity": "White", "why": "Typical 40s", "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.", "preds": {"DeepBrainNet": 42.67, "BrainAgeNeXt": 41.32, "BrainAgeNeXt models": [44.07, 46.63, 41.32, 39.77, 41.14], "DBN GAP-512 + ridge": 40.82, "DBN dense-1024 + ridge": 39.77, "BrainAgeNeXt + ridge": 42.87, "DBN GAP + BrainAgeNeXt + ridge": 42.25, "Linear regression": 45.41, "Random forest": 48.65, "XGBoost": 45.72}, "views": {"axial": ["img/IXI248_axial0.png", "img/IXI248_axial1.png", "img/IXI248_axial2.png", "img/IXI248_axial3.png", "img/IXI248_axial4.png", "img/IXI248_axial5.png", "img/IXI248_axial6.png"], "coronal": "img/IXI248_coronal.png", "sagittal": "img/IXI248_sagittal.png"}}, {"id": "IXI325", "cohort": "IXI", "site": "Guys", "age": 52.7, "sex": "F", "ethnicity": "Unknown", "why": "Typical 50s", "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.", "preds": {"DeepBrainNet": 49.36, "BrainAgeNeXt": 55.56, "BrainAgeNeXt models": [53.96, 57.49, 53.94, 55.56, 57.07], "DBN GAP-512 + ridge": 51.05, "DBN dense-1024 + ridge": 48.94, "BrainAgeNeXt + ridge": 53.02, "DBN GAP + BrainAgeNeXt + ridge": 53.52, "Linear regression": 50.73, "Random forest": 46.8, "XGBoost": 35.3}, "views": {"axial": ["img/IXI325_axial0.png", "img/IXI325_axial1.png", "img/IXI325_axial2.png", "img/IXI325_axial3.png", "img/IXI325_axial4.png", "img/IXI325_axial5.png", "img/IXI325_axial6.png"], "coronal": "img/IXI325_coronal.png", "sagittal": "img/IXI325_sagittal.png"}}, {"id": "IXI357", "cohort": "IXI", "site": "HH", "age": 63.5, "sex": "F", "ethnicity": "White", "why": "Typical 60s", "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.", "preds": {"DeepBrainNet": 57.43, "BrainAgeNeXt": 61.02, "BrainAgeNeXt models": [60.36, 61.02, 58.4, 61.62, 62.35], "DBN GAP-512 + ridge": 56.84, "DBN dense-1024 + ridge": 57.88, "BrainAgeNeXt + ridge": 60.91, "DBN GAP + BrainAgeNeXt + ridge": 60.76, "Linear regression": 60.99, "Random forest": 63.39, "XGBoost": 64.48}, "views": {"axial": ["img/IXI357_axial0.png", "img/IXI357_axial1.png", "img/IXI357_axial2.png", "img/IXI357_axial3.png", "img/IXI357_axial4.png", "img/IXI357_axial5.png", "img/IXI357_axial6.png"], "coronal": "img/IXI357_coronal.png", "sagittal": "img/IXI357_sagittal.png"}}, {"id": "IXI175", "cohort": "IXI", "site": "HH", "age": 72.3, "sex": "M", "ethnicity": "Asian or AsianBrit", "why": "Typical 70s", "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.", "preds": {"DeepBrainNet": 72.54, "BrainAgeNeXt": 70.04, "BrainAgeNeXt models": [70.04, 76.65, 69.38, 66.08, 76.49], "DBN GAP-512 + ridge": 75.0, "DBN dense-1024 + ridge": 72.87, "BrainAgeNeXt + ridge": 68.6, "DBN GAP + BrainAgeNeXt + ridge": 70.83, "Linear regression": 73.84, "Random forest": 78.81, "XGBoost": 75.0}, "views": {"axial": ["img/IXI175_axial0.png", "img/IXI175_axial1.png", "img/IXI175_axial2.png", "img/IXI175_axial3.png", "img/IXI175_axial4.png", "img/IXI175_axial5.png", "img/IXI175_axial6.png"], "coronal": "img/IXI175_coronal.png", "sagittal": "img/IXI175_sagittal.png"}}, {"id": "IXI185", "cohort": "IXI", "site": "Guys", "age": 83.5, "sex": "M", "ethnicity": "White", "why": "Typical 80s", "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.", "preds": {"DeepBrainNet": 78.21, "BrainAgeNeXt": 75.96, "BrainAgeNeXt models": [76.41, 75.96, 75.0, 74.51, 79.76], "DBN GAP-512 + ridge": 79.37, "DBN dense-1024 + ridge": 76.27, "BrainAgeNeXt + ridge": 73.69, "DBN GAP + BrainAgeNeXt + ridge": 75.57, "Linear regression": 77.68, "Random forest": 71.46, "XGBoost": 67.94}, "views": {"axial": ["img/IXI185_axial0.png", "img/IXI185_axial1.png", "img/IXI185_axial2.png", "img/IXI185_axial3.png", "img/IXI185_axial4.png", "img/IXI185_axial5.png", "img/IXI185_axial6.png"], "coronal": "img/IXI185_coronal.png", "sagittal": "img/IXI185_sagittal.png"}}, {"id": "IXI094", "cohort": "IXI", "site": "HH", "age": 24.9, "sex": "M", "ethnicity": "Asian or AsianBrit", "why": "DeepBrainNet's largest miss", "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.", "preds": {"DeepBrainNet": 46.74, "BrainAgeNeXt": 25.48, "BrainAgeNeXt models": [25.48, 28.46, 26.24, 24.79, 25.25], "DBN GAP-512 + ridge": 40.81, "DBN dense-1024 + ridge": 46.24, "BrainAgeNeXt + ridge": 25.11, "DBN GAP + BrainAgeNeXt + ridge": 25.89, "Linear regression": 52.2, "Random forest": 55.09, "XGBoost": 56.29}, "views": {"axial": ["img/IXI094_axial0.png", "img/IXI094_axial1.png", "img/IXI094_axial2.png", "img/IXI094_axial3.png", "img/IXI094_axial4.png", "img/IXI094_axial5.png", "img/IXI094_axial6.png"], "coronal": "img/IXI094_coronal.png", "sagittal": "img/IXI094_sagittal.png"}}, {"id": "IXI079", "cohort": "IXI", "site": "HH", "age": 52.5, "sex": "F", "ethnicity": "Asian or AsianBrit", "why": "BrainAgeNeXt's largest miss", "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.", "preds": {"DeepBrainNet": 34.72, "BrainAgeNeXt": 39.13, "BrainAgeNeXt models": [38.62, 42.63, 37.12, 42.37, 39.13], "DBN GAP-512 + ridge": 34.48, "DBN dense-1024 + ridge": 33.66, "BrainAgeNeXt + ridge": 38.64, "DBN GAP + BrainAgeNeXt + ridge": 38.74, "Linear regression": 36.38, "Random forest": 37.95, "XGBoost": 41.69}, "views": {"axial": ["img/IXI079_axial0.png", "img/IXI079_axial1.png", "img/IXI079_axial2.png", "img/IXI079_axial3.png", "img/IXI079_axial4.png", "img/IXI079_axial5.png", "img/IXI079_axial6.png"], "coronal": "img/IXI079_coronal.png", "sagittal": "img/IXI079_sagittal.png"}}, {"id": "eNKI_A00033247", "cohort": "eNKI", "site": "eNKI", "age": 22.0, "sex": "M", "ethnicity": "not recorded", "why": "Typical 20s", "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.", "preds": {"DeepBrainNet": 30.78, "BrainAgeNeXt": 25.58, "BrainAgeNeXt models": [26.53, 25.58, 25.73, 24.93, 23.23], "DBN GAP-512 + ridge": 28.86, "DBN dense-1024 + ridge": 25.62, "BrainAgeNeXt + ridge": 23.96, "DBN GAP + BrainAgeNeXt + ridge": 24.47}, "views": {"axial": ["img/eNKI_A00033247_axial0.png", "img/eNKI_A00033247_axial1.png", "img/eNKI_A00033247_axial2.png", "img/eNKI_A00033247_axial3.png", "img/eNKI_A00033247_axial4.png", "img/eNKI_A00033247_axial5.png", "img/eNKI_A00033247_axial6.png"], "coronal": "img/eNKI_A00033247_coronal.png", "sagittal": "img/eNKI_A00033247_sagittal.png"}}, {"id": "eNKI_A00051676", "cohort": "eNKI", "site": "eNKI", "age": 32.0, "sex": "M", "ethnicity": "not recorded", "why": "Typical 30s", "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.", "preds": {"DeepBrainNet": 43.19, "BrainAgeNeXt": 34.45, "BrainAgeNeXt models": [34.45, 32.51, 36.57, 37.27, 32.97], "DBN GAP-512 + ridge": 39.35, "DBN dense-1024 + ridge": 40.99, "BrainAgeNeXt + ridge": 34.13, "DBN GAP + BrainAgeNeXt + ridge": 34.19}, "views": {"axial": ["img/eNKI_A00051676_axial0.png", "img/eNKI_A00051676_axial1.png", "img/eNKI_A00051676_axial2.png", "img/eNKI_A00051676_axial3.png", "img/eNKI_A00051676_axial4.png", "img/eNKI_A00051676_axial5.png", "img/eNKI_A00051676_axial6.png"], "coronal": "img/eNKI_A00051676_coronal.png", "sagittal": "img/eNKI_A00051676_sagittal.png"}}, {"id": "eNKI_A00038411", "cohort": "eNKI", "site": "eNKI", "age": 44.0, "sex": "F", "ethnicity": "not recorded", "why": "Typical 40s", "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.", "preds": {"DeepBrainNet": 43.18, "BrainAgeNeXt": 47.31, "BrainAgeNeXt models": [47.78, 47.31, 49.39, 44.6, 44.67], "DBN GAP-512 + ridge": 43.66, "DBN dense-1024 + ridge": 43.34, "BrainAgeNeXt + ridge": 45.84, "DBN GAP + BrainAgeNeXt + ridge": 45.36}, "views": {"axial": ["img/eNKI_A00038411_axial0.png", "img/eNKI_A00038411_axial1.png", "img/eNKI_A00038411_axial2.png", "img/eNKI_A00038411_axial3.png", "img/eNKI_A00038411_axial4.png", "img/eNKI_A00038411_axial5.png", "img/eNKI_A00038411_axial6.png"], "coronal": "img/eNKI_A00038411_coronal.png", "sagittal": "img/eNKI_A00038411_sagittal.png"}}, {"id": "eNKI_A00054895", "cohort": "eNKI", "site": "eNKI", "age": 59.0, "sex": "F", "ethnicity": "not recorded", "why": "Typical 50s", "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. This image was re-processed on the laptop with the identical pipeline for display; the predictions are from the Colab run.", "preds": {"DeepBrainNet": 56.39, "BrainAgeNeXt": 61.93, "BrainAgeNeXt models": [63.46, 61.65, 60.91, 61.93, 64.69], "DBN GAP-512 + ridge": 59.34, "DBN dense-1024 + ridge": 56.62, "BrainAgeNeXt + ridge": 62.42, "DBN GAP + BrainAgeNeXt + ridge": 61.71}, "views": {"axial": ["img/eNKI_A00054895_axial0.png", "img/eNKI_A00054895_axial1.png", "img/eNKI_A00054895_axial2.png", "img/eNKI_A00054895_axial3.png", "img/eNKI_A00054895_axial4.png", "img/eNKI_A00054895_axial5.png", "img/eNKI_A00054895_axial6.png"], "coronal": "img/eNKI_A00054895_coronal.png", "sagittal": "img/eNKI_A00054895_sagittal.png"}}, {"id": "eNKI_A00028552", "cohort": "eNKI", "site": "eNKI", "age": 61.0, "sex": "F", "ethnicity": "not recorded", "why": "Typical 60s", "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.", "preds": {"DeepBrainNet": 68.42, "BrainAgeNeXt": 58.76, "BrainAgeNeXt models": [58.76, 57.62, 56.85, 63.09, 61.52], "DBN GAP-512 + ridge": 63.97, "DBN dense-1024 + ridge": 67.97, "BrainAgeNeXt + ridge": 58.15, "DBN GAP + BrainAgeNeXt + ridge": 59.33}, "views": {"axial": ["img/eNKI_A00028552_axial0.png", "img/eNKI_A00028552_axial1.png", "img/eNKI_A00028552_axial2.png", "img/eNKI_A00028552_axial3.png", "img/eNKI_A00028552_axial4.png", "img/eNKI_A00028552_axial5.png", "img/eNKI_A00028552_axial6.png"], "coronal": "img/eNKI_A00028552_coronal.png", "sagittal": "img/eNKI_A00028552_sagittal.png"}}, {"id": "eNKI_A00040324", "cohort": "eNKI", "site": "eNKI", "age": 70.0, "sex": "M", "ethnicity": "not recorded", "why": "Typical 70s", "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.", "preds": {"DeepBrainNet": 68.74, "BrainAgeNeXt": 65.76, "BrainAgeNeXt models": [65.76, 69.18, 64.91, 73.56, 65.06], "DBN GAP-512 + ridge": 70.21, "DBN dense-1024 + ridge": 68.32, "BrainAgeNeXt + ridge": 66.83, "DBN GAP + BrainAgeNeXt + ridge": 66.81}, "views": {"axial": ["img/eNKI_A00040324_axial0.png", "img/eNKI_A00040324_axial1.png", "img/eNKI_A00040324_axial2.png", "img/eNKI_A00040324_axial3.png", "img/eNKI_A00040324_axial4.png", "img/eNKI_A00040324_axial5.png", "img/eNKI_A00040324_axial6.png"], "coronal": "img/eNKI_A00040324_coronal.png", "sagittal": "img/eNKI_A00040324_sagittal.png"}}, {"id": "eNKI_A00039657", "cohort": "eNKI", "site": "eNKI", "age": 83.0, "sex": "F", "ethnicity": "not recorded", "why": "Typical 80s", "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.", "preds": {"DeepBrainNet": 67.5, "BrainAgeNeXt": 71.95, "BrainAgeNeXt models": [70.8, 69.55, 73.18, 74.53, 71.95], "DBN GAP-512 + ridge": 69.56, "DBN dense-1024 + ridge": 67.76, "BrainAgeNeXt + ridge": 71.73, "DBN GAP + BrainAgeNeXt + ridge": 71.61}, "views": {"axial": ["img/eNKI_A00039657_axial0.png", "img/eNKI_A00039657_axial1.png", "img/eNKI_A00039657_axial2.png", "img/eNKI_A00039657_axial3.png", "img/eNKI_A00039657_axial4.png", "img/eNKI_A00039657_axial5.png", "img/eNKI_A00039657_axial6.png"], "coronal": "img/eNKI_A00039657_coronal.png", "sagittal": "img/eNKI_A00039657_sagittal.png"}}, {"id": "eNKI_A00038998", "cohort": "eNKI", "site": "eNKI", "age": 26.0, "sex": "M", "ethnicity": "not recorded", "why": "DeepBrainNet's largest miss", "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.", "preds": {"DeepBrainNet": 47.91, "BrainAgeNeXt": 29.42, "BrainAgeNeXt models": [28.33, 34.53, 29.42, 30.99, 27.76], "DBN GAP-512 + ridge": 43.97, "DBN dense-1024 + ridge": 46.94, "BrainAgeNeXt + ridge": 29.56, "DBN GAP + BrainAgeNeXt + ridge": 30.76}, "views": {"axial": ["img/eNKI_A00038998_axial0.png", "img/eNKI_A00038998_axial1.png", "img/eNKI_A00038998_axial2.png", "img/eNKI_A00038998_axial3.png", "img/eNKI_A00038998_axial4.png", "img/eNKI_A00038998_axial5.png", "img/eNKI_A00038998_axial6.png"], "coronal": "img/eNKI_A00038998_coronal.png", "sagittal": "img/eNKI_A00038998_sagittal.png"}}, {"id": "SALD_031740", "cohort": "SALD", "site": "SALD", "age": 26.0, "sex": "F", "ethnicity": "Chinese", "why": "Typical 20s", "note": "SALD was never seen by any model or head. Ages are whole years.", "preds": {"DeepBrainNet": 26.3, "BrainAgeNeXt": 24.62, "BrainAgeNeXt models": [26.42, 24.46, 24.62, 26.52, 24.33], "DBN dense-1024 + ridge": 24.1, "BrainAgeNeXt + ridge": 27.97, "DBN GAP + BrainAgeNeXt + ridge": 26.42}, "views": {"axial": ["img/SALD_031740_axial0.png", "img/SALD_031740_axial1.png", "img/SALD_031740_axial2.png", "img/SALD_031740_axial3.png", "img/SALD_031740_axial4.png", "img/SALD_031740_axial5.png", "img/SALD_031740_axial6.png"], "coronal": "img/SALD_031740_coronal.png", "sagittal": "img/SALD_031740_sagittal.png"}}, {"id": "SALD_031522", "cohort": "SALD", "site": "SALD", "age": 37.0, "sex": "F", "ethnicity": "Chinese", "why": "Typical 30s", "note": "SALD was never seen by any model or head. Ages are whole years.", "preds": {"DeepBrainNet": 41.97, "BrainAgeNeXt": 34.13, "BrainAgeNeXt models": [34.13, 37.15, 30.42, 36.1, 33.9], "DBN dense-1024 + ridge": 35.37, "BrainAgeNeXt + ridge": 32.33, "DBN GAP + BrainAgeNeXt + ridge": 34.08}, "views": {"axial": ["img/SALD_031522_axial0.png", "img/SALD_031522_axial1.png", "img/SALD_031522_axial2.png", "img/SALD_031522_axial3.png", "img/SALD_031522_axial4.png", "img/SALD_031522_axial5.png", "img/SALD_031522_axial6.png"], "coronal": "img/SALD_031522_coronal.png", "sagittal": "img/SALD_031522_sagittal.png"}}, {"id": "SALD_031458", "cohort": "SALD", "site": "SALD", "age": 44.0, "sex": "F", "ethnicity": "Chinese", "why": "Typical 40s", "note": "SALD was never seen by any model or head. Ages are whole years.", "preds": {"DeepBrainNet": 43.11, "BrainAgeNeXt": 47.53, "BrainAgeNeXt models": [47.53, 47.52, 46.29, 48.47, 48.69], "DBN dense-1024 + ridge": 43.1, "BrainAgeNeXt + ridge": 47.42, "DBN GAP + BrainAgeNeXt + ridge": 46.63}, "views": {"axial": ["img/SALD_031458_axial0.png", "img/SALD_031458_axial1.png", "img/SALD_031458_axial2.png", "img/SALD_031458_axial3.png", "img/SALD_031458_axial4.png", "img/SALD_031458_axial5.png", "img/SALD_031458_axial6.png"], "coronal": "img/SALD_031458_coronal.png", "sagittal": "img/SALD_031458_sagittal.png"}}, {"id": "SALD_031346", "cohort": "SALD", "site": "SALD", "age": 58.0, "sex": "F", "ethnicity": "Chinese", "why": "Typical 50s", "note": "SALD was never seen by any model or head. Ages are whole years.", "preds": {"DeepBrainNet": 62.49, "BrainAgeNeXt": 54.68, "BrainAgeNeXt models": [56.26, 54.68, 57.62, 54.62, 53.58], "DBN dense-1024 + ridge": 61.95, "BrainAgeNeXt + ridge": 52.78, "DBN GAP + BrainAgeNeXt + ridge": 55.41}, "views": {"axial": ["img/SALD_031346_axial0.png", "img/SALD_031346_axial1.png", "img/SALD_031346_axial2.png", "img/SALD_031346_axial3.png", "img/SALD_031346_axial4.png", "img/SALD_031346_axial5.png", "img/SALD_031346_axial6.png"], "coronal": "img/SALD_031346_coronal.png", "sagittal": "img/SALD_031346_sagittal.png"}}, {"id": "SALD_031445", "cohort": "SALD", "site": "SALD", "age": 68.0, "sex": "F", "ethnicity": "Chinese", "why": "Typical 60s", "note": "SALD was never seen by any model or head. Ages are whole years.", "preds": {"DeepBrainNet": 65.34, "BrainAgeNeXt": 71.32, "BrainAgeNeXt models": [74.03, 68.92, 68.83, 72.23, 71.32], "DBN dense-1024 + ridge": 64.67, "BrainAgeNeXt + ridge": 70.29, "DBN GAP + BrainAgeNeXt + ridge": 69.56}, "views": {"axial": ["img/SALD_031445_axial0.png", "img/SALD_031445_axial1.png", "img/SALD_031445_axial2.png", "img/SALD_031445_axial3.png", "img/SALD_031445_axial4.png", "img/SALD_031445_axial5.png", "img/SALD_031445_axial6.png"], "coronal": "img/SALD_031445_coronal.png", "sagittal": "img/SALD_031445_sagittal.png"}}, {"id": "SALD_031313", "cohort": "SALD", "site": "SALD", "age": 73.0, "sex": "M", "ethnicity": "Chinese", "why": "Typical 70s", "note": "SALD was never seen by any model or head. Ages are whole years.", "preds": {"DeepBrainNet": 71.43, "BrainAgeNeXt": 75.36, "BrainAgeNeXt models": [76.45, 74.48, 72.8, 75.36, 79.33], "DBN dense-1024 + ridge": 71.42, "BrainAgeNeXt + ridge": 74.61, "DBN GAP + BrainAgeNeXt + ridge": 76.19}, "views": {"axial": ["img/SALD_031313_axial0.png", "img/SALD_031313_axial1.png", "img/SALD_031313_axial2.png", "img/SALD_031313_axial3.png", "img/SALD_031313_axial4.png", "img/SALD_031313_axial5.png", "img/SALD_031313_axial6.png"], "coronal": "img/SALD_031313_coronal.png", "sagittal": "img/SALD_031313_sagittal.png"}}, {"id": "SALD_031322", "cohort": "SALD", "site": "SALD", "age": 80.0, "sex": "M", "ethnicity": "Chinese", "why": "Typical 80s", "note": "SALD was never seen by any model or head. Ages are whole years.", "preds": {"DeepBrainNet": 72.73, "BrainAgeNeXt": 76.67, "BrainAgeNeXt models": [77.34, 76.11, 75.77, 76.67, 79.83], "DBN dense-1024 + ridge": 72.74, "BrainAgeNeXt + ridge": 76.91, "DBN GAP + BrainAgeNeXt + ridge": 77.85}, "views": {"axial": ["img/SALD_031322_axial0.png", "img/SALD_031322_axial1.png", "img/SALD_031322_axial2.png", "img/SALD_031322_axial3.png", "img/SALD_031322_axial4.png", "img/SALD_031322_axial5.png", "img/SALD_031322_axial6.png"], "coronal": "img/SALD_031322_coronal.png", "sagittal": "img/SALD_031322_sagittal.png"}}, {"id": "SALD_031759", "cohort": "SALD", "site": "SALD", "age": 25.0, "sex": "M", "ethnicity": "Chinese", "why": "DeepBrainNet's largest miss", "note": "SALD was never seen by any model or head. Ages are whole years.", "preds": {"DeepBrainNet": 45.6, "BrainAgeNeXt": 30.64, "BrainAgeNeXt models": [29.9, 30.12, 30.64, 31.1, 30.91], "DBN dense-1024 + ridge": 44.98, "BrainAgeNeXt + ridge": 28.99, "DBN GAP + BrainAgeNeXt + ridge": 30.75}, "views": {"axial": ["img/SALD_031759_axial0.png", "img/SALD_031759_axial1.png", "img/SALD_031759_axial2.png", "img/SALD_031759_axial3.png", "img/SALD_031759_axial4.png", "img/SALD_031759_axial5.png", "img/SALD_031759_axial6.png"], "coronal": "img/SALD_031759_coronal.png", "sagittal": "img/SALD_031759_sagittal.png"}}, {"id": "SALD_031639", "cohort": "SALD", "site": "SALD", "age": 42.0, "sex": "F", "ethnicity": "Chinese", "why": "BrainAgeNeXt's largest miss", "note": "SALD was never seen by any model or head. Ages are whole years.", "preds": {"DeepBrainNet": 55.72, "BrainAgeNeXt": 54.12, "BrainAgeNeXt models": [53.86, 55.17, 55.09, 52.55, 54.12], "DBN dense-1024 + ridge": 55.12, "BrainAgeNeXt + ridge": 50.68, "DBN GAP + BrainAgeNeXt + ridge": 52.17}, "views": {"axial": ["img/SALD_031639_axial0.png", "img/SALD_031639_axial1.png", "img/SALD_031639_axial2.png", "img/SALD_031639_axial3.png", "img/SALD_031639_axial4.png", "img/SALD_031639_axial5.png", "img/SALD_031639_axial6.png"], "coronal": "img/SALD_031639_coronal.png", "sagittal": "img/SALD_031639_sagittal.png"}}], "summary": [{"cohort": "IXI Guys+HH", "model": "DeepBrainNet", "n": 492, "MAE": 4.567, "ci_low": 4.25, "ci_high": 4.888, "mean_error": 0.918}, {"cohort": "IXI Guys+HH", "model": "BrainAgeNeXt", "n": 492, "MAE": 3.384, "ci_low": 3.166, "ci_high": 3.612, "mean_error": 0.653}, {"cohort": "eNKI", "model": "DeepBrainNet", "n": 39, "MAE": 6.299, "ci_low": 4.787, "ci_high": 7.931, "mean_error": 1.689}, {"cohort": "eNKI", "model": "BrainAgeNeXt", "n": 39, "MAE": 3.685, "ci_low": 2.915, "ci_high": 4.554, "mean_error": 0.161}, {"cohort": "SALD", "model": "DeepBrainNet", "n": 200, "MAE": 5.775, "ci_low": 5.167, "ci_high": 6.392, "mean_error": 2.213}, {"cohort": "SALD", "model": "BrainAgeNeXt", "n": 200, "MAE": 3.391, "ci_low": 3.026, "ci_high": 3.764, "mean_error": 0.065}], "heads_ixi": [{"model": "DeepBrainNet raw", "mae_guys_hh_5fold_oof": 4.57, "mae_enki": 6.3}, {"model": "BrainAgeNeXt raw", "mae_guys_hh_5fold_oof": 3.38, "mae_enki": 3.69}, {"model": "DeepBrainNet GAP-512 + ridge", "mae_guys_hh_5fold_oof": 4.57, "mae_enki": 6.29}, {"model": "DeepBrainNet dense-1024 + ridge", "mae_guys_hh_5fold_oof": 4.52, "mae_enki": 5.86}, {"model": "BrainAgeNeXt 512 + ridge", "mae_guys_hh_5fold_oof": 3.24, "mae_enki": 3.51}, {"model": "DeepBrainNet GAP + BrainAgeNeXt + ridge", "mae_guys_hh_5fold_oof": 3.26, "mae_enki": 3.54}], "heads_sald": [{"model": "DeepBrainNet raw", "MAE": 5.775, "mean_error": 2.213, "r": 0.923, "n": 200}, {"model": "BrainAgeNeXt raw", "MAE": 3.391, "mean_error": 0.065, "r": 0.968, "n": 200}, {"model": "DBN dense1024 + ridge (trained on IXI)", "MAE": 5.681, "mean_error": 1.148, "r": 0.899, "n": 200}, {"model": "BANG 512 + ridge (trained on IXI)", "MAE": 3.488, "mean_error": -0.851, "r": 0.969, "n": 200}, {"model": "DBN gap + BANG + ridge (trained on IXI)", "MAE": 3.367, "mean_error": -0.53, "r": 0.971, "n": 200}]}</script>
+<script>
+(function () {
+  const D = JSON.parse(document.getElementById('demo-data').textContent);
+  const CASES = D.cases;
+  const FAM = { 'DeepBrainNet': ['dbn', 'circle'], 'BrainAgeNeXt': ['bang', 'circle'],
+    'DBN GAP-512 + ridge': ['dbn', 'diamond'], 'DBN dense-1024 + ridge': ['dbn', 'diamond'],
+    'BrainAgeNeXt + ridge': ['bang', 'diamond'], 'DBN GAP + BrainAgeNeXt + ridge': ['combo', 'diamond'],
+    'Linear regression': ['tab', 'square'], 'Random forest': ['tab', 'square'], 'XGBoost': ['tab', 'square'] };
+  const GROUPS = [
+    { title: 'Brain-age CNNs', sub: 'as published, unchanged', rows: ['DeepBrainNet', 'BrainAgeNeXt'] },
+    { title: 'Ridge heads on frozen CNN features', sub: 'trained on IXI Guys+HH',
+      rows: ['DBN GAP-512 + ridge', 'DBN dense-1024 + ridge', 'BrainAgeNeXt + ridge', 'DBN GAP + BrainAgeNeXt + ridge'] },
+    { title: 'Tabular models on tissue volumes', sub: 'IXI only', rows: ['Linear regression', 'Random forest', 'XGBoost'] } ];
+  const ORI = { axial: ['A', 'P', 'L', 'R'], coronal: ['S', 'I', 'L', 'R'], sagittal: ['S', 'I', 'P', 'A'] };
+  const $ = (id) => document.getElementById(id);
+  const fmt = (v) => v.toFixed(1);
+  const store = { get(k) { try { return localStorage.getItem(k) } catch (e) { return null } },
+                  set(k, v) { try { localStorage.setItem(k, v) } catch (e) {} } };
+  let state = { filter: 'all', id: CASES[0].id, view: 'axial', slice: 3, quiz: store.get('iaudit-quiz') === '1',
+                revealed: {}, guesses: {} };
+
+  // facts
+  const cnt = (co) => CASES.filter(c => c.cohort === co).length;
+  $('facts').innerHTML = `<span class="fact"><b>${CASES.length}</b> real cases</span>
+    <span class="fact"><b>${cnt('IXI')}</b> IXI &middot; <b>${cnt('eNKI')}</b> eNKI &middot; <b>${cnt('SALD')}</b> SALD</span>
+    <span class="fact"><b>9</b> model variants</span>
+    <span class="fact">ages <b>${Math.round(Math.min(...CASES.map(c => c.age)))}&ndash;${Math.round(Math.max(...CASES.map(c => c.age)))}</b></span>`;
+
+  function hidden(c) { return state.quiz && !state.revealed[c.id] }
+
+  function renderStrip() {
+    const list = CASES.filter(c => state.filter === 'all' || c.cohort === state.filter);
+    $('strip').innerHTML = list.map(c => `<button class="card" id="card-${c.id}" data-id="${c.id}" aria-pressed="${c.id === state.id}">
+        <img src="${c.views.axial[3]}" alt="" loading="lazy">
+        <span class="meta"><span class="cid">${c.cohort} &middot; ${c.id.replace('SALD_', '')}</span>
+        <span class="cage">${hidden(c) ? 'Age hidden' : fmt(c.age) + ' y'} &middot; ${c.sex === 'F' ? 'female' : 'male'}</span>
+        <span class="cwhy">${c.why}</span></span></button>`).join('');
+  }
+
+  function renderViewer(c) {
+    const v = state.view;
+    $('scan').src = v === 'axial' ? c.views.axial[state.slice] : c.views[v];
+    const [t, b, l, r] = ORI[v];
+    $('o-t').textContent = t; $('o-b').textContent = b; $('o-l').textContent = l; $('o-r').textContent = r;
+    $('slicebox').hidden = v !== 'axial';
+    document.querySelectorAll('.vtabs button').forEach(bt => bt.setAttribute('aria-pressed', bt.dataset.v === v));
+    $('vmeta').innerHTML = `<div><span>Case</span><b class="mono">${c.id}</b></div>
+      <div><span>Site / sex</span><b>${c.site} &middot; ${c.sex}</b></div>
+      <div><span>True age</span><b class="mono">${hidden(c) ? '&mdash;' : fmt(c.age) + ' y'}</b></div>`;
+    $('vnote').textContent = c.note + ' Image: skull-stripped, bias-corrected, aligned to MNI152 (shown in neurological view, L on the left).';
+  }
+
+  function domain(c) {
+    const vals = [c.age, ...Object.values(c.preds).flat()];
+    if (state.guesses[c.id] != null) vals.push(state.guesses[c.id]);
+    let lo = Math.floor((Math.min(...vals) - 3) / 5) * 5, hi = Math.ceil((Math.max(...vals) + 3) / 5) * 5;
+    if (hi - lo < 20) { const m = (hi + lo) / 2; lo = Math.floor((m - 10) / 5) * 5; hi = lo + 20; }
+    return [lo, hi];
+  }
+
+  function rowHTML(name, val, c, pct, extra) {
+    const [fam, shape] = FAM[name] || ['you', 'circle'];
+    const err = val - c.age, big = Math.abs(err) >= 5;
+    const ticks = [];
+    for (let t = Math.ceil(pct.lo / 10) * 10; t <= pct.hi; t += 10) ticks.push(`<i class="gridl" style="left:${pct(t)}%"></i>`);
+    return `<div class="row">
+      <div class="rlabel"><i class="key ${shape} f-${fam}"></i><span>${name}</span></div>
+      <div class="track">${ticks.join('')}${extra || ''}<i class="truth" style="left:${pct(c.age)}%"></i>
+        <i class="mk ${shape} f-${fam}" style="left:${pct(val)}%" data-tip="${name}: ${fmt(val)} y (true ${fmt(c.age)} y, ${err >= 0 ? '+' : ''}${fmt(err)} y)"></i></div>
+      <div class="rval"><b>${fmt(val)}</b><small class="${big ? 'big' : ''}">${err >= 0 ? '+' : ''}${fmt(err)} y</small></div></div>`;
+  }
+
+  function renderChart(c) {
+    $('ptitle').textContent = hidden(c) ? 'Your guess first' : `Predicted age for ${c.id}`;
+    if (hidden(c)) {
+      $('chart').innerHTML = `<form class="guess" id="guessform">
+        <label for="guessin">How old is this person? Look at the ventricles and the folds of the cortex.</label>
+        <div class="ctl"><input id="guessin" type="number" min="15" max="95" step="1" inputmode="numeric" placeholder="age">
+          <button class="btn" type="submit">Reveal answers</button>
+          <button class="btn ghost" type="button" id="skip">Reveal without guessing</button></div>
+        <p class="empty-note">The models' predictions and the true age appear after you reveal.</p></form>`;
+      $('guessform').addEventListener('submit', (e) => { e.preventDefault();
+        const g = parseFloat($('guessin').value); if (!isNaN(g)) state.guesses[c.id] = g;
+        state.revealed[c.id] = true; renderAll(); });
+      $('skip').addEventListener('click', () => { state.revealed[c.id] = true; renderAll(); });
+      return;
+    }
+    const [lo, hi] = domain(c);
+    const pct = (v) => ((v - lo) / (hi - lo)) * 100; pct.lo = lo; pct.hi = hi;
+    let html = '';
+    if (state.guesses[c.id] != null) {
+      html += `<div class="grp"><h3>You</h3>${rowHTML('Your guess', state.guesses[c.id], c, pct)}</div>`;
+    }
+    for (const g of GROUPS) {
+      const rows = g.rows.filter(n => c.preds[n] != null);
+      if (!rows.length) continue;
+      html += `<div class="grp"><h3>${g.title} <span class="sub">&middot; ${g.sub}</span></h3>`;
+      for (const n of rows) {
+        let extra = '';
+        if (n === 'BrainAgeNeXt' && c.preds['BrainAgeNeXt models']) {
+          const m = c.preds['BrainAgeNeXt models'], a = Math.min(...m), b = Math.max(...m);
+          extra = `<i class="range" style="left:${pct(a)}%;width:${pct(b) - pct(a)}%"></i>` +
+            m.map((v, i) => `<i class="tick" style="left:${pct(v)}%" data-tip="BrainAgeNeXt model ${i + 1}: ${fmt(v)} y"></i>`).join('');
+        }
+        html += rowHTML(n, c.preds[n], c, pct, extra);
+      }
+      html += '</div>';
+    }
+    const labels = [];
+    for (let t = Math.ceil(lo / 10) * 10; t <= hi; t += 10) labels.push(`<span style="left:${pct(t)}%">${t}</span>`);
+    html += `<div class="axis"><div></div><div class="scale">${labels.join('')}</div><div></div>
+      <div class="cap">age in years &middot; black line = true age ${fmt(c.age)} y</div></div>`;
+    if (!c.preds['Linear regression']) html += `<p class="empty-note">Tabular models are not shown: they need tissue-volume features, which were only extracted for IXI.</p>`;
+    $('chart').innerHTML = html;
+  }
+
+  function renderAll() {
+    const c = CASES.find(x => x.id === state.id) || CASES[0];
+    renderStrip(); renderViewer(c); renderChart(c);
+    document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.f === state.filter));
+    $('quiz').checked = state.quiz;
+  }
+
+  function select(id) {
+    if (!CASES.some(c => c.id === id)) return;
+    state.id = id;
+    renderAll();                       // redraw first: a refused address-bar update must never block it
+    try { if (location.hash !== '#case-' + id) history.replaceState(null, '', '#case-' + id); } catch (e) {}
+  }
+
+  // results tables
+  const S = D.summary, order = ['IXI Guys+HH', 'eNKI', 'SALD'];
+  const cell = (r) => `${r.MAE.toFixed(2)} <span class="ci">(${r.ci_low.toFixed(2)}&ndash;${r.ci_high.toFixed(2)})</span>`;
+  $('summary').innerHTML = `<thead><tr><th>Cohort</th><th>Scans</th><th>DeepBrainNet MAE</th><th>BrainAgeNeXt MAE</th><th>In BrainAgeNeXt training?</th></tr></thead><tbody>` +
+    order.map(co => { const d = S.find(r => r.cohort === co && r.model === 'DeepBrainNet'), b = S.find(r => r.cohort === co && r.model === 'BrainAgeNeXt');
+      return `<tr><td>${co}${co === 'SALD' ? '' : ' &dagger;'}</td><td class="n">${b.n}</td><td class="n">${cell(d)}</td>
+        <td class="n ${b.ci_high < 4 ? 'pass' : ''}">${cell(b)}</td><td>${co === 'SALD' ? 'No (held out)' : 'Yes'}</td></tr>`; }).join('') + '</tbody>';
+  const hs = Object.fromEntries(D.heads_sald.map(r => [r.model, r.MAE]));
+  const hrow = (lab, ixi, sald) => `<tr><td>${lab}</td><td class="n">${ixi != null ? ixi.toFixed(2) : '&mdash;'}</td><td class="n">${sald != null ? sald.toFixed(2) : '&mdash;'}</td></tr>`;
+  const hi = Object.fromEntries(D.heads_ixi.map(r => [r.model, r.mae_guys_hh_5fold_oof]));
+  $('heads').innerHTML = `<thead><tr><th>Model variant</th><th>IXI MAE (5-fold)</th><th>SALD MAE (held out)</th></tr></thead><tbody>` +
+    hrow('DeepBrainNet, raw', hi['DeepBrainNet raw'], hs['DeepBrainNet raw']) +
+    hrow('DBN GAP-512 + ridge', hi['DeepBrainNet GAP-512 + ridge'], null) +
+    hrow('DBN dense-1024 + ridge', hi['DeepBrainNet dense-1024 + ridge'], hs['DBN dense1024 + ridge (trained on IXI)']) +
+    hrow('BrainAgeNeXt, raw', hi['BrainAgeNeXt raw'], hs['BrainAgeNeXt raw']) +
+    hrow('BrainAgeNeXt + ridge', hi['BrainAgeNeXt 512 + ridge'], hs['BANG 512 + ridge (trained on IXI)']) +
+    hrow('DBN GAP + BrainAgeNeXt + ridge', hi['DeepBrainNet GAP + BrainAgeNeXt + ridge'], hs['DBN gap + BANG + ridge (trained on IXI)']) + '</tbody>';
+
+  // events
+  $('strip').addEventListener('click', (e) => { const b = e.target.closest('.card'); if (b) select(b.dataset.id); });
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    state.filter = b.dataset.f;
+    const vis = CASES.filter(c => state.filter === 'all' || c.cohort === state.filter);
+    if (!vis.some(c => c.id === state.id)) state.id = vis[0].id;
+    select(state.id); }));
+  document.querySelectorAll('.vtabs button').forEach(b => b.addEventListener('click', () => { state.view = b.dataset.v; renderAll(); }));
+  $('slice').addEventListener('input', (e) => { state.slice = +e.target.value; renderViewer(CASES.find(x => x.id === state.id)); });
+  $('quiz').addEventListener('change', (e) => { state.quiz = e.target.checked; state.revealed = {}; store.set('iaudit-quiz', state.quiz ? '1' : '0'); renderAll(); });
+  const tip = $('tip');
+  document.addEventListener('mouseover', (e) => { const t = e.target.closest('[data-tip]');
+    if (!t) { tip.hidden = true; return; } tip.textContent = t.dataset.tip; tip.hidden = false; });
+  document.addEventListener('mousemove', (e) => { if (!tip.hidden) { tip.style.left = Math.min(e.clientX + 12, innerWidth - 270) + 'px'; tip.style.top = (e.clientY + 14) + 'px'; } });
+  window.addEventListener('hashchange', () => { const m = location.hash.match(/^#case-([\w-]+)$/); if (m) select(m[1]); });
+
+  const m = location.hash.match(/^#case-([\w-]+)$/);
+  if (m && CASES.some(c => c.id === m[1])) state.id = m[1];
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
