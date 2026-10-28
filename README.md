@@ -7,6 +7,11 @@ to test whether the fairness disparities found in one architecture are
 scanner/acquisition artifacts (replicate across architectures) or
 model-specific.
 
+**Demo website:** [`website/`](website/) is a static site that shows 26 real MRI cases
+(IXI, eNKI, SALD) with every model's prediction against the true age, plus every scan's
+predictions in [`website/data/all_predictions.csv`](website/data/all_predictions.csv).
+Deploy `website/site` on Vercel as-is; see [`website/HANDOFF.md`](website/HANDOFF.md).
+
 ## Pipeline
 
 | Stage | What | Script |
