@@ -1,0 +1,1135 @@
+{
+ "cases": [
+  {
+   "id": "IXI122",
+   "cohort": "IXI",
+   "site": "Guys",
+   "age": 23.0,
+   "sex": "F",
+   "ethnicity": "White",
+   "why": "Typical 20s",
+   "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.",
+   "preds": {
+    "DeepBrainNet": 24.76,
+    "BrainAgeNeXt": 25.88,
+    "BrainAgeNeXt models": [
+     25.88,
+     27.2,
+     25.72,
+     24.24,
+     27.76
+    ],
+    "DBN GAP-512 + ridge": 24.52,
+    "DBN dense-1024 + ridge": 23.18,
+    "BrainAgeNeXt + ridge": 25.36,
+    "DBN GAP + BrainAgeNeXt + ridge": 24.12,
+    "Linear regression": 22.74,
+    "Random forest": 23.23,
+    "XGBoost": 21.49
+   },
+   "views": {
+    "axial": [
+     "img/IXI122_axial0.png",
+     "img/IXI122_axial1.png",
+     "img/IXI122_axial2.png",
+     "img/IXI122_axial3.png",
+     "img/IXI122_axial4.png",
+     "img/IXI122_axial5.png",
+     "img/IXI122_axial6.png"
+    ],
+    "coronal": "img/IXI122_coronal.png",
+    "sagittal": "img/IXI122_sagittal.png"
+   }
+  },
+  {
+   "id": "IXI046",
+   "cohort": "IXI",
+   "site": "Guys",
+   "age": 37.7,
+   "sex": "F",
+   "ethnicity": "White",
+   "why": "Typical 30s",
+   "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.",
+   "preds": {
+    "DeepBrainNet": 38.0,
+    "BrainAgeNeXt": 34.76,
+    "BrainAgeNeXt models": [
+     36.92,
+     34.22,
+     31.66,
+     34.76,
+     36.93
+    ],
+    "DBN GAP-512 + ridge": 38.87,
+    "DBN dense-1024 + ridge": 36.85,
+    "BrainAgeNeXt + ridge": 34.73,
+    "DBN GAP + BrainAgeNeXt + ridge": 35.03,
+    "Linear regression": 39.47,
+    "Random forest": 39.3,
+    "XGBoost": 41.0
+   },
+   "views": {
+    "axial": [
+     "img/IXI046_axial0.png",
+     "img/IXI046_axial1.png",
+     "img/IXI046_axial2.png",
+     "img/IXI046_axial3.png",
+     "img/IXI046_axial4.png",
+     "img/IXI046_axial5.png",
+     "img/IXI046_axial6.png"
+    ],
+    "coronal": "img/IXI046_coronal.png",
+    "sagittal": "img/IXI046_sagittal.png"
+   }
+  },
+  {
+   "id": "IXI248",
+   "cohort": "IXI",
+   "site": "HH",
+   "age": 44.9,
+   "sex": "F",
+   "ethnicity": "White",
+   "why": "Typical 40s",
+   "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.",
+   "preds": {
+    "DeepBrainNet": 42.67,
+    "BrainAgeNeXt": 41.32,
+    "BrainAgeNeXt models": [
+     44.07,
+     46.63,
+     41.32,
+     39.77,
+     41.14
+    ],
+    "DBN GAP-512 + ridge": 40.82,
+    "DBN dense-1024 + ridge": 39.77,
+    "BrainAgeNeXt + ridge": 42.87,
+    "DBN GAP + BrainAgeNeXt + ridge": 42.25,
+    "Linear regression": 45.41,
+    "Random forest": 48.65,
+    "XGBoost": 45.72
+   },
+   "views": {
+    "axial": [
+     "img/IXI248_axial0.png",
+     "img/IXI248_axial1.png",
+     "img/IXI248_axial2.png",
+     "img/IXI248_axial3.png",
+     "img/IXI248_axial4.png",
+     "img/IXI248_axial5.png",
+     "img/IXI248_axial6.png"
+    ],
+    "coronal": "img/IXI248_coronal.png",
+    "sagittal": "img/IXI248_sagittal.png"
+   }
+  },
+  {
+   "id": "IXI325",
+   "cohort": "IXI",
+   "site": "Guys",
+   "age": 52.7,
+   "sex": "F",
+   "ethnicity": "Unknown",
+   "why": "Typical 50s",
+   "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.",
+   "preds": {
+    "DeepBrainNet": 49.36,
+    "BrainAgeNeXt": 55.56,
+    "BrainAgeNeXt models": [
+     53.96,
+     57.49,
+     53.94,
+     55.56,
+     57.07
+    ],
+    "DBN GAP-512 + ridge": 51.05,
+    "DBN dense-1024 + ridge": 48.94,
+    "BrainAgeNeXt + ridge": 53.02,
+    "DBN GAP + BrainAgeNeXt + ridge": 53.52,
+    "Linear regression": 50.73,
+    "Random forest": 46.8,
+    "XGBoost": 35.3
+   },
+   "views": {
+    "axial": [
+     "img/IXI325_axial0.png",
+     "img/IXI325_axial1.png",
+     "img/IXI325_axial2.png",
+     "img/IXI325_axial3.png",
+     "img/IXI325_axial4.png",
+     "img/IXI325_axial5.png",
+     "img/IXI325_axial6.png"
+    ],
+    "coronal": "img/IXI325_coronal.png",
+    "sagittal": "img/IXI325_sagittal.png"
+   }
+  },
+  {
+   "id": "IXI357",
+   "cohort": "IXI",
+   "site": "HH",
+   "age": 63.5,
+   "sex": "F",
+   "ethnicity": "White",
+   "why": "Typical 60s",
+   "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.",
+   "preds": {
+    "DeepBrainNet": 57.43,
+    "BrainAgeNeXt": 61.02,
+    "BrainAgeNeXt models": [
+     60.36,
+     61.02,
+     58.4,
+     61.62,
+     62.35
+    ],
+    "DBN GAP-512 + ridge": 56.84,
+    "DBN dense-1024 + ridge": 57.88,
+    "BrainAgeNeXt + ridge": 60.91,
+    "DBN GAP + BrainAgeNeXt + ridge": 60.76,
+    "Linear regression": 60.99,
+    "Random forest": 63.39,
+    "XGBoost": 64.48
+   },
+   "views": {
+    "axial": [
+     "img/IXI357_axial0.png",
+     "img/IXI357_axial1.png",
+     "img/IXI357_axial2.png",
+     "img/IXI357_axial3.png",
+     "img/IXI357_axial4.png",
+     "img/IXI357_axial5.png",
+     "img/IXI357_axial6.png"
+    ],
+    "coronal": "img/IXI357_coronal.png",
+    "sagittal": "img/IXI357_sagittal.png"
+   }
+  },
+  {
+   "id": "IXI175",
+   "cohort": "IXI",
+   "site": "HH",
+   "age": 72.3,
+   "sex": "M",
+   "ethnicity": "Asian or AsianBrit",
+   "why": "Typical 70s",
+   "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.",
+   "preds": {
+    "DeepBrainNet": 72.54,
+    "BrainAgeNeXt": 70.04,
+    "BrainAgeNeXt models": [
+     70.04,
+     76.65,
+     69.38,
+     66.08,
+     76.49
+    ],
+    "DBN GAP-512 + ridge": 75.0,
+    "DBN dense-1024 + ridge": 72.87,
+    "BrainAgeNeXt + ridge": 68.6,
+    "DBN GAP + BrainAgeNeXt + ridge": 70.83,
+    "Linear regression": 73.84,
+    "Random forest": 78.81,
+    "XGBoost": 75.0
+   },
+   "views": {
+    "axial": [
+     "img/IXI175_axial0.png",
+     "img/IXI175_axial1.png",
+     "img/IXI175_axial2.png",
+     "img/IXI175_axial3.png",
+     "img/IXI175_axial4.png",
+     "img/IXI175_axial5.png",
+     "img/IXI175_axial6.png"
+    ],
+    "coronal": "img/IXI175_coronal.png",
+    "sagittal": "img/IXI175_sagittal.png"
+   }
+  },
+  {
+   "id": "IXI185",
+   "cohort": "IXI",
+   "site": "Guys",
+   "age": 83.5,
+   "sex": "M",
+   "ethnicity": "White",
+   "why": "Typical 80s",
+   "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.",
+   "preds": {
+    "DeepBrainNet": 78.21,
+    "BrainAgeNeXt": 75.96,
+    "BrainAgeNeXt models": [
+     76.41,
+     75.96,
+     75.0,
+     74.51,
+     79.76
+    ],
+    "DBN GAP-512 + ridge": 79.37,
+    "DBN dense-1024 + ridge": 76.27,
+    "BrainAgeNeXt + ridge": 73.69,
+    "DBN GAP + BrainAgeNeXt + ridge": 75.57,
+    "Linear regression": 77.68,
+    "Random forest": 71.46,
+    "XGBoost": 67.94
+   },
+   "views": {
+    "axial": [
+     "img/IXI185_axial0.png",
+     "img/IXI185_axial1.png",
+     "img/IXI185_axial2.png",
+     "img/IXI185_axial3.png",
+     "img/IXI185_axial4.png",
+     "img/IXI185_axial5.png",
+     "img/IXI185_axial6.png"
+    ],
+    "coronal": "img/IXI185_coronal.png",
+    "sagittal": "img/IXI185_sagittal.png"
+   }
+  },
+  {
+   "id": "IXI094",
+   "cohort": "IXI",
+   "site": "HH",
+   "age": 24.9,
+   "sex": "M",
+   "ethnicity": "Asian or AsianBrit",
+   "why": "DeepBrainNet's largest miss",
+   "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.",
+   "preds": {
+    "DeepBrainNet": 46.74,
+    "BrainAgeNeXt": 25.48,
+    "BrainAgeNeXt models": [
+     25.48,
+     28.46,
+     26.24,
+     24.79,
+     25.25
+    ],
+    "DBN GAP-512 + ridge": 40.81,
+    "DBN dense-1024 + ridge": 46.24,
+    "BrainAgeNeXt + ridge": 25.11,
+    "DBN GAP + BrainAgeNeXt + ridge": 25.89,
+    "Linear regression": 52.2,
+    "Random forest": 55.09,
+    "XGBoost": 56.29
+   },
+   "views": {
+    "axial": [
+     "img/IXI094_axial0.png",
+     "img/IXI094_axial1.png",
+     "img/IXI094_axial2.png",
+     "img/IXI094_axial3.png",
+     "img/IXI094_axial4.png",
+     "img/IXI094_axial5.png",
+     "img/IXI094_axial6.png"
+    ],
+    "coronal": "img/IXI094_coronal.png",
+    "sagittal": "img/IXI094_sagittal.png"
+   }
+  },
+  {
+   "id": "IXI079",
+   "cohort": "IXI",
+   "site": "HH",
+   "age": 52.5,
+   "sex": "F",
+   "ethnicity": "Asian or AsianBrit",
+   "why": "BrainAgeNeXt's largest miss",
+   "note": "IXI is in BrainAgeNeXt's training data (via openBHB). Heads: 5-fold out-of-fold.",
+   "preds": {
+    "DeepBrainNet": 34.72,
+    "BrainAgeNeXt": 39.13,
+    "BrainAgeNeXt models": [
+     38.62,
+     42.63,
+     37.12,
+     42.37,
+     39.13
+    ],
+    "DBN GAP-512 + ridge": 34.48,
+    "DBN dense-1024 + ridge": 33.66,
+    "BrainAgeNeXt + ridge": 38.64,
+    "DBN GAP + BrainAgeNeXt + ridge": 38.74,
+    "Linear regression": 36.38,
+    "Random forest": 37.95,
+    "XGBoost": 41.69
+   },
+   "views": {
+    "axial": [
+     "img/IXI079_axial0.png",
+     "img/IXI079_axial1.png",
+     "img/IXI079_axial2.png",
+     "img/IXI079_axial3.png",
+     "img/IXI079_axial4.png",
+     "img/IXI079_axial5.png",
+     "img/IXI079_axial6.png"
+    ],
+    "coronal": "img/IXI079_coronal.png",
+    "sagittal": "img/IXI079_sagittal.png"
+   }
+  },
+  {
+   "id": "eNKI_A00033247",
+   "cohort": "eNKI",
+   "site": "eNKI",
+   "age": 22.0,
+   "sex": "M",
+   "ethnicity": "not recorded",
+   "why": "Typical 20s",
+   "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.",
+   "preds": {
+    "DeepBrainNet": 30.78,
+    "BrainAgeNeXt": 25.58,
+    "BrainAgeNeXt models": [
+     26.53,
+     25.58,
+     25.73,
+     24.93,
+     23.23
+    ],
+    "DBN GAP-512 + ridge": 28.86,
+    "DBN dense-1024 + ridge": 25.62,
+    "BrainAgeNeXt + ridge": 23.96,
+    "DBN GAP + BrainAgeNeXt + ridge": 24.47
+   },
+   "views": {
+    "axial": [
+     "img/eNKI_A00033247_axial0.png",
+     "img/eNKI_A00033247_axial1.png",
+     "img/eNKI_A00033247_axial2.png",
+     "img/eNKI_A00033247_axial3.png",
+     "img/eNKI_A00033247_axial4.png",
+     "img/eNKI_A00033247_axial5.png",
+     "img/eNKI_A00033247_axial6.png"
+    ],
+    "coronal": "img/eNKI_A00033247_coronal.png",
+    "sagittal": "img/eNKI_A00033247_sagittal.png"
+   }
+  },
+  {
+   "id": "eNKI_A00051676",
+   "cohort": "eNKI",
+   "site": "eNKI",
+   "age": 32.0,
+   "sex": "M",
+   "ethnicity": "not recorded",
+   "why": "Typical 30s",
+   "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.",
+   "preds": {
+    "DeepBrainNet": 43.19,
+    "BrainAgeNeXt": 34.45,
+    "BrainAgeNeXt models": [
+     34.45,
+     32.51,
+     36.57,
+     37.27,
+     32.97
+    ],
+    "DBN GAP-512 + ridge": 39.35,
+    "DBN dense-1024 + ridge": 40.99,
+    "BrainAgeNeXt + ridge": 34.13,
+    "DBN GAP + BrainAgeNeXt + ridge": 34.19
+   },
+   "views": {
+    "axial": [
+     "img/eNKI_A00051676_axial0.png",
+     "img/eNKI_A00051676_axial1.png",
+     "img/eNKI_A00051676_axial2.png",
+     "img/eNKI_A00051676_axial3.png",
+     "img/eNKI_A00051676_axial4.png",
+     "img/eNKI_A00051676_axial5.png",
+     "img/eNKI_A00051676_axial6.png"
+    ],
+    "coronal": "img/eNKI_A00051676_coronal.png",
+    "sagittal": "img/eNKI_A00051676_sagittal.png"
+   }
+  },
+  {
+   "id": "eNKI_A00038411",
+   "cohort": "eNKI",
+   "site": "eNKI",
+   "age": 44.0,
+   "sex": "F",
+   "ethnicity": "not recorded",
+   "why": "Typical 40s",
+   "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.",
+   "preds": {
+    "DeepBrainNet": 43.18,
+    "BrainAgeNeXt": 47.31,
+    "BrainAgeNeXt models": [
+     47.78,
+     47.31,
+     49.39,
+     44.6,
+     44.67
+    ],
+    "DBN GAP-512 + ridge": 43.66,
+    "DBN dense-1024 + ridge": 43.34,
+    "BrainAgeNeXt + ridge": 45.84,
+    "DBN GAP + BrainAgeNeXt + ridge": 45.36
+   },
+   "views": {
+    "axial": [
+     "img/eNKI_A00038411_axial0.png",
+     "img/eNKI_A00038411_axial1.png",
+     "img/eNKI_A00038411_axial2.png",
+     "img/eNKI_A00038411_axial3.png",
+     "img/eNKI_A00038411_axial4.png",
+     "img/eNKI_A00038411_axial5.png",
+     "img/eNKI_A00038411_axial6.png"
+    ],
+    "coronal": "img/eNKI_A00038411_coronal.png",
+    "sagittal": "img/eNKI_A00038411_sagittal.png"
+   }
+  },
+  {
+   "id": "eNKI_A00054895",
+   "cohort": "eNKI",
+   "site": "eNKI",
+   "age": 59.0,
+   "sex": "F",
+   "ethnicity": "not recorded",
+   "why": "Typical 50s",
+   "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. This image was re-processed on the laptop with the identical pipeline for display; the predictions are from the Colab run.",
+   "preds": {
+    "DeepBrainNet": 56.39,
+    "BrainAgeNeXt": 61.93,
+    "BrainAgeNeXt models": [
+     63.46,
+     61.65,
+     60.91,
+     61.93,
+     64.69
+    ],
+    "DBN GAP-512 + ridge": 59.34,
+    "DBN dense-1024 + ridge": 56.62,
+    "BrainAgeNeXt + ridge": 62.42,
+    "DBN GAP + BrainAgeNeXt + ridge": 61.71
+   },
+   "views": {
+    "axial": [
+     "img/eNKI_A00054895_axial0.png",
+     "img/eNKI_A00054895_axial1.png",
+     "img/eNKI_A00054895_axial2.png",
+     "img/eNKI_A00054895_axial3.png",
+     "img/eNKI_A00054895_axial4.png",
+     "img/eNKI_A00054895_axial5.png",
+     "img/eNKI_A00054895_axial6.png"
+    ],
+    "coronal": "img/eNKI_A00054895_coronal.png",
+    "sagittal": "img/eNKI_A00054895_sagittal.png"
+   }
+  },
+  {
+   "id": "eNKI_A00028552",
+   "cohort": "eNKI",
+   "site": "eNKI",
+   "age": 61.0,
+   "sex": "F",
+   "ethnicity": "not recorded",
+   "why": "Typical 60s",
+   "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.",
+   "preds": {
+    "DeepBrainNet": 68.42,
+    "BrainAgeNeXt": 58.76,
+    "BrainAgeNeXt models": [
+     58.76,
+     57.62,
+     56.85,
+     63.09,
+     61.52
+    ],
+    "DBN GAP-512 + ridge": 63.97,
+    "DBN dense-1024 + ridge": 67.97,
+    "BrainAgeNeXt + ridge": 58.15,
+    "DBN GAP + BrainAgeNeXt + ridge": 59.33
+   },
+   "views": {
+    "axial": [
+     "img/eNKI_A00028552_axial0.png",
+     "img/eNKI_A00028552_axial1.png",
+     "img/eNKI_A00028552_axial2.png",
+     "img/eNKI_A00028552_axial3.png",
+     "img/eNKI_A00028552_axial4.png",
+     "img/eNKI_A00028552_axial5.png",
+     "img/eNKI_A00028552_axial6.png"
+    ],
+    "coronal": "img/eNKI_A00028552_coronal.png",
+    "sagittal": "img/eNKI_A00028552_sagittal.png"
+   }
+  },
+  {
+   "id": "eNKI_A00040324",
+   "cohort": "eNKI",
+   "site": "eNKI",
+   "age": 70.0,
+   "sex": "M",
+   "ethnicity": "not recorded",
+   "why": "Typical 70s",
+   "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.",
+   "preds": {
+    "DeepBrainNet": 68.74,
+    "BrainAgeNeXt": 65.76,
+    "BrainAgeNeXt models": [
+     65.76,
+     69.18,
+     64.91,
+     73.56,
+     65.06
+    ],
+    "DBN GAP-512 + ridge": 70.21,
+    "DBN dense-1024 + ridge": 68.32,
+    "BrainAgeNeXt + ridge": 66.83,
+    "DBN GAP + BrainAgeNeXt + ridge": 66.81
+   },
+   "views": {
+    "axial": [
+     "img/eNKI_A00040324_axial0.png",
+     "img/eNKI_A00040324_axial1.png",
+     "img/eNKI_A00040324_axial2.png",
+     "img/eNKI_A00040324_axial3.png",
+     "img/eNKI_A00040324_axial4.png",
+     "img/eNKI_A00040324_axial5.png",
+     "img/eNKI_A00040324_axial6.png"
+    ],
+    "coronal": "img/eNKI_A00040324_coronal.png",
+    "sagittal": "img/eNKI_A00040324_sagittal.png"
+   }
+  },
+  {
+   "id": "eNKI_A00039657",
+   "cohort": "eNKI",
+   "site": "eNKI",
+   "age": 83.0,
+   "sex": "F",
+   "ethnicity": "not recorded",
+   "why": "Typical 80s",
+   "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.",
+   "preds": {
+    "DeepBrainNet": 67.5,
+    "BrainAgeNeXt": 71.95,
+    "BrainAgeNeXt models": [
+     70.8,
+     69.55,
+     73.18,
+     74.53,
+     71.95
+    ],
+    "DBN GAP-512 + ridge": 69.56,
+    "DBN dense-1024 + ridge": 67.76,
+    "BrainAgeNeXt + ridge": 71.73,
+    "DBN GAP + BrainAgeNeXt + ridge": 71.61
+   },
+   "views": {
+    "axial": [
+     "img/eNKI_A00039657_axial0.png",
+     "img/eNKI_A00039657_axial1.png",
+     "img/eNKI_A00039657_axial2.png",
+     "img/eNKI_A00039657_axial3.png",
+     "img/eNKI_A00039657_axial4.png",
+     "img/eNKI_A00039657_axial5.png",
+     "img/eNKI_A00039657_axial6.png"
+    ],
+    "coronal": "img/eNKI_A00039657_coronal.png",
+    "sagittal": "img/eNKI_A00039657_sagittal.png"
+   }
+  },
+  {
+   "id": "eNKI_A00038998",
+   "cohort": "eNKI",
+   "site": "eNKI",
+   "age": 26.0,
+   "sex": "M",
+   "ethnicity": "not recorded",
+   "why": "DeepBrainNet's largest miss",
+   "note": "eNKI (NKI-Rockland, New York) comes from NKI-RS, which is in BrainAgeNeXt's training data. Heads were trained on IXI only. Image and predictions are both from the Colab run.",
+   "preds": {
+    "DeepBrainNet": 47.91,
+    "BrainAgeNeXt": 29.42,
+    "BrainAgeNeXt models": [
+     28.33,
+     34.53,
+     29.42,
+     30.99,
+     27.76
+    ],
+    "DBN GAP-512 + ridge": 43.97,
+    "DBN dense-1024 + ridge": 46.94,
+    "BrainAgeNeXt + ridge": 29.56,
+    "DBN GAP + BrainAgeNeXt + ridge": 30.76
+   },
+   "views": {
+    "axial": [
+     "img/eNKI_A00038998_axial0.png",
+     "img/eNKI_A00038998_axial1.png",
+     "img/eNKI_A00038998_axial2.png",
+     "img/eNKI_A00038998_axial3.png",
+     "img/eNKI_A00038998_axial4.png",
+     "img/eNKI_A00038998_axial5.png",
+     "img/eNKI_A00038998_axial6.png"
+    ],
+    "coronal": "img/eNKI_A00038998_coronal.png",
+    "sagittal": "img/eNKI_A00038998_sagittal.png"
+   }
+  },
+  {
+   "id": "SALD_031740",
+   "cohort": "SALD",
+   "site": "SALD",
+   "age": 26.0,
+   "sex": "F",
+   "ethnicity": "Chinese",
+   "why": "Typical 20s",
+   "note": "SALD was never seen by any model or head. Ages are whole years.",
+   "preds": {
+    "DeepBrainNet": 26.3,
+    "BrainAgeNeXt": 24.62,
+    "BrainAgeNeXt models": [
+     26.42,
+     24.46,
+     24.62,
+     26.52,
+     24.33
+    ],
+    "DBN dense-1024 + ridge": 24.1,
+    "BrainAgeNeXt + ridge": 27.97,
+    "DBN GAP + BrainAgeNeXt + ridge": 26.42
+   },
+   "views": {
+    "axial": [
+     "img/SALD_031740_axial0.png",
+     "img/SALD_031740_axial1.png",
+     "img/SALD_031740_axial2.png",
+     "img/SALD_031740_axial3.png",
+     "img/SALD_031740_axial4.png",
+     "img/SALD_031740_axial5.png",
+     "img/SALD_031740_axial6.png"
+    ],
+    "coronal": "img/SALD_031740_coronal.png",
+    "sagittal": "img/SALD_031740_sagittal.png"
+   }
+  },
+  {
+   "id": "SALD_031522",
+   "cohort": "SALD",
+   "site": "SALD",
+   "age": 37.0,
+   "sex": "F",
+   "ethnicity": "Chinese",
+   "why": "Typical 30s",
+   "note": "SALD was never seen by any model or head. Ages are whole years.",
+   "preds": {
+    "DeepBrainNet": 41.97,
+    "BrainAgeNeXt": 34.13,
+    "BrainAgeNeXt models": [
+     34.13,
+     37.15,
+     30.42,
+     36.1,
+     33.9
+    ],
+    "DBN dense-1024 + ridge": 35.37,
+    "BrainAgeNeXt + ridge": 32.33,
+    "DBN GAP + BrainAgeNeXt + ridge": 34.08
+   },
+   "views": {
+    "axial": [
+     "img/SALD_031522_axial0.png",
+     "img/SALD_031522_axial1.png",
+     "img/SALD_031522_axial2.png",
+     "img/SALD_031522_axial3.png",
+     "img/SALD_031522_axial4.png",
+     "img/SALD_031522_axial5.png",
+     "img/SALD_031522_axial6.png"
+    ],
+    "coronal": "img/SALD_031522_coronal.png",
+    "sagittal": "img/SALD_031522_sagittal.png"
+   }
+  },
+  {
+   "id": "SALD_031458",
+   "cohort": "SALD",
+   "site": "SALD",
+   "age": 44.0,
+   "sex": "F",
+   "ethnicity": "Chinese",
+   "why": "Typical 40s",
+   "note": "SALD was never seen by any model or head. Ages are whole years.",
+   "preds": {
+    "DeepBrainNet": 43.11,
+    "BrainAgeNeXt": 47.53,
+    "BrainAgeNeXt models": [
+     47.53,
+     47.52,
+     46.29,
+     48.47,
+     48.69
+    ],
+    "DBN dense-1024 + ridge": 43.1,
+    "BrainAgeNeXt + ridge": 47.42,
+    "DBN GAP + BrainAgeNeXt + ridge": 46.63
+   },
+   "views": {
+    "axial": [
+     "img/SALD_031458_axial0.png",
+     "img/SALD_031458_axial1.png",
+     "img/SALD_031458_axial2.png",
+     "img/SALD_031458_axial3.png",
+     "img/SALD_031458_axial4.png",
+     "img/SALD_031458_axial5.png",
+     "img/SALD_031458_axial6.png"
+    ],
+    "coronal": "img/SALD_031458_coronal.png",
+    "sagittal": "img/SALD_031458_sagittal.png"
+   }
+  },
+  {
+   "id": "SALD_031346",
+   "cohort": "SALD",
+   "site": "SALD",
+   "age": 58.0,
+   "sex": "F",
+   "ethnicity": "Chinese",
+   "why": "Typical 50s",
+   "note": "SALD was never seen by any model or head. Ages are whole years.",
+   "preds": {
+    "DeepBrainNet": 62.49,
+    "BrainAgeNeXt": 54.68,
+    "BrainAgeNeXt models": [
+     56.26,
+     54.68,
+     57.62,
+     54.62,
+     53.58
+    ],
+    "DBN dense-1024 + ridge": 61.95,
+    "BrainAgeNeXt + ridge": 52.78,
+    "DBN GAP + BrainAgeNeXt + ridge": 55.41
+   },
+   "views": {
+    "axial": [
+     "img/SALD_031346_axial0.png",
+     "img/SALD_031346_axial1.png",
+     "img/SALD_031346_axial2.png",
+     "img/SALD_031346_axial3.png",
+     "img/SALD_031346_axial4.png",
+     "img/SALD_031346_axial5.png",
+     "img/SALD_031346_axial6.png"
+    ],
+    "coronal": "img/SALD_031346_coronal.png",
+    "sagittal": "img/SALD_031346_sagittal.png"
+   }
+  },
+  {
+   "id": "SALD_031445",
+   "cohort": "SALD",
+   "site": "SALD",
+   "age": 68.0,
+   "sex": "F",
+   "ethnicity": "Chinese",
+   "why": "Typical 60s",
+   "note": "SALD was never seen by any model or head. Ages are whole years.",
+   "preds": {
+    "DeepBrainNet": 65.34,
+    "BrainAgeNeXt": 71.32,
+    "BrainAgeNeXt models": [
+     74.03,
+     68.92,
+     68.83,
+     72.23,
+     71.32
+    ],
+    "DBN dense-1024 + ridge": 64.67,
+    "BrainAgeNeXt + ridge": 70.29,
+    "DBN GAP + BrainAgeNeXt + ridge": 69.56
+   },
+   "views": {
+    "axial": [
+     "img/SALD_031445_axial0.png",
+     "img/SALD_031445_axial1.png",
+     "img/SALD_031445_axial2.png",
+     "img/SALD_031445_axial3.png",
+     "img/SALD_031445_axial4.png",
+     "img/SALD_031445_axial5.png",
+     "img/SALD_031445_axial6.png"
+    ],
+    "coronal": "img/SALD_031445_coronal.png",
+    "sagittal": "img/SALD_031445_sagittal.png"
+   }
+  },
+  {
+   "id": "SALD_031313",
+   "cohort": "SALD",
+   "site": "SALD",
+   "age": 73.0,
+   "sex": "M",
+   "ethnicity": "Chinese",
+   "why": "Typical 70s",
+   "note": "SALD was never seen by any model or head. Ages are whole years.",
+   "preds": {
+    "DeepBrainNet": 71.43,
+    "BrainAgeNeXt": 75.36,
+    "BrainAgeNeXt models": [
+     76.45,
+     74.48,
+     72.8,
+     75.36,
+     79.33
+    ],
+    "DBN dense-1024 + ridge": 71.42,
+    "BrainAgeNeXt + ridge": 74.61,
+    "DBN GAP + BrainAgeNeXt + ridge": 76.19
+   },
+   "views": {
+    "axial": [
+     "img/SALD_031313_axial0.png",
+     "img/SALD_031313_axial1.png",
+     "img/SALD_031313_axial2.png",
+     "img/SALD_031313_axial3.png",
+     "img/SALD_031313_axial4.png",
+     "img/SALD_031313_axial5.png",
+     "img/SALD_031313_axial6.png"
+    ],
+    "coronal": "img/SALD_031313_coronal.png",
+    "sagittal": "img/SALD_031313_sagittal.png"
+   }
+  },
+  {
+   "id": "SALD_031322",
+   "cohort": "SALD",
+   "site": "SALD",
+   "age": 80.0,
+   "sex": "M",
+   "ethnicity": "Chinese",
+   "why": "Typical 80s",
+   "note": "SALD was never seen by any model or head. Ages are whole years.",
+   "preds": {
+    "DeepBrainNet": 72.73,
+    "BrainAgeNeXt": 76.67,
+    "BrainAgeNeXt models": [
+     77.34,
+     76.11,
+     75.77,
+     76.67,
+     79.83
+    ],
+    "DBN dense-1024 + ridge": 72.74,
+    "BrainAgeNeXt + ridge": 76.91,
+    "DBN GAP + BrainAgeNeXt + ridge": 77.85
+   },
+   "views": {
+    "axial": [
+     "img/SALD_031322_axial0.png",
+     "img/SALD_031322_axial1.png",
+     "img/SALD_031322_axial2.png",
+     "img/SALD_031322_axial3.png",
+     "img/SALD_031322_axial4.png",
+     "img/SALD_031322_axial5.png",
+     "img/SALD_031322_axial6.png"
+    ],
+    "coronal": "img/SALD_031322_coronal.png",
+    "sagittal": "img/SALD_031322_sagittal.png"
+   }
+  },
+  {
+   "id": "SALD_031759",
+   "cohort": "SALD",
+   "site": "SALD",
+   "age": 25.0,
+   "sex": "M",
+   "ethnicity": "Chinese",
+   "why": "DeepBrainNet's largest miss",
+   "note": "SALD was never seen by any model or head. Ages are whole years.",
+   "preds": {
+    "DeepBrainNet": 45.6,
+    "BrainAgeNeXt": 30.64,
+    "BrainAgeNeXt models": [
+     29.9,
+     30.12,
+     30.64,
+     31.1,
+     30.91
+    ],
+    "DBN dense-1024 + ridge": 44.98,
+    "BrainAgeNeXt + ridge": 28.99,
+    "DBN GAP + BrainAgeNeXt + ridge": 30.75
+   },
+   "views": {
+    "axial": [
+     "img/SALD_031759_axial0.png",
+     "img/SALD_031759_axial1.png",
+     "img/SALD_031759_axial2.png",
+     "img/SALD_031759_axial3.png",
+     "img/SALD_031759_axial4.png",
+     "img/SALD_031759_axial5.png",
+     "img/SALD_031759_axial6.png"
+    ],
+    "coronal": "img/SALD_031759_coronal.png",
+    "sagittal": "img/SALD_031759_sagittal.png"
+   }
+  },
+  {
+   "id": "SALD_031639",
+   "cohort": "SALD",
+   "site": "SALD",
+   "age": 42.0,
+   "sex": "F",
+   "ethnicity": "Chinese",
+   "why": "BrainAgeNeXt's largest miss",
+   "note": "SALD was never seen by any model or head. Ages are whole years.",
+   "preds": {
+    "DeepBrainNet": 55.72,
+    "BrainAgeNeXt": 54.12,
+    "BrainAgeNeXt models": [
+     53.86,
+     55.17,
+     55.09,
+     52.55,
+     54.12
+    ],
+    "DBN dense-1024 + ridge": 55.12,
+    "BrainAgeNeXt + ridge": 50.68,
+    "DBN GAP + BrainAgeNeXt + ridge": 52.17
+   },
+   "views": {
+    "axial": [
+     "img/SALD_031639_axial0.png",
+     "img/SALD_031639_axial1.png",
+     "img/SALD_031639_axial2.png",
+     "img/SALD_031639_axial3.png",
+     "img/SALD_031639_axial4.png",
+     "img/SALD_031639_axial5.png",
+     "img/SALD_031639_axial6.png"
+    ],
+    "coronal": "img/SALD_031639_coronal.png",
+    "sagittal": "img/SALD_031639_sagittal.png"
+   }
+  }
+ ],
+ "summary": [
+  {
+   "cohort": "IXI Guys+HH",
+   "model": "DeepBrainNet",
+   "n": 492,
+   "MAE": 4.567,
+   "ci_low": 4.25,
+   "ci_high": 4.888,
+   "mean_error": 0.918
+  },
+  {
+   "cohort": "IXI Guys+HH",
+   "model": "BrainAgeNeXt",
+   "n": 492,
+   "MAE": 3.384,
+   "ci_low": 3.166,
+   "ci_high": 3.612,
+   "mean_error": 0.653
+  },
+  {
+   "cohort": "eNKI",
+   "model": "DeepBrainNet",
+   "n": 39,
+   "MAE": 6.299,
+   "ci_low": 4.787,
+   "ci_high": 7.931,
+   "mean_error": 1.689
+  },
+  {
+   "cohort": "eNKI",
+   "model": "BrainAgeNeXt",
+   "n": 39,
+   "MAE": 3.685,
+   "ci_low": 2.915,
+   "ci_high": 4.554,
+   "mean_error": 0.161
+  },
+  {
+   "cohort": "SALD",
+   "model": "DeepBrainNet",
+   "n": 200,
+   "MAE": 5.775,
+   "ci_low": 5.167,
+   "ci_high": 6.392,
+   "mean_error": 2.213
+  },
+  {
+   "cohort": "SALD",
+   "model": "BrainAgeNeXt",
+   "n": 200,
+   "MAE": 3.391,
+   "ci_low": 3.026,
+   "ci_high": 3.764,
+   "mean_error": 0.065
+  }
+ ],
+ "heads_ixi": [
+  {
+   "model": "DeepBrainNet raw",
+   "mae_guys_hh_5fold_oof": 4.57,
+   "mae_enki": 6.3
+  },
+  {
+   "model": "BrainAgeNeXt raw",
+   "mae_guys_hh_5fold_oof": 3.38,
+   "mae_enki": 3.69
+  },
+  {
+   "model": "DeepBrainNet GAP-512 + ridge",
+   "mae_guys_hh_5fold_oof": 4.57,
+   "mae_enki": 6.29
+  },
+  {
+   "model": "DeepBrainNet dense-1024 + ridge",
+   "mae_guys_hh_5fold_oof": 4.52,
+   "mae_enki": 5.86
+  },
+  {
+   "model": "BrainAgeNeXt 512 + ridge",
+   "mae_guys_hh_5fold_oof": 3.24,
+   "mae_enki": 3.51
+  },
+  {
+   "model": "DeepBrainNet GAP + BrainAgeNeXt + ridge",
+   "mae_guys_hh_5fold_oof": 3.26,
+   "mae_enki": 3.54
+  }
+ ],
+ "heads_sald": [
+  {
+   "model": "DeepBrainNet raw",
+   "MAE": 5.775,
+   "mean_error": 2.213,
+   "r": 0.923,
+   "n": 200
+  },
+  {
+   "model": "BrainAgeNeXt raw",
+   "MAE": 3.391,
+   "mean_error": 0.065,
+   "r": 0.968,
+   "n": 200
+  },
+  {
+   "model": "DBN dense1024 + ridge (trained on IXI)",
+   "MAE": 5.681,
+   "mean_error": 1.148,
+   "r": 0.899,
+   "n": 200
+  },
+  {
+   "model": "BANG 512 + ridge (trained on IXI)",
+   "MAE": 3.488,
+   "mean_error": -0.851,
+   "r": 0.969,
+   "n": 200
+  },
+  {
+   "model": "DBN gap + BANG + ridge (trained on IXI)",
+   "MAE": 3.367,
+   "mean_error": -0.53,
+   "r": 0.971,
+   "n": 200
+  }
+ ]
+}
